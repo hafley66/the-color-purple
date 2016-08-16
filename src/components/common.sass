@@ -16,41 +16,44 @@ $blue1: #337DE8
 $blue2: #38EDFF
 
 body 
-	font-family: 'Roboto', sans-serif
+  font-family: 'Roboto', sans-serif
 
 
 .abs 
-	position: absolute
+  position: absolute
 
 
-.abs-cover 
-	left: 0
-	right: 0
-	bottom: 0
-	top: 0
+=abs-cover
+  position: absolute
+  left: 0
+  right: 0
+  bottom: 0
+  top: 0
 
+.abs-cover
+  +abs-cover
 
 .dim-cover 
-	width: 100%
-	height: 100%
+  width: 100%
+  height: 100%
 
 
 .foreground, .background 
-	opacity: 1
+  opacity: 1
 
 
 =dim($w: 100px, $h: 100px) 
-	width: $w
-	height: $h
+  width: $w
+  height: $h
 
 
 .test 
-	+dim(300px, 300px)
-	background: $purple0
+  +dim(300px, 300px)
+  background: $purple0
 
 
 .relative 
-	position: relative
+  position: relative
 
 
 

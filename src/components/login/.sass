@@ -4,7 +4,7 @@
 $Log-Clr: $green0
 $Reg-Clr: $red0
 
-$Btn-Text: 5rem
+$Btn-Text: 50px
 $Btn: $Btn-Text + 2
 $Tri: $Btn / 2
 $Tri-trans-time : 0.4s
@@ -22,50 +22,60 @@ $Ctn-Height: (2*$Btn + 3*$Tri)
 		width: 100%
 		position: absolute
 		+translate(0, 0)
-		z-index: 1
 
-		background: white
-		
 		text-transform: uppercase
 		
 		border-size: 3px
 		border-style: solid
 
-		transition: color 0.5s, background 0.5s
-
 		&:hover
-			color: white
+			.text
+				color: white
 			.triangle
 				+translate($y: 0)
 
-		span 
-			+abs-center()
-			display: block
+		.triangle-button
+			z-index: -1
+
+		.text
+			+abs-cover()
+			background: white
+			z-index: 1
+			transition: color 0.5s, background 0.5s
 			font-size: $Btn-Text
+
+			span
+				+abs-center()
+				display: block
 
 	.login
 		top: 1 * $Tri
-
-		color: $Log-Clr
 		border-color: $Log-Clr
 
 		path
 			fill: $Log-Clr
+		
+		.text
+			color: $Log-Clr
 
-		&:hover
-			background: $Log-Clr
+		&:hover 
+			.text
+				background: $Log-Clr
 
 	.register
 		top: (2*$Tri) + 1*$Btn
 
-		color: $Reg-Clr
 		border-color: $Reg-Clr
 		
 		path 
 			fill: $Reg-Clr
 
-		&:hover
-			background: $Reg-Clr
+		.text
+			color: $Reg-Clr
+
+		&:hover 
+			.text
+				background: $Reg-Clr
 
 svg
 	overflow: visible !important
