@@ -1,71 +1,98 @@
 @import ../common
 
-$triangle-height: 20px
+
+$Log-Clr: $green0
+$Reg-Clr: $red0
+
+$Btn-Text: 5rem
+$Btn: $Btn-Text + 2
+$Tri: $Btn / 2
+$Tri-trans-time : 0.4s
+$Ctn-Height: (2*$Btn + 3*$Tri)
 
 .login-card 
-	height: 100vh
-	max-width: 30em
+	height: $Ctn-Height
 	position: relative
+	max-width: 30em
 	margin: auto
 
-	
 	.button
-		height: 40%
+		left: 0
+		height: $Btn
 		width: 100%
 		position: absolute
-		margin: 0
+		+translate(0, 0)
+		z-index: 1
+
+		background: white
+		
+		text-transform: uppercase
+		
+		border-size: 3px
+		border-style: solid
+
 		transition: color 0.5s, background 0.5s
 
-		span 
-			display: block
-			font-size: 5em
+		&:hover
 			color: white
-			text-transform: uppercase
+			.triangle
+				+translate($y: 0)
+
+		span 
 			+abs-center()
+			display: block
+			font-size: $Btn-Text
 
 	.login
-		background: $green0
-		top: 0
-		left: 0
-		bottom: 60%
+		top: 1 * $Tri
 
-		&:hover .triangle
-			+scale($x: 1, $y: 0)
+		color: $Log-Clr
+		border-color: $Log-Clr
 
-		.triangle 
-			position: absolute
-			top: 100%
-			left: 0
-			height: 50%
-			transition: all 0.4s
-			transform-origin: 0 0
+		path
+			fill: $Log-Clr
 
-			path
-				stroke-width: 0
-				fill: $green0
-				stroke-linejoin: round
+		&:hover
+			background: $Log-Clr
 
 	.register
-		top: 60%
-		left: 0
-		background: $red0
+		top: (2*$Tri) + 1*$Btn
 
-		&:hover .triangle
-			+scale($x:1, $y: 0)
+		color: $Reg-Clr
+		border-color: $Reg-Clr
+		
+		path 
+			fill: $Reg-Clr
 
-		.triangle
-			position: absolute
-			top: -50%
-			height: 50%
-			left: 0
-			transition: all 0.4s
-			transform-origin: 0 100%
-
-
-			path
-				stroke-width: 0
-				fill: $red0
-				stroke-linejoin: round
+		&:hover
+			background: $Reg-Clr
 
 svg
 	overflow: visible !important
+
+.triangle-button
+	z-index: -1
+
+	.triangle
+		position: absolute
+		left: 0
+		height: $Tri
+		transition: transform $Tri-trans-time
+
+	&:hover .triangle 
+		+translate($y: 0)
+
+	svg
+		position: absolute
+		overflow: visible !important
+
+	.triangle-up
+		top: -$Tri
+		+translate($y: $Tri)
+
+	.triangle-down
+		bottom: -$Tri
+		+translate($y: -$Tri)
+
+.reflect-y
+	+scale(1, -1)

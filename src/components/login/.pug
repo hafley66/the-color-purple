@@ -1,11 +1,24 @@
 include ../../common.pug
 
+-var downTriangle = "M 40 0, H 60, L 50 100, Z"
+-var upTriangle ="M 40 100, H 60, L 50 0, Z"
+
+
+mixin Triangle-Button
+	.triangle-button
+		+ResponsiveSVG.triangle.triangle-up
+			path(d=upTriangle)
+		+ResponsiveSVG.triangle.triangle-down
+			path(d=downTriangle)
+
 .login-card
 	.button.login
-		+ResponsiveSVG.triangle
-			path(d="M 0 0, H 100, V 100, Z")
+		+Triangle-Button
 		span Login
 	.button.register
-		+ResponsiveSVG.triangle
-			path(d="M 0 0, V 100, H 100, Z")
+		+Triangle-Button
 		span Register
+
+
+mixin Triangle( one, two, three )
+	+ResponsiveSVG

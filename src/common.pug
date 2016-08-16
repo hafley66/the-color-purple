@@ -5,9 +5,7 @@ mixin SVG
 		block
 
 mixin ResponsiveSVG
-	svg(xmlns="http://www.w3.org/2000/svg",
-			width='100%',
-			height='100%',
+	svg.dim-cover(xmlns="http://www.w3.org/2000/svg",
 			viewBox='0 0 100 100',
 			preserveAspectRatio='none')&attributes(attributes)
 		block
@@ -30,3 +28,5 @@ mixin _MultiTransformHelper(order, parent)
 mixin SVGMultiTransform(order) 
 	+MultiTransform(order, 'g')&attributes(attributes)
 		block
+
+mixin
