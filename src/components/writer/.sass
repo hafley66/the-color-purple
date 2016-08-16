@@ -1,0 +1,81 @@
+//Compound Color Scheme
+$green0: #00FF81
+$blue0: #3DCDD7
+$red0: #FF4054
+$purple0: #CC1484
+
+//Analogous Color Scheme
+$pink0: #FF15C7
+$purple1: #A233E8
+$violet: #5644FF
+$blue1: #337DE8
+$blue2: #38EDFF
+
+body 
+	background: $green0
+	font-family: 'Roboto', sans-serif
+
+
+.abs 
+	position: absolute
+
+
+.abs-cover 
+	left: 0
+	right: 0
+	bottom: 0
+	top: 0
+
+
+.cover 
+	width: 100%
+	height: 100%
+
+
+.foreground, .background 
+	opacity: 1
+
+
+=dim($w: 100px, $h: 100px) 
+	width: $w
+	height: $h
+
+
+.test 
+	+dim(300px, 300px)
+	background: $purple0
+
+
+.relative 
+	position: relative
+
+
+
+=translate($x:0, $y:0, $origin: center)
+  transform: translate($x, $y) 
+  transform-origin: $origin
+  @content
+
+=scale($x:1, $y:null, $origin:center)
+  @if($y)
+    transform: scale($x, $y)
+  @else
+    transform: scale($x)
+  transform-origin: $origin
+  @content
+
+=sscale($x: 1, $y: null, $origin: center)
+  .scale
+    +scale($x, $y, $origin)
+
+=rotate($deg:0, $origin: center) 
+  transform: rotate($deg)
+  transform-origin: $origin
+  @content
+
+=ttranslate($x:0, $y:0, $origin: center)
+  .translate
+    +translate($x, $y, $origin)
+
+.muh-circle
+  +sscale(1.5, 1)

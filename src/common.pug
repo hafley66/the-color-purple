@@ -1,0 +1,32 @@
+-var orderMap = {S:'scale', R:'rotate', T:'translate'};
+
+mixin SVG
+	svg(xmlns="http://www.w3.org/2000/svg")&attributes(attributes)
+		block
+
+mixin ResponsiveSVG
+	svg(xmlns="http://www.w3.org/2000/svg",
+			width='100%',
+			height='100%',
+			viewBox='0 0 100 100',
+			preserveAspectRatio='none')&attributes(attributes)
+		block
+
+mixin MultiTransform(order, parent)
+	-order=(order||'SRT').split(''); parent=parent||'div';
+	#{parent}.transform-group&attributes(attributes)
+		+_MultiTransformHelper(order, parent)
+			block
+	
+mixin _MultiTransformHelper(order, parent)
+	if order.length
+		-var t = order.pop().toUpperCase();
+		#{parent}(class=orderMap[t])
+			+_MultiTransformHelper(order, parent)
+				block
+	else
+		block
+
+mixin SVGMultiTransform(order) 
+	+MultiTransform(order, 'g')&attributes(attributes)
+		block

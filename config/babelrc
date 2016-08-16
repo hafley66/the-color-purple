@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    ["transform-es2015-modules-commonjs", {
+      "allowTopLevelThis": false,
+      "strict": false,
+      "loose": false
+    }]
+  ],
+  "presets": ["es2015"]
+}

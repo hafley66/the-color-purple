@@ -1,0 +1,71 @@
+@import ../common
+
+$triangle-height: 20px
+
+.login-card 
+	height: 100vh
+	max-width: 30em
+	position: relative
+	margin: auto
+
+	
+	.button
+		height: 40%
+		width: 100%
+		position: absolute
+		margin: 0
+		transition: color 0.5s, background 0.5s
+
+		span 
+			display: block
+			font-size: 5em
+			color: white
+			text-transform: uppercase
+			+abs-center()
+
+	.login
+		background: $green0
+		top: 0
+		left: 0
+		bottom: 60%
+
+		&:hover .triangle
+			+scale($x: 1, $y: 0)
+
+		.triangle 
+			position: absolute
+			top: 100%
+			left: 0
+			height: 50%
+			transition: all 0.4s
+			transform-origin: 0 0
+
+			path
+				stroke-width: 0
+				fill: $green0
+				stroke-linejoin: round
+
+	.register
+		top: 60%
+		left: 0
+		background: $red0
+
+		&:hover .triangle
+			+scale($x:1, $y: 0)
+
+		.triangle
+			position: absolute
+			top: -50%
+			height: 50%
+			left: 0
+			transition: all 0.4s
+			transform-origin: 0 100%
+
+
+			path
+				stroke-width: 0
+				fill: $red0
+				stroke-linejoin: round
+
+svg
+	overflow: visible !important
