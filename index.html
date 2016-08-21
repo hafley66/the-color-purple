@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+</head>
+<body>
+  <div ng-app="muh-demo">
+      <muh-app>
+      </muh-app>
+  </div>
+  <script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
+  <script src="./node_modules/mezr/mezr.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <script>
+    (function($, self){
+
+        if(!$ || !self) {
+            return;
+        }
+
+        for(var i=0; i<self.properties.length; i++) {
+            var property = self.properties[i],
+            camelCased = StyleFix.camelCase(property),
+            PrefixCamelCased = self.prefixProperty(property, true);
+
+            $.cssProps[camelCased] = PrefixCamelCased;
+        }
+
+    })(window.jQuery, window.PrefixFree);
+</script>
+
+<script type="text/javascript" src="/bundle.js" charset="utf-8"></script>
+</body>
+</html>

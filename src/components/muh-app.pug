@@ -1,2 +1,33 @@
+include ../common.pug
+
+-var downTriangle = "M 40 0, H 60, L 50 100, Z"
+-var upTriangle ="M 40 100, H 60, L 50 0, Z"
+
+mixin m-triangle-menu()
+	.m-triangle-menu.padd-y-child-xs.pstn-r-child(
+		ng-controller="fuck as ctrl"
+		ng-class="{'active': ctrl.isActive()}")
+		
+		.button(class="{{::item}}"
+		ng-class="{'active': ctrl.isActive(item)}"
+		ng-repeat="item in ctrl.items"
+		ng-click="ctrl.toggle(item)" 
+		float-top)
+
+			.background.abs-cover
+				+bg-moving-triangle
+			.back-button
+				i.fa.fa-arrow-left(aria-hidden="true")
+			.color.txt-center.new-stacking-context.uppercase
+				span {{item}}
+
+mixin bg-moving-triangle
+	.bg-moving-triangle.abs-cover&attributes(attributes)
+		+ResponsiveSVG.triangle.triangle-up
+			path(d=upTriangle)
+		+ResponsiveSVG.triangle.triangle-down
+			path(d=downTriangle)
+
 .relative.dim-cover
-	muh-login
+	.m-login.collapse-child-margins
+		+m-triangle-menu()

@@ -38,7 +38,7 @@ module.exports = {
         },
         {
             test: /\.(pug|jade)$/,
-            loader: "pug?pretty=true"
+            loader: "pug"
         },
         {
             test: /\.js$/,

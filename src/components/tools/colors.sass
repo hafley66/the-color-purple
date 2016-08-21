@@ -1,0 +1,26 @@
+=alternate-color-props($propA, $propB, $valueA, $valueB, $trigger: '&:hover', $speed: $fast)
+  .#{$propA}  
+    #{$propA}: $valueA
+    transition: $propA $speed
+  .#{$propB}
+    #{$propB}: $valueB
+    transition: $propB $speed
+
+  #{$trigger}
+    .#{$propA}
+      #{$propA}: $valueB
+    .#{$propB}
+      #{$propB}: $valueA
+
+=alternate-bg-text($bg-init: white, $trigger: '&:hover')
+  .background
+    background: $bg-init
+    transform: background $fast
+  .color
+    color: currentColor
+    transform: color $fast
+  #{$trigger}
+    .background
+      background: currentColor
+    .color
+      color: $bg-init

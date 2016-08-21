@@ -1,0 +1,26 @@
+=bg-moving-triangle($height: $gutter-px-3, $trigger: '&:hover')
+	#{$trigger} 
+		.bg-moving-triangle .triangle
+			+translate($y: 0)
+			opacity: 1
+
+	.bg-moving-triangle
+		.triangle-up
+			top: -$height
+			+translate($y: $height)
+
+		.triangle-down
+			bottom: -$height
+			+translate($y: -$height)
+
+		.triangle
+			z-index: -100
+			position: absolute
+			left: 0
+			height: $height
+			overflow: visible 
+			opacity: 0
+
+			transition: transform $fast, opacity $fast
+			path 
+				fill: currentColor

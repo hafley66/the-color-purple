@@ -1,0 +1,51 @@
+=margin($y: null, $x: null, $all: null)
+  +shorthand('margin', $y, $x)
+=padding($y: null, $x: null)
+  +shorthand('padding', $y, $x)
+=border-width($y: null, $x: null)
+  +shorthand('border-width', $y, $x)
+
+=border($size: $brdr-xs, $color: black)
+  border: $size solid $color
+
+
+=make-padd-y-child($gutters: $gutters-px)
+  @each $name, $length in $gutters
+    .padd-y-child-#{$name}
+      > * 
+        +padding($y: $length)
+=make-marg-y-child($gutters: $gutters-px)
+  @each $name, $length in $gutters
+    .marg-y-child-#{$name}
+      > * 
+        +margin($y: $length)
+
+.pstn-r-child > *
+  position: relative
+
+=shorthand($prop: margin, $y: null, $x: null)
+  @if($y)
+    +shorthand-y($prop, $value: $y)
+  @else if($x)
+    +shorthand-x($prop, $value: $x)
+=shorthand-x($prop, $value: null)
+  @if($x)
+    @if(length($x) > 1)
+      #{$prop}-left: nth($value, 1)
+      #{$prop}-right: nth($value, 2)
+    @else 
+      #{$prop}-left: $value
+      #{$prop}-right: $value
+=shorthand-y($prop, $value: null)
+  @if($value)
+    @if(length($value) > 1)
+      #{$prop}-top: nth($value, 1)
+      #{$prop}-bottom: nth($value, 2)
+    @else 
+      #{$prop}-top: $value
+      #{$prop}-bottom: $value
+
+.collapse-child-margins:before, .collapse-child-margins:after
+  content: ' '
+  display: table
+  

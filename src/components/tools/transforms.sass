@@ -1,0 +1,37 @@
+=translate($x:0, $y:0, $origin: null)
+  transform: translate($x, $y) 
+  @if($origin)
+    transform-origin: $origin
+  @content
+
+=scale($x:1, $y:null, $origin: null)
+  @if($y)
+    transform: scale($x, $y)
+  @else
+    transform: scale($x)
+  @if($origin)
+    transform-origin: $origin
+  @content
+
+=sscale($x: 1, $y: null, $origin: center)
+  .scale
+    +scale($x, $y, $origin)
+
+=rotate($deg:0, $origin: null) 
+  transform: rotate($deg)
+  @if($origin)
+    transform-origin: $origin
+  @content
+
+=ttranslate($x:0, $y:0, $origin: center)
+  .translate
+    +translate($x, $y, $origin)
+
+
+.reflect-y
+  +scale(1, -1)
+
+.transparent
+  opacity: 0
+.opaque
+  opacity: 1

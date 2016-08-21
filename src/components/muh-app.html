@@ -1,14 +1,21 @@
-Welcome!
-<div class="relative cover">
-  <svg class="abs abs-cover" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="100%" height="100%">
-    <g class="transform-group tform-circle">
-      <g class="translate">
-        <g class="rotate">
-          <g class="scale">
-            <circle cx="50%" cy="50" r="50"></circle>
-          </g>
-        </g>
-      </g>
-    </g>
-  </svg>
+
+<div class="relative dim-cover">
+  <div class="m-login collapse-child-margins">
+    <div class="m-triangle-menu padd-y-child-xs pstn-r-child" ng-controller="fuck as ctrl" ng-class="{'active': ctrl.isActive()}">
+      <div class="button {{::item}}" ng-class="{'active': ctrl.isActive(item)}" ng-repeat="item in ctrl.items" ng-click="ctrl.toggle(item)" float-top="float-top">
+        <div class="background abs-cover">
+          <div class="bg-moving-triangle abs-cover">
+            <svg class="dim-cover triangle triangle-up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M 40 100, H 60, L 50 0, Z"></path>
+            </svg>
+            <svg class="dim-cover triangle triangle-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M 40 0, H 60, L 50 100, Z"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="back-button"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+        <div class="color txt-center new-stacking-context uppercase"><span>{{item}}</span></div>
+      </div>
+    </div>
+  </div>
 </div>
