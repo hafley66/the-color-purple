@@ -51,7 +51,7 @@ app.directive('floatTop', function() {
 			var mez = mezr.place($elem[0], {
 				my: 'left top',
 				at: 'left top',
-				of: $elem.offsetParent()[0]
+				of: $elem.parent()[0]
 			})
 			var offset = mez.top;
 			$elem.on('click', toggleFloat);
@@ -63,6 +63,27 @@ app.directive('floatTop', function() {
 				floating = !floating;
 				console.log($elem, 'offset', offset);
 			}
+		}
+	}
+})
+
+app.directive('squarePlease', function() {
+	return {
+		link($scope, $elem) {
+			$elem.width($elem.height());
+		}
+	}
+})
+
+app.directive('hoverState', function() {
+	return {
+		link($scope, $elem) {
+			console.log($elem);
+			$elem.on('mouseenter', (e)=>{
+				console.log('yooo');
+				$elem.addClass('hovering')
+			})
+			$elem.on('mouseleave', e=>$elem.removeClass('hovering'))
 		}
 	}
 })

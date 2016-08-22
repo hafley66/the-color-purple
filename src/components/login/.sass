@@ -6,11 +6,13 @@
 		.button
 			transition: transform $fast, opacity $slow
 			+margin($y: $margin-y)
-			+bg-moving-triangle($margin-y, $trigger: '&:hover, &.active')
+			+bg-moving-triangle($margin-y, $trigger: '&.hovering, &.active')
 			
-			+border($color: currentColor)
 			+alternate-bg-text($trigger: '&:hover, &.active')
 			font-size: $font-md
+
+			.background
+				+border($color: currentColor)
 
 			.color
 				user-select: none
@@ -23,12 +25,18 @@
 			color: $red0
 
 		.button.active
-			.back-button
+			
+			.fancy-square-container
 				opacity: 1
+				.border-square
+					transform: translate(0, -50%) rotate(45deg)
+
 			.color 
 				+scale(0.75, $origin: center)
-			&:hover .color
-				+scale(1)
+			&.hovering
+				.fancy-square-container
+					+scale(1.1, $origin: center)
+
 
 		&.active .button:not(.active)
 			+translate($y: 100vh)

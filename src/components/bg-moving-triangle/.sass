@@ -5,6 +5,7 @@
 			opacity: 1
 
 	.bg-moving-triangle
+		z-index: -100
 		.triangle-up
 			top: -$height
 			+translate($y: $height)
@@ -14,7 +15,6 @@
 			+translate($y: -$height)
 
 		.triangle
-			z-index: -100
 			position: absolute
 			left: 0
 			height: $height
@@ -24,3 +24,50 @@
 			transition: transform $fast, opacity $fast
 			path 
 				fill: currentColor
+
+[data-state='form-active']
+
+.fancy-square-container
+	position: absolute
+	top: 0
+	left: 0
+	bottom: 0
+	z-index: 100
+	transition: opacity $fast, transform $fast
+	opacity: 0
+	svg
+		+square()
+		position: absolute
+		top: 0
+		left: 0
+		overflow: visible !important
+	.blanket
+		z-index: -100
+		rect
+			fill: white
+	.border-square, .inner-border-square
+		transition: transform $fast
+		top: 50%
+		transform: translate(0, -50%)
+
+	.border-square
+		z-index: -99
+		rect
+			stroke: currentColor
+			stroke-width: $brdr-sm
+			fill: white
+	.border-square.inner
+		z-index: -98
+		rect
+			fill: currentColor
+			stroke-width: 0
+	.text
+		color: white
+		position: absolute
+		top: 50%
+		left: 50%
+		font-size: 1rem
+		text-decoration: uppercase
+		+translate(-50%, -50%)
+		span
+			transition: all $fast

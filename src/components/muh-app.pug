@@ -2,7 +2,18 @@ include ../common.pug
 
 -var downTriangle = "M 40 0, H 60, L 50 100, Z"
 -var upTriangle ="M 40 100, H 60, L 50 0, Z"
+-var downLeftTriangle = "M 0 0, V 100, H 100, Z"
 
+mixin border-square
+	.fancy-square-container(square-please='')
+		+ResponsiveSVG.blanket
+			rect(x=-10, y=-5, width=60, height=110)
+		+ResponsiveSVG.border-square
+			rect(x=0, y= 0, width=100, height=100)
+		+ResponsiveSVG.inner.border-square
+			rect(x=10, y= 10, width=80, height=80)
+		.text.uppercase.back
+			span back
 mixin m-triangle-menu()
 	.m-triangle-menu.padd-y-child-xs.pstn-r-child(
 		ng-controller="fuck as ctrl"
@@ -12,9 +23,11 @@ mixin m-triangle-menu()
 		ng-class="{'active': ctrl.isActive(item)}"
 		ng-repeat="item in ctrl.items"
 		ng-click="ctrl.toggle(item)" 
-		float-top)
+		float-top
+		hover-state)
 
 			.background.abs-cover
+				+border-square
 				+bg-moving-triangle
 			.back-button
 				i.fa.fa-arrow-left(aria-hidden="true")
