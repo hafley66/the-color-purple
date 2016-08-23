@@ -3,15 +3,21 @@
 .registration.form-items.menu
 	position: relative
 	margin: auto
-	max-width: $max-reading-width / 2
+	max-width: 8.5in
 
-	&.g_active .instance:not(.l_active)
-		+translate($y: 100vh)
-		+hide
+	=hide-inactive-items
+		&.g_active .instance:not(.l_active)
+			+translate($y: 100vh)
+			+hide
+	+hide-inactive-items
 
 	.form-item-instance
 		$margin: 2.5em
-		+margin($y: $margin)
+		
+		.content-mask
+			+scale($y: 0, $origin: 50% 100%)
+			height: 100rem
+
 		.the-toggle .form-name
 			+padding($y: 10px)
 
@@ -30,21 +36,30 @@
 			svg.tri
 				+show
 
-		
 		&.l_active
+			.content-mask
+				+scale($y: 1)
 			.svg-button-0 
-
 				+show
 				.rotation
 					transform: rotate(45deg)
-
-		svg.tri
-			+hide
-			height: $margin
-			width: 20%
-			left: 40%
-		.svg-button-0
-			+hide
+			.the-content .content-container 
+				+translate(0)
+				.body
+					+show
+		=measurement-dependencies($margin)
+			.the-toggle
+				margin-top: $margin
+			.the-content
+				margin-bottom: $margin
+			svg.tri
+				+hide
+				height: $margin
+				width: 20%
+				left: 40%
+			.svg-button-0
+				+hide
+		+measurement-dependencies($margin)
 
 		=colors
 			&.login, &.login svg
@@ -54,3 +69,10 @@
 		+colors
 .over-hidden
 	overflow: hidden
+.no-height
+	height: 0
+.body
+	border-top: 0px
+	margin-left: 2em
+	padding: 1em
+	height: 200px

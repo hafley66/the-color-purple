@@ -10,6 +10,10 @@ mixin decorator-button-0
 				rect(x=0, y= 0, width=100, height=100)
 				rect.inner.no-stroke.swap-color(x=10, y= 10, width=80, height=80)
 		block
+
+mixin blanket
+	+svg.blanket&attributes(attributes)
+		rect.blanket(x=0, y=0, width=100, height=100)
 			
 mixin m-triangle-menu()
 	.m-triangle-menu.registration.form-items.menu(
@@ -23,13 +27,15 @@ mixin m-triangle-menu()
 			float-top
 			hover-state
 		)
-			
-			+cc-parent(bg).the-toggle.relative.will-move-gpu(
+
+
+			+cc-parent.the-toggle.relative.will-move-gpu(
 				ng-click="ctrl.toggle(item)" 
 			)
-
+				+blanket.content-mask.abs.above.matrix.wide
 				+rsvg.tri.align-top
 					+triangle-U.no-stroke.cc-fill
+				
 			
 				mixin cc-background
 					.cc-bord-sm&attributes(attributes)
@@ -38,16 +44,16 @@ mixin m-triangle-menu()
 								| back
 			
 				mixin cc-text
-					.form-name.text.txt-center.uppercase.font-lg.flat-line.no-highlight&attributes(attributes)
+					.form-name.txt-center.uppercase.font-lg.flat-line.no-highlight&attributes(attributes)
 						.matrix {{item}}
-
-
-			.form-item-content.matrix.abs.low.wide.t-up
-				.content
-					|Your content
-				+rsvg.tri.align-bottom
-					+triangle-D.t-above.no-stroke.cc-fill
-
+			
+			.the-content.low.relative.no-height
+				.content-container.abs-init.t-up.matrix.wide
+					.body.hide.cc-bord-sm.shader
+						span Your content
+					+rsvg.tri.align-bottom.wide
+						+triangle-D.t-above.no-stroke.cc-fill
 .relative.dim-cover
 	.m-login.collapse-child-margins
 		+m-triangle-menu()
+
