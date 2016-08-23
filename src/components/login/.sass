@@ -1,56 +1,56 @@
 @import ../common
-@import ../bg-moving-triangle/.sass
 
-=m-triangle-menu($margin-y: $md)
-	.m-triangle-menu
-		.button
-			transition: transform $fast, opacity $slow
-			+margin($y: $margin-y)
-			+bg-moving-triangle($margin-y, $trigger: '&.hovering, &.active')
-			
-			+alternate-bg-text($trigger: '&:hover, &.active')
-			font-size: $font-md
-
-			.background
-				+border($color: currentColor)
-
-			.color
-				user-select: none
-				transition: transform $fast
-				line-height: 1em
-
-		.login
-			color: $green0
-		.register
-			color: $red0
-
-		.button.active
-			
-			.fancy-square-container
-				opacity: 1
-				.border-square
-					transform: translate(0, -50%) rotate(45deg)
-
-			.color 
-				+scale(0.75, $origin: center)
-			&.hovering
-				.fancy-square-container
-					+scale(1.1, $origin: center)
-
-
-		&.active .button:not(.active)
-			+translate($y: 100vh)
-			opacity: 0
-
-.m-login
-	max-width: $max-reading-width / 2
-	margin: auto
+.registration.form-items.menu
 	position: relative
-	+m-triangle-menu()
+	margin: auto
+	max-width: $max-reading-width / 2
 
-.back-button
-	position: absolute
-	left: 5px
-	color: white
-	opacity: 0
-	transition: opacity $fast
+	&.g_active .instance:not(.l_active)
+		+translate($y: 100vh)
+		+hide
+
+	.form-item-instance
+		$margin: 2.5em
+		+margin($y: $margin)
+		.the-toggle .form-name
+			+padding($y: 10px)
+
+		=push-triangles-out
+			.tri.align-top
+				+t-up
+			.tri.align-bottom
+				+t-down
+
+		&.hovering, &.l_active
+			+push-triangles-out
+			.the-toggle
+				+cc-swap
+				.form-name .matrix
+					+scale(0.75, $origin: center)
+			svg.tri
+				+show
+
+		
+		&.l_active
+			.svg-button-0 
+
+				+show
+				.rotation
+					transform: rotate(45deg)
+
+		svg.tri
+			+hide
+			height: $margin
+			width: 20%
+			left: 40%
+		.svg-button-0
+			+hide
+
+		=colors
+			&.login, &.login svg
+				color: $green0
+			&.register, &.register svg
+				color: $red0
+		+colors
+.over-hidden
+	overflow: hidden

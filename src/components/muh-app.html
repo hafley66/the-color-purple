@@ -1,20 +1,21 @@
 
 <div class="relative dim-cover">
   <div class="m-login collapse-child-margins">
-    <div class="m-triangle-menu padd-y-child-xs pstn-r-child" ng-controller="fuck as ctrl" ng-class="{'active': ctrl.isActive()}">
-      <div class="button {{::item}}" ng-class="{'active': ctrl.isActive(item)}" ng-repeat="item in ctrl.items" ng-click="ctrl.toggle(item)" float-top="float-top">
-        <div class="background abs-cover">
-          <div class="bg-moving-triangle abs-cover">
-            <svg class="dim-cover triangle triangle-up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M 40 100, H 60, L 50 0, Z"></path>
-            </svg>
-            <svg class="dim-cover triangle triangle-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M 40 0, H 60, L 50 100, Z"></path>
-            </svg>
-          </div>
+    <div class="m-triangle-menu" ng-controller="fuck as ctrl" ng-class="{'active': ctrl.isActive()}">
+      <div class="form-item-instance relative {{::item}}" ng-repeat="item in ctrl.items">
+        <div class="cc-parent form-item-toggle relative" ng-class="{'active': ctrl.isActive(item)}" ng-click="ctrl.toggle(item)" float-top="float-top" hover-state="hover-state">
+          <svg class="gsvg dim-cover tri t-above" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path class="triangle triangle-vertical triangle-up no-stroke cc-fill" d="M 0 100, H 100, L 50 0, Z"></path>
+          </svg>
+          <div class="cc-bord-sm cc-background abs-cover"></div>
+          <div class="txt-center uppercase font-lg cc-text relative">{{item}}</div>
         </div>
-        <div class="back-button"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
-        <div class="color txt-center new-stacking-context uppercase"><span>{{item}}</span></div>
+        <div class="form-item-content matrix abs low wide">
+          <div class="content"></div>
+          <svg class="gsvg dim-cover tri" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path class="triangle triangle-vertical triangle-down no-stroke cc-fill" d="M 0 0, H 100, L 50 100, Z"></path>
+          </svg>
+        </div>
       </div>
     </div>
   </div>

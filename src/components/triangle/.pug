@@ -1,0 +1,32 @@
+include ../../common
+-var downTriangle = "M 0 0, H 100, L 50 100, Z"
+-var upTriangle ="M 0 100, H 100, L 50 0, Z"
+-var leftDownTriangle = "M 0 0, V 100, H 100, Z"
+-var rightTriangle = "M 100 0, V 100, L 100 50, Z"
+-var leftTriangle = "M 0 0, V 100, L 100 50, Z"
+
+mixin bg-moving-triangle
+	.bg-moving-triangle.abs-cover&attributes(attributes)
+		+rsvg.triangle.triangle-up
+			path.swap-color.no-stroke(d=upTriangle)
+		+rsvg.triangle.triangle-down
+			path.swap-color.no-stroke(d=downTriangle)
+mixin triangle-D
+	+triangle("M 0 0, H 100, L 50 100, Z").triangle-vertical.triangle-down&attributes(attributes)
+	block
+mixin triangle-U
+	+triangle("M 0 100, H 100, L 50 0, Z").triangle-vertical.triangle-up&attributes(attributes)
+	block
+mixin triangle-LD
+	path.tri.triangle-diagonal.triangle-left-down(d=leftDownTriangle)&attributes(attributes)
+	block
+mixin triangle-R
+	+triangle("M 100 0, V 100, L 100 50, Z").triangle-horizontal.triangle-right&attributes(attributes)
+	block
+mixin triangle-L
+	+triangle("M 0 0, V 100, L 100 50, Z").triangle-horizontal.triangle-left&attributes(attributes)
+	block
+mixin triangle(path)
+	path.triangle(d=path)&attributes(attributes)
+mixin pugIsTheBuggiestEver
+	span

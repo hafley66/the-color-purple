@@ -35,3 +35,28 @@
   opacity: 0
 .opaque
   opacity: 1
+
+=will-move-gpu($t-speed: $fast, $o-speed: $fast)
+  transition: transform $t-speed, opacity $o-speed
+=matrix($speed: $fast)
+  transition: transform $speed
+=shader($speed: $fast)
+  transition: opacity $speed
+
+.matrix
+  +matrix
+.shader
+  +shader
+
+.will-move-gpu, .matrix.shader
+  +will-move-gpu
+
+=t-down($v: 100%)
+  +translate(0, $v)
+=t-up($v: 100%)
+  +translate(0, -1 * $v)
+
+.t-up
+  +t-up()
+.t-down
+  +t-down()

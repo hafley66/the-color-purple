@@ -1,24 +1,55 @@
-
 .abs 
   position: absolute
 
-=abs-cover
+=_abs-helper($order) 
+  @if ($order == null)
+    top: 0
+    left: 0
+  @else if(length($order) == 4)
+    top: nth($order, 1)
+    right: nth($order, 2)
+    bottom: nth($order, 3)
+    left: nth($order, 4)
+  @else if (length($order) == 2)
+    $y: nth($order, 1)
+    $x: nth($order, 2)
+    +_abs-helper($y $x $y $x)
+  @else if (length($order) == 3)
+    $top: nth($order, 1)
+    $x: nth($order, 2)
+    $bottom: nth($order, 3)
+    +_abs-helper($top $x $bottom $x)
+  @else if (length($order) == 1)
+    $a: nth($order, 1)
+    +_abs-helper($a $a $a $a)
+
+=abs($order: null)
   position: absolute
-  left: 0
-  right: 0
-  bottom: 0
-  top: 0
+  +_abs-helper($order)
+
+=abs-alt($t: 0, $l: 0, $b: 9000, $r: 9000)
+  position: absolute
+  @if ($t != 9000)
+    top: $t
+  @if ($r != 9000)
+    right: $r 
+  @if ($b != 9000)
+    bottom: $b
+  @if ($l != 9000)
+    left: $l
+=abs-cover
+  +abs(0 0 0 0)
 
 .abs-cover
   +abs-cover
 
-.dim-cover 
-  width: 100%
-  height: 100%
-
 =dim($w: 100px, $h: 100px) 
   width: $w
   height: $h
+
+.dim-cover 
+  +dim(100%, 100%)
+
 
 .relative 
   position: relative
@@ -30,25 +61,68 @@
   transform: translate(-50%, -50%)
 
 =square($dim: 100%)
-  height: $dim
-  width: $dim
+  +dim($dim, $dim)
 
-@function approximateSq($num, $approx) 
-  $root : (( $num / $approx ) + $approx) / 2
-  @return $root
+=center-to-origin
+  +translate(-50%, -50%)
+=push-halfway-left
+  +translate(-50%, 0)
+=push-halfway-up
+  +translate(0, -50%)
 
-
-@function sqrt($num) 
-  $root: 0
-  $testRoot : 0
-  $upperBounds : round($num / 2) + 1 //never need over half the main number. Add one just to be sure!
-  $loops : $upperBounds
-  @for $test from 2 through $upperBounds
-    $sq : $test * $test
-    @if $sq <= $num 
-      $testRoot : $test
-  $root : (approximateSq($num, $testRoot))
+=bottom-on-top()
+  bottom: 100%
+=top-on-bottom()
+  top: 100%
+=left-on-middle()
+  left: 50%
+=right-on-middle()
+  right: 50%
+=top-on-middle()
+  top: 50%
   
-  @return $root
+=center-on-center()
+  position: absolute
+  +top-on-middle
+  +left-on-middle
+  +center-to-origin
+
+.low
+  z-index: -1
+.lower
+  z-index: -2
+.lowest
+  z-index: -3
+.high
+  z-index: 1
+.higher
+  z-index: 2
+.highest
+  z-index: 3
+
+svg
+  overflow: visible !important
 
 
+.above
+  +bottom-on-top
+
+.below
+  +top-on-bottom
+
+.abs-center
+  +center-on-center
+.abs-height
+  position: absolute
+  top: 0
+  bottom: 0
+.wide
+  width: 100%
+
+.align-bottom
+  bottom: 0
+.align-top
+  top: 0
+.abs-init
+  top: 0
+  left: 0

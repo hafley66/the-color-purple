@@ -5,7 +5,7 @@
 =border-width($y: null, $x: null)
   +shorthand('border-width', $y, $x)
 
-=border($size: $brdr-xs, $color: black)
+=border($size: $bord-xs, $color: black)
   border: $size solid $color
 
 
@@ -48,4 +48,13 @@
 .collapse-child-margins:before, .collapse-child-margins:after
   content: ' '
   display: table
-  
+
+=make-rules-from-map($attribute, $map, $rule-pre, $rule-post: '')
+  @each $name, $value in $map
+    @if($rule-post != '')
+      #{$rule-pre}-#{$name}-#{$rule-post}
+        #{$attribute}: $value
+    @else
+      #{$rule-pre}-#{$name}
+        #{$attribute}: $value
++make-rules-from-map("padding", $margin-sizes, 'padd')

@@ -1,4 +1,3 @@
-
 .txt-left
   text-align: left
 .txt-right
@@ -8,3 +7,17 @@
 
 .uppercase
 	text-transform: uppercase
+
+.rem
+	font-size: 1rem
+
++make-rules-from-map('font-size', $font-sizes, '.font')
++make-rules-from-map('font-size', $font-sizes-rel, '.font', 'r')
+
+.no-highlight
+	user-select: none
+
+.flat-line
+	line-height: 1em
+.white
+	color: white

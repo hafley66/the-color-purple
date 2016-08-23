@@ -4,8 +4,27 @@ mixin SVG
 	svg(xmlns="http://www.w3.org/2000/svg")&attributes(attributes)
 		block
 
+mixin svg
+	svg.rsvg(xmlns="http://www.w3.org/2000/svg",
+			viewBox='0 0 100 100',
+			preserveAspectRatio='none')&attributes(attributes)
+		block
+
 mixin ResponsiveSVG
-	svg.dim-cover(xmlns="http://www.w3.org/2000/svg",
+	+svg.dim-cover(xmlns="http://www.w3.org/2000/svg",
+			viewBox='0 0 100 100',
+			preserveAspectRatio='none')&attributes(attributes)
+		block
+
+
+mixin rsvg
+	+svg.dim-cover(xmlns="http://www.w3.org/2000/svg",
+			viewBox='0 0 100 100',
+			preserveAspectRatio='none')&attributes(attributes)
+		block
+
+mixin asvg
+	+svg.abs(xmlns="http://www.w3.org/2000/svg",
 			viewBox='0 0 100 100',
 			preserveAspectRatio='none')&attributes(attributes)
 		block
@@ -28,3 +47,9 @@ mixin _MultiTransformHelper(order, parent)
 mixin SVGMultiTransform(order) 
 	+MultiTransform(order, 'g')&attributes(attributes)
 		block
+
+mixin cc-parent(bg, tx)
+	.cc-parent&attributes(attributes)
+		block
+		+cc-background.cc-background.abs-cover
+		+cc-text.cc-text.relative

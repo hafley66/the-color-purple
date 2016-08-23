@@ -31,6 +31,7 @@ app.controller('fuck', ['$scope', function controller($scope) {
 			this.isActive(item) ? this.deactivate(item) : this.activate(item);
 		},
 		isActive(item) {
+			console.log(arguments);
 			if(!item)
 				return !!activeItem;
 			return activeItem === item;
@@ -87,5 +88,16 @@ app.directive('hoverState', function() {
 		}
 	}
 })
+
+app.directive('postMeasure', ()=>{
+	return {
+		link($scope, $elem, $attr) {
+			var command = $attr.mezrHeight.split(' ');
+			var [myAttribute, parentType, fromAttribute] = command
+			target = $elem[parentType]() || $elem;
+			$elem[myAttribute](target[attribute]);
+		}
+	}
+});
 
 export default app;

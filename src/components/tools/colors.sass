@@ -1,26 +1,44 @@
-=alternate-color-props($propA, $propB, $valueA, $valueB, $trigger: '&:hover', $speed: $fast)
-  .#{$propA}  
-    #{$propA}: $valueA
-    transition: $propA $speed
-  .#{$propB}
-    #{$propB}: $valueB
-    transition: $propB $speed
+=moving-color-text($speed: $fast)
+  transition: color $fast
+=moving-color-bg($speed: $fast)
+  transition: background $speed
+=moving-color($speed: $fast) 
+  transition: background $speed, color $speed
 
-  #{$trigger}
-    .#{$propA}
-      #{$propA}: $valueB
-    .#{$propB}
-      #{$propB}: $valueA
-
-=alternate-bg-text($bg-init: white, $trigger: '&:hover')
-  .background
-    background: $bg-init
-    transform: background $fast
-  .color
+=cc-swap-init($bg: white)
+  .cc-text
     color: currentColor
-    transform: color $fast
-  #{$trigger}
-    .background
-      background: currentColor
-    .color
-      color: $bg-init
+    +moving-color-text
+  
+  .cc-background
+    background: $bg
+    +moving-color-bg
+  .text.background
+    +moving-color
+
+=cc-swap($bg: white)
+  .cc-background
+    background: currentColor
+  .cc-text
+    color: $bg
+
+.cc-bord-sm
+  +border($color: currentColor, $size: $bord-sm)
+
+.moving-color-text
+  +moving-color-text
+.moving-color-bg
+  +moving-color-bg
+.moving-color
+  +moving-color
+
++cc-swap-init
+
+=hide
+  opacity: 0
+=show
+  opacity: 1
+.hide, .transparent
+  opacity: 0
+.opaque, .show
+  opacity: 1
