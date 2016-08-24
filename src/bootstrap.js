@@ -25,13 +25,12 @@ function clear(elem) {
 
 app.controller('fuck', ['$scope', function controller($scope) {
 	var activeItem = null;
-	this.items = ['login', 'register', 'skip'];
+	this.items = ['Chris Hafley'];
 	Object.assign(this, {
 		toggle(item) {
 			this.isActive(item) ? this.deactivate(item) : this.activate(item);
 		},
 		isActive(item) {
-			console.log(arguments);
 			if(!item)
 				return !!activeItem;
 			return activeItem === item;
@@ -62,7 +61,6 @@ app.directive('floatTop', function() {
 				else
 					translate($elem, `0px, ${offset}px`);
 				floating = !floating;
-				console.log($elem, 'offset', offset);
 			}
 		}
 	}
@@ -81,9 +79,9 @@ app.directive('hoverState', function() {
 		link($scope, $elem) {
 			console.log($elem);
 			$elem.on('mouseenter', (e)=>{
-				console.log('yooo');
 				$elem.addClass('hovering')
 			})
+
 			$elem.on('mouseleave', e=>$elem.removeClass('hovering'))
 		}
 	}
@@ -99,5 +97,22 @@ app.directive('postMeasure', ()=>{
 		}
 	}
 });
+
+app.directive('flowIn', ()=>{
+	return {
+		link($scope, $elem, $attr) {
+			var [elem] = $elem
+			var height = 
+			$scope.$watch($attr.flowIn, (newValue, oldValue)=> {
+				if(!!newValue) 
+        	elem.style.maxHeight = Array.prototype.reduce.call(elem.childNodes, (p, c)=> p + (c.offsetHeight || 0), 0) + 'px';
+        else
+					elem.style.maxHeight = 0
+				console.log(newValue, 'watchin');
+			});
+			console.log(elem);
+		}
+	}
+})
 
 export default app;
