@@ -1,0 +1,54 @@
+// font-family: 'Teko', sans-serif;
+// font-family: 'Oswald', sans-serif;
+// font-family: 'Roboto Condensed', sans-serif;
+
+.black-on-white
+	color: black
+	background-color: white
+.white-on-black
+	color: white
+	background-color: black
+.black-on-silver
+	color: black
+	background-color: silver
+.My-Resume
+	display: flex
+	justify-content: space-around
+	>.left-side
+		flex: 2
+		border-right: $bord-sm solid currentColor
+		.my-work-history
+			.primary-info, .secondary-info 
+				font-size: 20px
+				float: left
+
+			.primary-info
+				width: 75%
+			.secondary-info
+				width: 25%
+			.the-position
+				border: $bord-sm solid currentColor
+				border-top: 0px
+				border-left: 0px
+			.the-highlights
+				font-size: 15px
+				margin: 0
+				padding-top: 10px
+				padding-left: 30px
+				padding-bottom: 10px
+	>.right-side
+		flex: 1
+.l_active .My-Resume
+	opacity: 1
+.dense
+	font-family: 'Oswald', sans-serif
+.bold
+	font-weight: bolder
+.robo.dense
+	font-family: 'Roboto Condensed', sans-serif
+.b-r-sm
+
+.float-right
+	float: right
+.clear	
+	clear: both

@@ -98,11 +98,11 @@ app.directive('flowIn', ()=>{
         	elem.style.maxHeight = Array.prototype.reduce.call(elem.childNodes, (p, c)=> p + (c.offsetHeight || 0), 0) + 'px';
         else
 					elem.style.maxHeight = 0
-				console.log(newValue, 'watchin');
 			});
-			console.log(elem);
-		}
-	}
+		}}})
+
+app.controller('Resumer', function() {
+	Object.assign(this, resume);
 })
 
 export default app;

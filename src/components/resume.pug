@@ -1,5 +1,6 @@
 include ../common.pug
 include triangle/
+include resume.main.pug
 
 	
 mixin the-content()
@@ -9,23 +10,27 @@ mixin the-content()
 				block
 			+rsvg.tri.align-bottom.wide
 				+triangle-D.t-above.no-stroke.cc-fill
-
 mixin the-toggle
 	+cc-parent.the-toggle.relative.will-move-gpu( ng-click="ctrl.toggle(item)" )
-		//- +rsvg.tri.align-top
-			+triangle-U.no-stroke.cc-fill
 		mixin cc-background
 			.cc-bord-sm&attributes(attributes)
-			.contact-bars.abs-cover.white.font-sm.hide.shader
-				.bar.padd-sm(ng-repeat="type in [['phone', '330-324-4867'], ['email', 'hafley66@gmail.com']]",
+			.contact-bars.abs.abs-height.white.font-sm.hide.shader
+				.bar.black.flat-line(ng-repeat=`type in 
+				[
+				['email', 'hafley66@gmail.com', 'fa-envelope-o'], 
+				['phone', '330-324-4867', 'fa-phone']
+				]
+				`,
 				class="{{type[0]}}-bar")
-					.contact-info.relative.black.white-bg
-						|{{type[1]}}
+					.contact-info.relative.white-bg
+						i.icon.txt-right.fa.padd-xs-right(class="{{type[2]}}", aria-hidden="true")
+						span.cc.bord-sm-left.padd-xs-left.robo.dense {{type[1]}}
 		mixin cc-text
 			.form-name.padd-md.txt-center.uppercase.font-xl.flat-line.no-highlight&attributes(attributes)
-				.matrix.relative
-					|{{item}}
-					.self-declared-title.sub-text.abs-width.below.txt-center.font-md-rem.flat-line-rem.hide.shader
+				.matrix
+					.main-text.relative.dense
+						|{{item}}
+					.sub-text.abs.abs-width.below.font-md-rem.flat-line-rem.hide.shader.padd-xs
 						|Software Engineer
 mixin m-triangle-menu()
 	.m-triangle-menu.registration.form-items.menu(
@@ -41,17 +46,10 @@ mixin m-triangle-menu()
 		)
 			+the-toggle
 			+the-content.cc-bord-sm.bord-no-top.t-up.matrix
-				.my-resume-content
-					.my-resume-experience.column.float-left(ng-repeat="section in ['education', 'work history', 'projects']")
-					.my-resume-education.column.float-left
-					//- .heading.font-md.black-bg.white.uppercase.p-xs.flat-line
-						| {{::section}}
-					.text
-						| HURRDURR
+				block
+
 
 .relative.dim-cover
 	.m-login.collapse-child-margins
 		+m-triangle-menu()
-
-mixin my-resume
-	.resume
+			+my-resume()

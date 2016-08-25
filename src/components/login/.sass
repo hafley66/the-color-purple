@@ -21,14 +21,22 @@
 				.sub-text
 					+speed($fastest)
 		.contact-bars
+			$HIGH-ENERGY: 9999
 			font-size: 1.5em
+			display: flex
+			flex-direction: column
+			justify-content: space-around
+			align-items: stretch 
+			align-content: space-around
+			right: $bord-sm
 			.bar
-				padding: 7px
-				float: right
-				clear: right
-				.contact-info
-					padding: 2px 3px
+				.icon
+					width: 1.3em
+					padding-left: 3px
 
+				.contact-info
+					border-radius: 2px
+					padding: 4px
 
 		=push-triangles-out
 			.tri.align-top
@@ -49,7 +57,7 @@
 					transform: translate(0) scale(0.95)
 			&.l_active
 				.form-name .matrix
-					transform: translate(-2in, -20%) scale(0.90)
+					transform: translate(-2in, -20%) scale(0.85)
 					.sub-text
 						+show
 						+delay
@@ -82,6 +90,7 @@
 			&.register, &.register svg
 				color: $red0
 		+colors
+
 .over-hidden
 	overflow: hidden
 .no-height
@@ -92,3 +101,11 @@
 	transition: max-height $fast ease
 	max-height: 0
 	overflow: hidden
+.cc.bord-sm-right
+	border-right: $bord-sm solid currentColor
+.cc.bord-sm-left
+	border-left: $bord-sm solid currentColor
+.padd-xs-left
+	padding-left: 5px
+.padd-xs-right
+	padding-right: 5px

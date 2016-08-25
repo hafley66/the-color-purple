@@ -1,0 +1,41 @@
+
+<div class="relative dim-cover">
+  <div class="m-login collapse-child-margins">
+    <div class="m-triangle-menu registration form-items menu" ng-controller="fuck as ctrl" ng-class="{'g_active': ctrl.isActive()}">
+      <div class="form-item-instance instance relative will-move-gpu l_active {{::item}}" ng-repeat="item in ctrl.items" ng-class="{'l_active': ctrl.isActive(item)}" float-top="float-top" hover-state="hover-state">
+        <div class="cc-parent the-toggle relative will-move-gpu" ng-click="ctrl.toggle(item)">
+          <div class="cc-bord-sm cc-background abs-cover"></div>
+          <div class="contact-bars abs abs-height white font-sm hide shader">
+            <div class="bar black flat-line {{type[0]}}-bar" ng-repeat="type in 
+				[
+				['email', 'hafley66@gmail.com', 'fa-envelope-o'], 
+				['phone', '330-324-4867', 'fa-phone']
+				]
+				">
+              <div class="contact-info relative white-bg"><i class="fa padd-xs-right {{item[2]}}" aria-hidden="true"></i><span class="cc bord-sm-left padd-xs-left">{{type[1]}}</span></div>
+            </div>
+          </div>
+          <div class="form-name padd-md txt-center uppercase font-xl flat-line no-highlight cc-text relative">
+            <div class="matrix relative">{{item}}
+              <div class="self-declared-title sub-text abs-width below txt-center font-md-rem flat-line-rem hide shader">Software Engineer</div>
+            </div>
+          </div>
+        </div>
+        <div class="the-content low relative cc-bord-sm bord-no-top t-up matrix">
+          <div class="flow-in over-hidden" flow-in="ctrl.isActive(item)"> 
+            <div class="content">
+              <div class="my-resume-content">
+                <div class="my-resume-experience column float-left" ng-repeat="section in ['education', 'work history', 'projects']"></div>
+                <div class="my-resume-education column float-left"></div>
+                <div class="text">HURRDURR</div>
+              </div>
+            </div>
+            <svg class="rsvg dim-cover tri align-bottom wide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path class="triangle triangle-vertical triangle-down t-above no-stroke cc-fill" d="M 0 0, H 100, L 50 100, Z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

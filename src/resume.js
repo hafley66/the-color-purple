@@ -65,25 +65,25 @@ var cwru = {
 var seniorProject = {
 	name: 'Canvas',
 	tech: ['Android', 'Node', 'HTML/CSS'],
-	description: ''
+	highlights: []
 }
 
 var paperAndroid = {
 	name: 'PaperAndroid',
 	tech: ['Android', 'Retained Graphics Model'],
-	description: ''
+	highlights: []
 }
 
 var machineLearners = {
 	name: 'Machine Learning Algorithms (Coursework)',
 	tech: ['Python', 'MATLAB'],
-	description: 'Implemnted artificial neural network, decision tree, and naive bayes classifiers from scratch. Tested each learner on various types and sizes of data sets.'
+	highlights: ['Implemnted artificial neural network, decision tree, and naive bayes classifiers from scratch.', 'Tested each learner on various types and sizes of data sets.']
 }
 
 var aiProjects = {
 	name: 'Artificial Intelligence Algorithms (Coursework)',
 	tech: ['Java'],
-	description: 'Implemented A*, Min-Max, and Temporal Difference learner against opponents in an in-house game framework.'
+	highlights: ['Implemented A*, Min-Max, and Temporal Difference learner against opponents in an in-house game framework.']
 }
 
 var projects = [seniorProject, paperAndroid, machineLearners, aiProjects];
@@ -107,24 +107,24 @@ var maths = [
 ]
 
 var sigmaCoordinator = {
-	organization: 'Sigma Phi Epsilon Fraternity',
+	name: 'Sigma Phi Epsilon Fraternity',
 	position: 'New Member Coordinator',
 	highlights: []
 }
 var peerTutor = {
-	organization: 'Case Western Tutoring Services',
+	name: 'Case Western Tutoring Services',
 	position: 'Peer Tutor',
 	highlights: []
 }
 var strengthTrainer = {
-	organization: 'Case Western Recreation Center',
+	name: 'Case Western Recreation Center',
 	position: 'Student Strength Trainer',
 	highlights: []
 }
 
 
 var resume = {
-	work: {expand, rosetta, snapon},
+	experience: {expand, rosetta, snapon},
 	education: {cwru},
 	projects,
 	leadership: [ sigmaCoordinator, peerTutor, strengthTrainer ],

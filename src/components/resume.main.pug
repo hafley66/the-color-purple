@@ -1,0 +1,25 @@
+
+mixin my-resume
+	.My-Resume.hide.shader(ng-controller="Resumer as ctrl")
+		.left-side
+			+my-work-experience
+			//- +my-projects
+		.right-side
+			|grr
+			//- +my-education
+			//- +my-relevant-skills
+mixin my-work-experience
+	.my-work-history
+		.font-md.black.txt-center.dense
+			|Work History
+		.job-section(ng-repeat="job in ctrl.experience")
+			.the-heading.wide
+				.primary-info.txt-left.dense.flat-line.wide
+					.the-employer.padd-xs.white-on-black {{job.name}}
+					.the-position.padd-xs.black-on-silver {{job.position}}
+				.secondary-info.dense.flat-line.txt-right
+					.the-start-date.padd-xs {{job.start}}
+					.the-end-date.padd-xs {{job.end}}
+			ul.the-highlights.clear.robo.dense
+				li.a-highlight(ng-repeat="point in job.highlights")
+					|{{point}}
