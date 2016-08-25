@@ -1,9 +1,12 @@
 @import ../common
 
+=delay($s: $fast)
+	transition-delay: $s
+
 .registration.form-items.menu
 	position: relative
 	margin: auto
-	max-width: $max-reading-width / 2
+	max-width: 8.5in
 
 	=hide-inactive-items
 		&.g_active .instance:not(.l_active)
@@ -13,50 +16,54 @@
 
 	.form-item-instance
 		$margin: 2em
-		
-		.content-container
-			left: 0
-			right: 0
-			border-top: 0px
-			padding: 1em
+		.the-toggle .form-name .matrix
+				+scale(1, $origin: center)
+				.sub-text
+					+speed($fastest)
+		.contact-bars
+			font-size: 1.5em
+			.bar
+				padding: 7px
+				float: right
+				clear: right
+				.contact-info
+					padding: 2px 3px
 
-		.the-toggle .form-name
-			+padding($y: 10px)
 
 		=push-triangles-out
 			.tri.align-top
 				+t-up
 			.tri.align-bottom
 				+t-down
+		
 
-		.form-name .matrix
-			+scale(1, $origin: center)
-		&.hovering, &.l_active
-			+push-triangles-out
-			.the-toggle
-				+cc-swap
-			svg.tri
-				+show
+		=state-changes
+			&.hovering, &.l_active
+				+push-triangles-out
+				.the-toggle
+					+cc-swap
+				svg.tri
+					+show
+			&.hovering:not(.l_active)
+				.form-name .matrix
+					transform: translate(0) scale(0.95)
+			&.l_active
+				.form-name .matrix
+					transform: translate(-2in, -20%) scale(0.90)
+					.sub-text
+						+show
+						+delay
+				.contact-bars
+					+show
+					+delay($fast * 1.75)
+				.the-content 
+					+translate(0)
+		+state-changes
 
-		&.hovering:not(.l_active)
-			.form-name .matrix
-				transform: translate(0, -20%) scale(0.90)
-		&.l_active
-			.form-name .matrix
-					transform: translate(-2em, -20%) scale(0.75)
-			// .svg-button-0 
-			// 	+show
-			// 	.rotation
-			// 		transform: rotate(45deg)
-			
-			.content-container 
-				+translate(0)
-				.content-body
-					+scale(1)
 
 		=measurement-dependencies($margin)
 			.the-toggle
-				margin-top: $margin
+				// margin-top: $margin
 			.the-content
 				margin-bottom: $margin
 			svg.tri
@@ -67,6 +74,7 @@
 			.svg-button-0
 				+hide
 		+measurement-dependencies($margin)
+
 
 		=colors
 			&.login, &.login svg

@@ -53,3 +53,17 @@ mixin cc-parent(bg, tx)
 		block
 		+cc-background.cc-background.abs-cover
 		+cc-text.cc-text.relative
+
+
+mixin decorator-button-0
+	.svg-button-0.will-move-gpu&attributes(attributes)
+		.svg-group
+			+rsvg
+				rect.the-mask.blanket(y=-10, width=60, height=120)
+			+rsvg.the-background.abs.rotation.matrix.top-on-middle
+				rect(x=0, y= 0, width=100, height=100)
+				rect.inner.no-stroke.swap-color(x=10, y= 10, width=80, height=80)
+		block
+mixin blanket
+	+svg.blanket&attributes(attributes)
+		rect.blanket(x=0, y=0, width=100, height=100)

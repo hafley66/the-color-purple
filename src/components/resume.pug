@@ -3,12 +3,12 @@ include triangle/
 
 	
 mixin the-content()
-	.the-content.low.relative
+	.the-content.low.relative&attributes(attributes)
 		.flow-in.over-hidden(flow-in="ctrl.isActive(item)") 
-			.content&attributes(attributes)
+			.content
 				block
-				+rsvg.tri.align-bottom.wide
-					+triangle-D.t-above.no-stroke.cc-fill
+			+rsvg.tri.align-bottom.wide
+				+triangle-D.t-above.no-stroke.cc-fill
 
 mixin the-toggle
 	+cc-parent.the-toggle.relative.will-move-gpu( ng-click="ctrl.toggle(item)" )
@@ -16,11 +16,16 @@ mixin the-toggle
 			+triangle-U.no-stroke.cc-fill
 		mixin cc-background
 			.cc-bord-sm&attributes(attributes)
+			.contact-bars.abs-cover.white.font-sm.hide.shader
+				.bar.padd-sm(ng-repeat="type in [['phone', '330-324-4867'], ['email', 'hafley66@gmail.com']]",
+				class="{{type[0]}}-bar")
+					.contact-info.relative.black.white-bg
+						|{{type[1]}}
 		mixin cc-text
-			.form-name.txt-center.uppercase.font-xl.flat-line.no-highlight&attributes(attributes)
+			.form-name.padd-md.txt-center.uppercase.font-xl.flat-line.no-highlight&attributes(attributes)
 				.matrix.relative
 					|{{item}}
-					.sub-text.abs-width.below.txt-center.font-md-rem.flat-line-rem.hide.shader
+					.self-declared-title.sub-text.abs-width.below.txt-center.font-md-rem.flat-line-rem.hide.shader
 						|Software Engineer
 mixin m-triangle-menu()
 	.m-triangle-menu.registration.form-items.menu(
@@ -34,12 +39,12 @@ mixin m-triangle-menu()
 			float-top
 			hover-state
 		)
-			+the-toggle.padd-md
-			+the-content.cc-bord-sm
-				.my-resume-content.clearfix
+			+the-toggle
+			+the-content.cc-bord-sm.bord-no-top.t-up.matrix
+				.my-resume-content
 					.my-resume-experience.column.float-left(ng-repeat="section in ['education', 'work history', 'projects']")
 					.my-resume-education.column.float-left
-					.heading.font-md.black-bg.white.uppercase.p-xs.flat-line
+					//- .heading.font-md.black-bg.white.uppercase.p-xs.flat-line
 						| {{::section}}
 					.text
 						| HURRDURR

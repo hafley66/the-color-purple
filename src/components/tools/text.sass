@@ -12,12 +12,14 @@
 	font-size: 1rem
 
 +make-rules-from-map('font-size', $font-sizes, '.font')
-+make-rules-from-map('font-size', $font-sizes-rel, '.font', 'r')
++make-rules-from-map('font-size', $font-sizes-rel, '.font', 'rem')
 
 .no-highlight
 	user-select: none
 
 .flat-line
 	line-height: 1em
+.flat-line-rem
+	line-height: 1rem
 .white
 	color: white

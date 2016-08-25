@@ -57,14 +57,16 @@
     @else
       #{$rule-pre}-#{$name}
         #{$attribute}: $value
-+make-rules-from-map("padding", $margin-sizes, 'padd')
-.p-sm
++make-rules-from-map("padding", $margin-sizes, '.padd')
+.p-sm, .padd-sm
   padding: 10px
-.p-sm-rel
+.p-sm-rel, .padd-sm-rem
   padding: 1rem
-.p-md
+.p-md, .padd-md
   padding: 15px
-.p-md-rel
+.p-md-rel, .padd-md-rem
   padding: 1.5rem
 .p-xs
   padding: 5px
+.bord-no-top
+  border-top-width: 0 !important

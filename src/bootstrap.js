@@ -1,9 +1,8 @@
 import fastdom from 'fastdom'
-
+import resume from './resume'
 import 'normalize.css'
-import templateFn from './components/muh-app.pug';
+import templateFn from './components/resume.pug';
 import 'components/login/.sass'
-
 
 var template = templateFn();
 var app = angular.module('muh-demo', []);
@@ -31,21 +30,16 @@ app.controller('fuck', ['$scope', function controller($scope) {
 			this.isActive(item) ? this.deactivate(item) : this.activate(item);
 		},
 		isActive(item) {
-			if(!item)
-				return !!activeItem;
-			return activeItem === item;
+			if(!item) return(!!activeItem)
+			else return(activeItem === item)
 		},
-		activate(item) {
-			activeItem = item;
-		},
-		deactivate(item) {
-			activeItem = null;
-		}
+		activate(item) { activeItem = item },
+		deactivate(item) { activeItem = null }
 	});
 }]);
 
 app.directive('floatTop', function() {
-	return {
+	return({
 		link($scope, $elem){
 			var floating = false;
 			var mez = mezr.place($elem[0], {
@@ -56,14 +50,10 @@ app.directive('floatTop', function() {
 			var offset = mez.top;
 			$elem.on('click', toggleFloat);
 			function toggleFloat() {
-				if(floating)
-					clear($elem)
-				else
-					translate($elem, `0px, ${offset}px`);
+				if(floating) clear($elem)
+				else translate($elem, `0px, ${offset}px`);
 				floating = !floating;
-			}
-		}
-	}
+			}}})
 })
 
 app.directive('squarePlease', function() {

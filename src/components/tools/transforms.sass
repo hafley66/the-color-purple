@@ -31,10 +31,16 @@
 .reflect-y
   +scale(1, -1)
 
-.transparent
+=hide
   opacity: 0
-.opaque
+=show
   opacity: 1
+.hide, .transparent
+  opacity: 0
+.opaque, .show
+  opacity: 1
+=speed($s: $fast)
+  transition-duration: $s
 
 =will-move-gpu($t-speed: $fast, $o-speed: $fast)
   transition: transform $t-speed linear, opacity $o-speed linear
