@@ -1,5 +1,5 @@
 import fastdom from 'fastdom'
-import resume from './resume'
+import resume from './resume/resume'
 import 'normalize.css'
 import templateFn from './components/resume.pug';
 import 'components/login/.sass'

@@ -1,25 +1,52 @@
 
 mixin my-resume
 	.My-Resume.hide.shader(ng-controller="Resumer as ctrl")
-		.left-side
+		.left-side.bord-r-sm
 			+my-work-experience
-			//- +my-projects
+			+my-projects
 		.right-side
-			|grr
-			//- +my-education
-			//- +my-relevant-skills
+			+my-education
+			+my-skills
+			+my-leadership
+
+			
 mixin my-work-experience
-	.my-work-history
-		.font-md.black.txt-center.dense
-			|Work History
+	.my-work-history.bord-b-sm
+		.font.head Work History
 		.job-section(ng-repeat="job in ctrl.experience")
-			.the-heading.wide
-				.primary-info.txt-left.dense.flat-line.wide
-					.the-employer.padd-xs.white-on-black {{job.name}}
-					.the-position.padd-xs.black-on-silver {{job.position}}
-				.secondary-info.dense.flat-line.txt-right
-					.the-start-date.padd-xs {{job.start}}
-					.the-end-date.padd-xs {{job.end}}
-			ul.the-highlights.clear.robo.dense
+			.wide.clearfix
+				.txt-left.float-left.wide-75
+					.font.main {{job.name}}
+					.font.sub.bord-rb-sm {{job.position}}
+				.txt-right.float-left.wide-25
+					.font.side {{job.start}}
+					.font.side {{job.end}}
+			ul.font.body
 				li.a-highlight(ng-repeat="point in job.highlights")
 					|{{point}}
+mixin my-education
+	.my-education.wide
+		.font.head Education
+		.txt-left
+			.font.main {{ctrl.education.cwru.name}}
+			.font.sub.bord-b-sm {{ctrl.education.cwru.degree}}
+mixin my-skills
+	.my-skills
+		.font.head
+			|Skills
+		div(ng-repeat="category in ctrl.skills")
+			.font.sub.bord-y-sm
+				|{{category.name}}
+			.padd-xs
+				.font.body(ng-repeat="skill in category.skills")
+					|{{skill}}
+
+mixin my-projects
+	.my-projects
+		.font.head Projects
+		.wide(ng-repeat="project in ctrl.projects") 
+			.font.main {{project.name}}
+			.font.body.wide.padd-xs {{project.description}}
+
+mixin my-leadership
+	.div

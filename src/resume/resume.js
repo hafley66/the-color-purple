@@ -1,4 +1,4 @@
-var expand={
+var expand = {
 	name: 'Expand Interactive',
 	position: 'Frontend Engineer',
 	where: 'Fairlawn, OH',
@@ -6,19 +6,13 @@ var expand={
 	end: 'May 20, 2016',
 	highlights: 
 	[
-	'Used Angular.js to create complex & dynamic front-end interfaces.',
+	'Created several apps using Angular.js.',
 
-	'Introduced consistent methods for creating encapsulated components in code-base.',
+	'Cleaned code-base by introducing techniques for creating new components.',
 
-	'Refactored common parts between apps into one to promote reusability.',
+	'Normalized development environments with Vagrant and Virtualbox.',
 
-	'Assisted in normalizing development environments with Vagrant and Virtualbox.',
-
-	'Translated mockups to use angular and connect them to live data.',
-
-	'Created custom servers to manage and preprocess front-end data using node.js.',
-
-	'Developed wrapper library for 3rd party Mapping APIs (Google Maps, Leaflet.js)'
+	'Translated mockups to use angular and connect them to live data.'
 	]
 };
 var rosetta={
@@ -29,9 +23,7 @@ var rosetta={
 	end: 'Aug. 8, 2014',
 	highlights: 
 	[
-	'Experienced enterprise website development at a management level.',
-
-	'Developed and updated code for a dynamic and responsive website in the back-end.',
+	'Assisted migration of enterprise website on both front and back ends.',
 
 	'Collaborated with other interns to build a pro-bono website for the Learning Coalition of Ohio.'
 	]
@@ -46,12 +38,6 @@ var snapon={
 	highlights: 
 	[
 	'Improved time efficiency of quality assurance application by factor of 60.',
-
-	'Build custom data-structure to efficiently process relations in database.',
-
-	'Collaborated with fellow intern to implement various UI and functional changes in Swing.',
-
-	'Added version aware code and test cases for internal API.'
 	]
 }
 
@@ -65,28 +51,28 @@ var cwru = {
 var seniorProject = {
 	name: 'Canvas',
 	tech: ['Android', 'Node', 'HTML/CSS'],
-	highlights: []
+	description: 'Collaborative drawing app designed to allow players to draw on the same canvas in multiple ways.'
 }
 
 var paperAndroid = {
 	name: 'PaperAndroid',
 	tech: ['Android', 'Retained Graphics Model'],
-	highlights: []
+	description: `Retained Mode (RM) graphics library for Android Canvas library. Inspired by PaperJS API.`
 }
 
 var machineLearners = {
 	name: 'Machine Learning Algorithms (Coursework)',
 	tech: ['Python', 'MATLAB'],
-	highlights: ['Implemnted artificial neural network, decision tree, and naive bayes classifiers from scratch.', 'Tested each learner on various types and sizes of data sets.']
+	description: `Implemnted artificial neural network, decision tree, and naive bayes classifiers from scratch.`
 }
 
 var aiProjects = {
 	name: 'Artificial Intelligence Algorithms (Coursework)',
 	tech: ['Java'],
-	highlights: ['Implemented A*, Min-Max, and Temporal Difference learner against opponents in an in-house game framework.']
+	description: 'Implemented A*, Min-Max, and Temporal Difference learner against opponents in an in-house game framework.'
 }
 
-var projects = [seniorProject, paperAndroid, machineLearners, aiProjects];
+var projects = [seniorProject, paperAndroid, aiProjects, machineLearners];
 
 
 var courses = [
@@ -109,17 +95,17 @@ var maths = [
 var sigmaCoordinator = {
 	name: 'Sigma Phi Epsilon Fraternity',
 	position: 'New Member Coordinator',
-	highlights: []
+	description: ''
 }
 var peerTutor = {
 	name: 'Case Western Tutoring Services',
 	position: 'Peer Tutor',
-	highlights: []
+	description: ''
 }
 var strengthTrainer = {
 	name: 'Case Western Recreation Center',
 	position: 'Student Strength Trainer',
-	highlights: []
+	description: ''
 }
 
 
@@ -129,7 +115,38 @@ var resume = {
 	projects,
 	leadership: [ sigmaCoordinator, peerTutor, strengthTrainer ],
 	courses,
-	skills: []
+	skills: [
+	{
+		name: 'Front End',
+		skills: `Information Architecture
+		Angular
+		Responsive Design
+		JavaScript+ES2015
+		DOM APIs
+		CSS/Sass
+		SVG
+		HTML5 Canvas
+		Maps API`.split('\n')
+	},{
+		name: 'Back End',
+		skills: `Django
+		npm+Node.js
+		MySQL
+		Redis
+		AWS
+		BASH
+		git
+		Vagrant+VirtualBox
+		`.split('\n')
+	}//,{
+	// 	name: 'Machine Learning',
+	// 	skills: `Python+NumPy
+	// 	MATLAB
+	// 	Decision Trees
+	// 	Neural Networks
+	// 	Naive Bayes Classification`.split('\n')
+	// }
+	]
 }
 
 export default resume
