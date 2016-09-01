@@ -1,35 +1,38 @@
 
 mixin my-resume
-	.My-Resume.hide.shader(ng-controller="Resumer as ctrl")
-		.left-side.bord-r-sm
-			+my-work-experience
-			+my-projects
-		.right-side
-			+my-education
-			+my-skills
-			+my-leadership
+	.My-Resume(ng-controller="Resumer as ctrl")
+		.roh
+			.col-sm-8.bord-r-sm
+				+my-work-experience
+				+my-projects
+			.col-sm-4
+				+my-education
+				+my-skills
+				+my-leadership
 
-			
+
 mixin my-work-experience
-	.my-work-history.bord-b-sm
+	.my-work-history
 		.font.head Work History
 		.job-section(ng-repeat="job in ctrl.experience")
-			.wide.clearfix
-				.txt-left.float-left.wide-75
+			.roh
+				.txt-left.col-xs-8
 					.font.main {{job.name}}
 					.font.sub.bord-rb-sm {{job.position}}
-				.txt-right.float-left.wide-25
+				.txt-right.col-xs-4
 					.font.side {{job.start}}
 					.font.side {{job.end}}
 			ul.font.body
 				li.a-highlight(ng-repeat="point in job.highlights")
 					|{{point}}
+
 mixin my-education
 	.my-education.wide
 		.font.head Education
 		.txt-left
-			.font.main {{ctrl.education.cwru.name}}
-			.font.sub.bord-b-sm {{ctrl.education.cwru.degree}}
+			.font.main {{ ctrl.education.cwru.name }}
+			.font.sub {{ ctrl.education.cwru.degree }}
+
 mixin my-skills
 	.my-skills
 		.font.head

@@ -8,20 +8,9 @@
 	margin: auto
 	max-width: 8.5in
 
-	=hide-inactive-items
-		&.g_active .instance:not(.l_active)
-			+translate($y: 100vh)
-			+hide
-	+hide-inactive-items
-
 	.form-item-instance
 		$margin: 2em
-		.the-toggle .form-name .matrix
-				+scale(1, $origin: center)
-				.sub-text
-					+speed($fastest)
 		.contact-bars
-			$HIGH-ENERGY: 9999
 			font-size: 1.5em
 			display: flex
 			flex-direction: column
@@ -52,26 +41,15 @@
 					+cc-swap
 				svg.tri
 					+show
-			&.hovering:not(.l_active)
-				.form-name .matrix
-					transform: translate(0) scale(0.95)
-			&.l_active
-				.form-name .matrix
-					transform: translate(-2in, -20%) scale(0.85)
-					.sub-text
-						+show
-						+delay
-				.contact-bars
+			.form-name .matrix
+				transform: translate(0) 
+				.sub-text
 					+show
-					+delay($fast * 1.75)
-				.the-content 
-					+translate(0)
+					+delay
 		+state-changes
 
 
 		=measurement-dependencies($margin)
-			.the-toggle
-				// margin-top: $margin
 			.the-content
 				margin-bottom: $margin
 			svg.tri
@@ -95,8 +73,6 @@
 	overflow: hidden
 .no-height
 	height: 0
-.the-mask.blanket
-	x: -5
 .flow-in
 	transition: max-height $fast ease
 	max-height: 0

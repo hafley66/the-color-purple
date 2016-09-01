@@ -1,55 +1,51 @@
 include ../common.pug
 include triangle/
 include resume.main.pug
-
-	
-mixin the-content()
-	.the-content.low.relative&attributes(attributes)
-		.flow-in.over-hidden(flow-in="ctrl.isActive(item)") 
-			.content
-				block
-			+rsvg.tri.align-bottom.wide
-				+triangle-D.t-above.no-stroke.cc-fill
-mixin the-toggle
-	+cc-parent.the-toggle.relative.will-move-gpu( ng-click="ctrl.toggle(item)" )
-		mixin cc-background
-			.cc-bord-sm&attributes(attributes)
-			.contact-bars.abs.abs-height.white.font-sm.hide.shader
-				.bar.black.flat-line(ng-repeat=`type in 
-				[
+-
+	var x=`[
 				['email', 'hafley66@gmail.com', 'fa-envelope-o'], 
 				['phone', '330-324-4867', 'fa-phone']
-				]
-				`,
-				class="{{type[0]}}-bar")
-					.contact-info.relative.white-bg
-						i.icon.txt-right.fa.padd-xs-right(class="{{type[2]}}", aria-hidden="true")
-						span.txt.center.cc.bord-sm-left.padd-xs-left.robo.dense {{type[1]}}
-		mixin cc-text
-			.form-name.padd-md.txt-center.uppercase.font-xl.flat-line.no-highlight&attributes(attributes)
-				.matrix
-					.main-text.relative.dense
-						|{{item}}
-					.sub-text.abs.abs-width.below.font-md-rem.flat-line-rem.hide.shader.padd-xs
-						|Software Engineer
+				]`
+
+mixin the-content()
+	.the-content.low.relative&attributes(attributes)
+		//- .flow-in.over-hidden(flow-in="ctrl.isActive(item)") 
+		.content
+			block
+		+rsvg.tri.align-bottom.wide
+			+triangle-D.t-above.no-stroke.cc-fill
+mixin the-toggle
+	.cc-parent.the-toggle.relative.will-move-gpu
+		.cc-background.abs-cover.cc-bord-sm
+		.roh
+			.col-sm-8.col-xs-10
+				.cc-text.relative.form-name.txt-center.uppercase.font-xl.flat-line.no-highlight
+					.matrix
+						.roh
+							.col-xs-12.main-text.relative.dense
+								.marg-sm|Chris Hafley
+							.col-xs-12.sub-text.font-md-rem.flat-line-rem
+								.marg-sm|Software Engineer
+			.col-sm-4.col-xs-2
+				+contact-bars
 mixin m-triangle-menu()
-	.m-triangle-menu.registration.form-items.menu(
-			ng-controller="fuck as ctrl"
-			ng-class="{'g_active': ctrl.isActive()}"
-		)
-		.form-item-instance.instance.relative.will-move-gpu.l_active(
-			ng-repeat="item in ctrl.items"
-			ng-class="{'l_active': ctrl.isActive(item)}"
-			class="{{::item}}"
-			float-top
-			hover-state
-		)
+	.m-triangle-menu.registration.form-items.menu
+		.form-item-instance.instance.relative.will-move-gpu.l_active
 			+the-toggle
-			+the-content.cc-bord-sm.bord-no-top.t-up.matrix
+			+the-content.cc-bord-sm.bord-no-top
 				block
 
-
-.relative.dim-cover
-	.m-login.collapse-child-margins
-		+m-triangle-menu()
-			+my-resume()
+mixin build
+	.relative.dim-cover
+		.m-login.collapse-child-margins
+			+m-triangle-menu()
+				+my-resume()
+mixin contact-bars
+	.contact-bars.white.font-sm.padd-xs
+		.bar.black.flat-line(ng-repeat=`type in ` + x, class="{{type[0]}}-bar")
+			.roh.contact-info.white-bg.marg-xs
+				.col-sm-2.col-xs-12.txt-center
+					i.icon.fa(class="{{type[2]}}", aria-hidden="true")
+				.col-sm-10.hidden-xs
+					.txt-center.cc.bord-sm-left.padd-xs-left.robo.dense {{type[1]}}
++build

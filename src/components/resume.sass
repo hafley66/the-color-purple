@@ -1,3 +1,5 @@
+* 
+	-webkit-print-color-adjust: economy | exact
 
 .dense
 	font-family: 'Oswald', sans-serif
@@ -17,23 +19,22 @@
 // font-family: 'Roboto Slab', serif;
 // font-family: 'Lato', sans-serif;
 .black-on-white
-	color: black
+	color: $black
 	background-color: white
 .white-on-black
 	color: white
-	background-color: black
+	background-color: $black
 .black-on-silver
-	color: black
-	background-color: silver
+	color: $black
+	background-color: $silver
 .My-Resume
-	display: flex
-	justify-content: space-around
-	
 	.font
 		&.head
-			font-size: 25px
+			font-size: 28px
 			@extend .dense
 			@extend .txt-center
+			border-top: $bord-sm solid currentColor
+			border-bottom: $bord-sm solid currentColor
 		&.main
 			@extend .white-on-black
 		&.sub
@@ -51,16 +52,12 @@
 			font-size: 18px
 			border-width: 2px
 	
-	>.left-side
-		flex: 2
-		ul
-			margin: 0
-			padding: 10px 3px 10px 30px
-	> .right-side
-		flex: 1
+	ul
+		margin: 0
+		padding: 10px 3px 10px 30px
 	.my-education .font.main
 		font-size: 28px
-.l_active .My-Resume
+.My-Resume
 	opacity: 1
 .b-r-sm
 
@@ -93,3 +90,9 @@
 	$b: $bord-sm solid currentColor
 	border-top: $b
 	border-bottom: $b
+.no-padd
+	padding: 0 !important
+.roh
+	> *
+		padding: 0 !important
+	+clearfix

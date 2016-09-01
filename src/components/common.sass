@@ -22,3 +22,10 @@ body
 
 +make-padd-y-child()
 +make-marg-y-child()
+
+=clearfix
+  &:before, &:after
+    content: " "
+    display: table
+  &:after
+    clear: both

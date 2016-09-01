@@ -139,7 +139,9 @@ svg
   left: 0
 .float-left
   float: left
-.clearfix:after 
+=clearfix
+  &:before, &:after
     content: " "
-    display: block
+    display: table
+  &:after
     clear: both

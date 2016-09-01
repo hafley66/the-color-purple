@@ -3,6 +3,9 @@ import resume from './resume/resume'
 import 'normalize.css'
 import templateFn from './components/resume.pug';
 import 'components/login/.sass'
+import './custom/bootstrap.scss';
+import './print-fix.css'
+
 
 var template = templateFn();
 var app = angular.module('muh-demo', []);
