@@ -34,8 +34,8 @@ app.controller('fuck', ['$scope', function controller($scope) {
 		},
 		isActive(item) {
 			if(!item) return(!!activeItem)
-			else return(activeItem === item)
-		},
+				else return(activeItem === item)
+			},
 		activate(item) { activeItem = item },
 		deactivate(item) { activeItem = null }
 	});
@@ -54,7 +54,7 @@ app.directive('floatTop', function() {
 			$elem.on('click', toggleFloat);
 			function toggleFloat() {
 				if(floating) clear($elem)
-				else translate($elem, `0px, ${offset}px`);
+					else translate($elem, `0px, ${offset}px`);
 				floating = !floating;
 			}}})
 })
@@ -98,8 +98,8 @@ app.directive('flowIn', ()=>{
 			var height = 
 			$scope.$watch($attr.flowIn, (newValue, oldValue)=> {
 				if(!!newValue) 
-        	elem.style.maxHeight = Array.prototype.reduce.call(elem.childNodes, (p, c)=> p + (c.offsetHeight || 0), 0) + 'px';
-        else
+					elem.style.maxHeight = Array.prototype.reduce.call(elem.childNodes, (p, c)=> p + (c.offsetHeight || 0), 0) + 'px';
+				else
 					elem.style.maxHeight = 0
 			});
 		}}})
@@ -107,5 +107,63 @@ app.directive('flowIn', ()=>{
 app.controller('Resumer', function() {
 	Object.assign(this, resume);
 })
+
+app.directive('relative-d', function() {
+	return {
+		link($scope, $elem, $attr){
+			var W, H, d;
+			var relX = str => (Number(str)/100) * W
+			var relY = str => (Number(str)/100) * H
+
+			var replaceFunctions = [
+			[/[MLH] ?(\d+%)/gi, relX], 
+			[/[V] ?(\d+%)/gi, relY], 
+			[/[ML] ?\d+[^\s]*\s*,?\s*(\d+%)/gi, relY]
+			]
+			var replacePercents = (pathString, [percentageRegex, percentageFunction])=> 
+			pathString.replace(percentageRegex, percentageFunction)
+			var reducePercents = (pathString) => 
+			replaceFunctions.reduce(reducePercents, pathString)
+
+			var getPath = () => fastdom.measure( () => d=$elem.attr('relative-d') )
+			var setPath = () => fastdom.mutate(()=> element.setAttribute('d', replacePercents(pathString)))
+			var updatePath= () => getPath().then(setPath)
+
+			$scope.$on('view-box-change', (e, data)=> {
+				[W, H] = data
+				updatePath()
+			})
+
+			$scope.$watch('relative-d', pathString =>{
+				d = pathString
+				setPath()
+			})
+
+		}
+	}
+})
+
+app.directive('viewBoxFit', function() {
+	return {
+		link($scope, $elem, $attr) {
+			var W, H, element = $elem[0];
+			var getViewBox = e=> fastdom.measure(x=>{
+				W = $elem.width();
+				H = $elem.height();
+			})
+			var setViewBox = e => fastdom.mutate(x=>{
+				element.setAttribute(`0 0 ${W} ${H}`)
+			})
+			var broadcastViewBox = e => $scope.$broadcast('view-box-change', [0, 0, W, H]);
+			var doThings = e => getViewBox().then(setViewBox).then(broadcastViewBox);
+			onResize(doThings)
+			doThings();
+		}
+	}
+})
+
+function onResize(fn, debounceThreshold=100) {
+	$(window).on('resize', _.debounce(fn, debounceThreshold));
+}
 
 export default app;
