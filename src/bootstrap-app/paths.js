@@ -1,3 +1,5 @@
+import fastdom from 'fastdom'
+
 const PATH_REGEX_X_COORD = /([MLH] ?)(\d+(?:\.\d+)?%)/gi,
 PATH_REGEX_Y_COORD_2ND_PLACE = /(,?[MLH] *(?:\d+(?:\.\d+)?)[a-z% ]+(?: *|,))(\d+(?:\.\d+)?%)/gi,
 PATH_REGEX_Y_COORD_1ST_PLACE = /([V] ?)(\d+%)/gi;
@@ -16,7 +18,7 @@ const PATH_TEMPLATE_0 = ctx => `M 0 50%, L 100% ${ctx.count}%`,
 PATH_TEMPLATE_1 = ctx => {
   var {
     count
-  } = ctx
+  } = ctx;
   var percent = count / 100
   var half = percent * 0.5
   return `M ${50*half}% 50%, L ${40-15*percent}% ${40-15*percent}% 
@@ -29,9 +31,9 @@ PATH_TEMPLATE_1 = ctx => {
 PATH_TEMPLATE = PATH_TEMPLATE_1
 
 var log = console.log.bind(console);
-var fastdom = fastdom.extend(fastdomPromised);
+fastdom.extend(fastdomPromised);
 
-var app = angular.module('svg-test', []);
+var app = angular.module('svg-helpers', []);
 app.directive('relativeD', function() {
   return {
     scope: {
@@ -101,18 +103,13 @@ app.directive('viewBoxFit', function() {
       var getViewBox = e => fastdom.measure(x => {
         var parent = $elem.parent();
         W = parent.width();
-        H = parent.height();
+        H = parent.height(); 
       })
-      var setViewBox = e => fastdom.mutate(x => {
-        element.setAttribute('view-box', `0 0 ${W} ${H}`)
-      })
-      var broadcastViewBox = e => {
-        log('broadcasting change')
-        return $scope.$broadcast('view-box-change', [0, 0, W, H])
-      }
-      var doThings = e => getViewBox().then(setViewBox).then(broadcastViewBox);
+      var setViewBox = e => fastdom.mutate(x => element.setAttribute('view-box', `0 0 ${W} ${H}`))
+      var broadcastViewBox = e => $scope.$broadcast('view-box-change', [0, 0, W, H])
+      var doThings = e => getViewBox().then(setViewBox).then(broadcastViewBox)
       onResize(doThings)
-      doThings();
+      doThings()
     }
   }
 })
@@ -176,3 +173,5 @@ function truncator(numToTruncate, intDecimalPlaces) {
     ret = lhs
   return Number(ret);
 }
+
+export default app;

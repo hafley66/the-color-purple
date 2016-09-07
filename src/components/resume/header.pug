@@ -1,6 +1,6 @@
-include ../common.pug
-include triangle/
-include resume.main.pug
+include ../global.pug
+include ../triangle/
+include ./body.pug
 -
 	var x=`[
 				['email', 'hafley66@gmail.com', 'fa-envelope-o'], 
@@ -9,14 +9,12 @@ include resume.main.pug
 
 mixin the-content()
 	.the-content.low.relative&attributes(attributes)
-		//- .flow-in.over-hidden(flow-in="ctrl.isActive(item)") 
 		.content
 			block
-		+rsvg.tri.align-bottom.wide
-			+triangle-D.t-above.no-stroke.cc-fill
+		+rsvg.tri.wide
+			+triangle-D.no-stroke.cc-fill
 mixin the-toggle
-	.cc-parent.the-toggle.relative.will-move-gpu
-		.cc-background.abs-cover.cc-bord-sm
+	.cc-parent.the-toggle.relative.cc-bord-sm
 		.roh
 			.col-sm-8.col-xs-10
 				.cc-text.relative.form-name.txt-center.uppercase.font-xl.flat-line.no-highlight
@@ -28,20 +26,14 @@ mixin the-toggle
 								.marg-sm|Software Engineer
 			.col-sm-4.col-xs-2
 				+contact-bars
-mixin m-triangle-menu()
-	.m-triangle-menu.registration.form-items.menu
-		.form-item-instance.instance.relative.will-move-gpu.l_active
-			+the-toggle
-			+the-content.cc-bord-sm.bord-no-top
-				block
 
 mixin build
-	.relative.dim-cover
-		.m-login.collapse-child-margins
-			+m-triangle-menu()
-				+my-resume()
+	.relative.dim-cover.container
+		+the-toggle
+		+the-content.cc-bord-sm.bord-no-top
+			+my-resume
 mixin contact-bars
-	.contact-bars.white.font-sm.padd-xs
+	.contact-bars.white.font-md.padd-xs
 		.bar.black.flat-line(ng-repeat=`type in ` + x, class="{{type[0]}}-bar")
 			.roh.contact-info.white-bg.marg-xs
 				.col-sm-2.col-xs-12.txt-center

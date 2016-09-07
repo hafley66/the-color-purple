@@ -32,7 +32,8 @@
     "cson-loader": "^0.1.0"
   },
   "scripts": {
-    "dev": "webpack-dev-server --inline",
+    "build:index": "pug src/bootstrap-app/page/index.pug -o ./ -f",
+    "dev": "npm run build:index && webpack-dev-server --inline",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
