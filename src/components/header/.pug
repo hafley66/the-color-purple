@@ -1,0 +1,34 @@
+//- ng-mousemove="ctrl.moveDash($event)" 
+mixin wavebeam
+	#wavebeam.abs-cover.hidden-xs(ng-class=`{
+	'as-diamond': ctrl.tween === 0,
+	'into-diamond': ctrl.tween < 1
+	}`)
+		svg.abs-cover.dim-cover.header-wave(view-box-fit, preserveAspectRatio='none')
+			path.top.no-fill(relative-d="ctrl.path" 
+			relative-dash 
+			relative-dash-size="ctrl.dashSize" 
+			relative-dash-position="ctrl.dashPosition")
+		svg.abs-cover.dim-cover.origin-center.reflect-y(view-box-fit, preserveAspectRatio='none')
+			path.bottom.no-fill(relative-d="ctrl.path" 
+			relative-dash 
+			relative-dash-size="ctrl.dashSize" 
+			relative-dash-position="ctrl.dashPosition")
+
+mixin header-build
+	.header-component.header-text.relative.padd-md.ng-cloak(
+		ng-mouseleave="ctrl.anchorOn(ctrl.active) + ctrl.toSquare()" 
+		ng-mouseenter="ctrl.toDiamond()")
+		+wavebeam
+		+row-of-links
+mixin row-of-links
+	.row
+		.col-sm-3(ng-repeat="link in ctrl.links")
+			.clicker(
+			ng-class="{outline: ctrl.isActive(link)}"
+			ng-click="ctrl.activateLink(link)"
+			ng-mouseenter="ctrl.anchorOn(link)"
+			)
+				.txt-center.padd-md.font-md.uppercase.dense.no-highlight.pointer.underline
+					|{{link}}
++header-build
