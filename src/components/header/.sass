@@ -5,12 +5,14 @@
 		stroke-antialiasing: true
 		transition: stroke-dashoffset $fast
 	&.as-diamond, &.into-diamond
-		path
-			// stroke-linecap: square
+	&.into-square
+		transition: stroke-dashoffset 0s
 	.top
 		stroke: rgba(150, 0, 0, 1)
 	.bottom
 		stroke: rgba(0, 150, 150, 1)
+	.ghost
+		visibility: hidden
 
 .outline
   color: #fff

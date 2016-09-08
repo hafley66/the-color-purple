@@ -4,4 +4,4 @@ import './print-fix.css'
 import '../components/build.sass'
 
 import './angular-tools'
-import './paths'
+import '../components/animations/paths.js'

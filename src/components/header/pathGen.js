@@ -4,7 +4,7 @@ export default function genWaves(elements) {
 	var size = 100/elements.length
 	var length = elements.length;
 
-	function genRelativePathString(atTime=0) {
+	function genRelativePathString(atTime=0, unit='%') {
 		var pts = genPoints(atTime);
 		var pts0 = genPoints(0);
 		var range = _.range(elements.length);
@@ -15,14 +15,13 @@ export default function genWaves(elements) {
 				y = 100 - y
 			return [x,y]
 		}));
-
 		var pointSequence = _.flatten(pointsXY);
-		
-		var makeString = (pathString, [x,y])=> {
-			pathString.push(`${x}% ${y}% L`)
-			return pathString;
-		}
-		return pointSequence.reduce(makeString, ['M']).join(' ').trimLast();
+		return makeString(pointSequence, unit);
+	}
+
+	function makeString(points, unit='%') {
+		var makeString = (pathString, [x,y])=> pathString.push(`${x + unit} ${y + unit} L`) && pathString
+		return points.reduce(makeString, ['M']).join(' ').trimLast();
 	}
 
 	function genPoints(atTime=0) {
@@ -32,6 +31,22 @@ export default function genWaves(elements) {
 		var Y = X0;
 		return [ [0, 50], [X0, Y], [50, 0], [X1, Y], [100, 50] ];
 	}
+
+	getSlack();
+
 	return genRelativePathString
+
+	function measurePath(time=0, using="#ghost-path .ghost"){
+		var path = $(using)[0];
+		var pathString = genRelativePathString(time, '');
+		path.setAttribute('d', pathString);
+		return path.getTotalLength();
+	}
+
+	function getSlack(start=0, end=1) {
+		var startLength = measurePath(start) 
+		var endLength = measurePath(end);
+		console.log('lengths are...', startLength/ endLength);
+	}
 }
 

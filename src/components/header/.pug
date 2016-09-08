@@ -1,8 +1,8 @@
 //- ng-mousemove="ctrl.moveDash($event)" 
-mixin wavebeam
+mixin the-wavebeam
 	#wavebeam.abs-cover.hidden-xs(ng-class=`{
 	'as-diamond': ctrl.tween === 0,
-	'into-diamond': ctrl.tween < 1
+	'into-square': !ctrl.animation.reversed()
 	}`)
 		svg.abs-cover.dim-cover.header-wave(view-box-fit, preserveAspectRatio='none')
 			path.top.no-fill(relative-d="ctrl.path" 
@@ -14,21 +14,38 @@ mixin wavebeam
 			relative-dash 
 			relative-dash-size="ctrl.dashSize" 
 			relative-dash-position="ctrl.dashPosition")
+		svg#ghost-path.abs-cover.dim-cover.invisible(view-box-fix, preserveAspectRatio="none")
+			path.ghost.no-fill(relative-d="ctrl.path")
 
-mixin header-build
-	.header-component.header-text.relative.padd-md.ng-cloak(
-		ng-mouseleave="ctrl.anchorOn(ctrl.active) + ctrl.toSquare()" 
-		ng-mouseenter="ctrl.toDiamond()")
-		+wavebeam
-		+row-of-links
-mixin row-of-links
+mixin the-header-build
+	.padd-md
+		.header-component.header-text.relative.padd-md.ng-cloak(
+			ng-mouseleave="ctrl.anchorOn(ctrl.active) + ctrl.toSquare()" 
+			ng-mouseenter="ctrl.toDiamond()")
+			+the-wavebeam
+			+a-row-of-links
+mixin a-row-of-links
 	.row
 		.col-sm-3(ng-repeat="link in ctrl.links")
-			.clicker(
-			ng-class="{outline: ctrl.isActive(link)}"
-			ng-click="ctrl.activateLink(link)"
-			ng-mouseenter="ctrl.anchorOn(link)"
-			)
-				.txt-center.padd-md.font-md.uppercase.dense.no-highlight.pointer.underline
-					|{{link}}
-+header-build
+			+a-header-link
+mixin a-header-link
+	.clicker(
+		ng-class="{outline: ctrl.isActive(link)}"
+		ng-click="ctrl.activateLink(link)"
+		ng-mouseenter="ctrl.anchorOn(link)"
+	)
+		+a-header-text
+			|{{link}}
+mixin a-header-text
+	div(class=`
+	txt-center	
+	padd-md	
+	font-md	
+	uppercase	
+	dense	
+	no-highlight	
+	pointer	
+	underline
+		`)&attributes(attributes)
+		block
++the-header-build

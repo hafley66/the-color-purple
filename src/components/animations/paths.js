@@ -37,9 +37,12 @@ app.directive('relativeD', function() {
         return pathString && W && H && replaceFunctions.reduce(replace, pathString)
       }
       var getPath = () => Promise.resolve($scope.pathString)
+      var lastFrame;
       var setPath = (pathString) => {
-        if (pathString && W && H)
-          return fastdom.mutate(() => element.setAttribute('d', reduce(pathString)))
+        if (pathString && W && H){
+          if(lastFrame) fastdom.clear(lastFrame);
+          lastFrame = fastdom.mutate(() => element.setAttribute('d', reduce(pathString)))
+        }
       }
       var broadcastChange = (pathString) => $scope.$broadcast('path-change', [pathString, $elem])
       var updatePath = () => getPath().then(setPath).then(broadcastChange);
