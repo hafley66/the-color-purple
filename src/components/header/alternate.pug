@@ -1,3 +1,7 @@
+include ../paths/
+
+
+
 mixin the-header-build
 	.padd-md
 		.header-component.header-text.relative.padd-md.ng-cloak(
@@ -6,31 +10,20 @@ mixin the-header-build
 			+the-wavebeam
 			+a-row-of-links
 
-mixin wave
+mixin wave-path 
 	svg.abs-cover.dim-cover.header-wave(view-box-fit, preserveAspectRatio='none')&attributes(attributes)
-		path.top.no-fill(relative-d="M 0 50% L 50% 0 L 100% 50%" 
+		path.no-fill(relative-d="{{ctrl.path}}" 
 		relative-dash 
-		relative-dash-size="{{tween.T}}%" 
-		relative-dash-position="{{-(50 - tween.T/2)}}%"
-		)
-mixin wave-2
-	svg.abs-cover.dim-cover.header-wave(view-box-fit, preserveAspectRatio='none')&attributes(attributes)
-		path.wave-2.top.no-fill(relative-d="M {{50-tween.T * 0.5}}% {{tween.T * 0.5}}% L 50% 0 L {{50 + tween.T * 0.5}}% {{tween.T * 0.5}}%" )
+		relative-dash-size="{{ctrl.dashSize}}" 
+		relative-dash-position="{{ctrl.dashPosition}}")
+
 mixin the-wavebeam
 	#wavebeam.abs-cover.hidden-xs(ng-class=`{
 	'as-diamond': ctrl.tween === 0,
 	'into-square': !ctrl.animation.reversed()
 	}`)
-		svg.abs-cover.dim-cover.header-wave(view-box-fit, preserveAspectRatio='none')
-			path.top.no-fill(relative-d="{{ctrl.path}}" 
-			relative-dash 
-			relative-dash-size="{{ctrl.dashSize}}" 
-			relative-dash-position="{{ctrl.dashPosition}}")
-		svg.abs-cover.dim-cover.origin-center.reflect-y(view-box-fit, preserveAspectRatio='none')
-			path.bottom.no-fill(relative-d="{{ctrl.path}}" 
-			relative-dash 
-			relative-dash-size="{{ctrl.dashSize}}" 
-			relative-dash-position="{{ctrl.dashPosition}}")
+		+wave-path.top
+		+wave-path.bottom.origin-center.reflect-y
 		svg#ghost-path.abs-cover.dim-cover.invisible(view-box-fix, preserveAspectRatio="none")
 			path.ghost.no-fill(relative-d="{{ctrl.path}}")
 
@@ -38,15 +31,16 @@ mixin a-row-of-links
 	.row
 		.col-sm-3(ng-repeat="link in ctrl.links")
 			+a-header-link
+mixin links-tween
+	//- my-tween(
+	//- 	to=100
+	//- 	duration=1
+	//- 	start-paused='false'
+	//- 	yoyo='true'
+	//- 	)
+	block
 mixin a-header-link
-	my-tween(
-	to=100
-	duration=1
-	repeat='-1'
-	start-paused='false'
-	yoyo='true')
-		//- +wave-2
-		//- +wave
+	+links-tween
 		.clicker.will-move-gpu(
 			ng-class="{outline: ctrl.isActive(link)}"
 			ng-click="ctrl.activateLink(link)"
@@ -54,6 +48,8 @@ mixin a-header-link
 		)
 			+a-header-text
 				|{{link}}
+		//- +wave-2
+		//- +wave
 mixin a-header-text
 	div(class=`
 	txt-center	
@@ -67,3 +63,4 @@ mixin a-header-text
 		`)&attributes(attributes)
 		block
 +the-header-build
++special-beam-cannon

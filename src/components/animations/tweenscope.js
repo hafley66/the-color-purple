@@ -1,9 +1,9 @@
 const app = angular.module('my-tweens', [])
 const directiveName = 'myTween'
 const bindToController = {
-	monUpdate: '&',
-	monStart: '&',
-	monEnd: '&',
+	monUpdate: '&onUpdate',
+	monStart: '&onStart',
+	monEnd: '&onEnd',
 	mduration: '<?duration',
 	mrepeat: '<?repeat',
 	startPaused: '<?',
@@ -14,14 +14,16 @@ const bindToController = {
 }
 
 function link($scope, $elem, $attr, C) {
-	$scope.$watch('tween.mreverse', bool=> bool && !C.reversed() ? C.reverse() : null);
-
 	C.T = C.mfrom || 0;
 	C.T100 = (C.mfrom || 0) * 100;
 	var tween = TweenMax.to(C, C.mduration || 0.5, {
 		T: C.mto || 1,
 		T100: (C.mto || 1) * 100,
 		repeat: C.mrepeat || 0,
+		onComplete(){
+		},
+		onReverseComplete() {
+		},
 		onUpdate() {
 			if(C.T === C.mto|| 1 && C.monEnd) 
 				C.monEnd()
@@ -31,10 +33,12 @@ function link($scope, $elem, $attr, C) {
 				C.monUpdate(C.T)
 			$scope.$apply();
 		}, 
-		paused: C.startPaused || false,
-		yoyo: C.myoyo || false
-	});
-	Object.setPrototypeOf(C, tween);
+		paused: C.startPaused || true,
+		yoyo: C.myoyo || false,
+		ease: Sine.easeInOut
+	})
+	C.play = tween.play.bind(tween)
+	C.reverse = tween.reverse.bind(tween)
 }
 
 app.directive(directiveName, function() {

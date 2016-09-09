@@ -2,6 +2,18 @@ import _ from 'lodash';
 import templateFn from './alternate.pug'
 import genWaves from './pathGen.js'
 
+
+const TOP = 0, 
+LEFT = 1,
+BOTTOM = 2,
+RIGHT = 3;
+
+const sides= {
+	TOP,
+	LEFT,
+	BOTTOM,
+	RIGHT
+}
 const DURATION = 0.3,
 EASING_FUNCTION = SlowMo.ease.config(0.1, 0.1, false);
 
@@ -77,12 +89,16 @@ export default ['myHeader', ['$timeout', function($timeout) {
 				ctrl.anchored = link;
 				moveToPercent(ctrl.anchorPercent(link));
 			}
+
+			$scope.getEventSideEntrance = e=> {
+				var side = getEventSideEntrance(e)
+				$scope.side 
+			}
+
 			$timeout(()=>ctrl.anchorOn(ctrl.active) + ctrl.toSquare())
 		},
 		template: templateFn()
 	}
 }]]
 
-function getPathLength(selector) {
 
-}
