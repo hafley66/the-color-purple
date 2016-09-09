@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import templateFn from './.pug'
+import templateFn from './alternate.pug'
 import genWaves from './pathGen.js'
 
 const DURATION = 0.3,
@@ -33,10 +33,9 @@ export default ['myHeader', ['$timeout', function($timeout) {
 			this.gen = genWaves(this.links);
 			this.path = this.gen(0);
 
-			var interpRatio = 1.22
 
 			this.dashAlign = 0.50
-			this.dashSize = 1/this.links.length;
+			this.dashSize = 1/this.links.length
 			this.dashDistanceFromPoint= this.dashAlign * this.dashSize
 			this.dashPosition = this.dashDistanceFromPoint;
 			this.tween = 0;
@@ -44,37 +43,15 @@ export default ['myHeader', ['$timeout', function($timeout) {
 		link($scope, $elem, $attr, ctrl) {
 			var target = $elem.find('.header-component');
 			var moveToPercent = percent => ctrl.dashPosition = -(percent - ctrl.dashDistanceFromPoint)
-			var moveFromEvent = (event) => {
-				var percent = event.offsetX / $elem.width();
-				moveToPercent(percent);
-			}
 
 			var dashSize = 1/ctrl.links.length;
 
 			var changePath = percent => {
 				ctrl.path = ctrl.gen(percent)
-				var pivot = ctrl.dashDistanceFromPoint;
-				var decay = (1-percent);
-				
-				var length = ctrl.length();
-
-				if(!ctrl.animation.reversed()){
-					var alignPercent = ctrl.anchorPercent()
-					var index = ctrl.index();
-					// console.log('position is...', pivot, ctrl.dashPosition, decay);
-					// ctrl.dashPosition = -alignPercent + pivot - pivot*decay*(index + 1)
-					// console.log('\tnow it is...', ctrl.dashPosition);
-				} 
-				if(ctrl.animation.reversed()){
-					var alignPercent = ctrl.anchorPercent(ctrl.anchored)
-					var index = ctrl.index(ctrl.anchored);
-					// ctrl.dashPosition = -alignPercent + pivot + pivot*percent*index*0.82
-				}
 				ctrl.tween = percent;
 				$scope.$broadcast('path-change', percent);
 			}
 			ctrl.index = (link=ctrl.active) => _.indexOf(ctrl.links, link)
-			ctrl.moveDash = moveFromEvent
 			ctrl.animation = genTween( percent => $scope.$apply(()=>changePath(percent)));
 			ctrl.toSquare = event => ctrl.animation.play();
 			ctrl.toDiamond = event => ctrl.animation.reverse(); 

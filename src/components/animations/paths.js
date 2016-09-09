@@ -11,7 +11,7 @@ var app = angular.module('svg-helpers', []);
 app.directive('relativeD', function() {
   return {
     scope: {
-      'pathString': '=relativeD'
+      'pathString': '@relativeD'
     },
     link($scope, $elem, $attr) {
       var element = $elem[0];
@@ -83,8 +83,8 @@ app.directive('viewBoxFit', ['$timeout', function($timeout) {
 app.directive('relativeDash', function() {
   return {
     bindToController: {
-      relSize: '=relativeDashSize',
-      relPosition: '=relativeDashPosition'
+      relSize: '@relativeDashSize',
+      relPosition: '@relativeDashPosition'
     },
     controller() {
       this.pathLength = 0;
@@ -96,14 +96,22 @@ app.directive('relativeDash', function() {
       $scope.$on('view-box-change', update)
       $scope.$on('path-change', update)
       $scope.$watch('pathSizer.relPosition', update)
+      $scope.$watch('pathSizer.relSize', update)
 
       var length = () => path.getTotalLength();
+
+      var normalizeInput = text => {
+        if(text.indexOf('%') > -1)
+          return Number(text.trimLast()) / 100;
+        else
+          return Number(text);
+      }
 
       function update() {
         return fastdom.mutate(()=>{
           var newLength = length();
-          ctrl.size = ctrl.relSize * newLength 
-          ctrl.position = ctrl.relPosition * newLength    
+          ctrl.size = normalizeInput(ctrl.relSize) * newLength
+          ctrl.position = normalizeInput(ctrl.relPosition) * newLength
           path.style.strokeDasharray = `${ctrl.size} ${newLength}`
           path.style.strokeDashoffset = ctrl.position
         })
@@ -127,21 +135,6 @@ function onResizeThrottle(fn, rate = 50) {
 
 function onResizeDebounce(fn, debounceThreshold = 100) {
   $(window).on('resize', _.debounce(fn, debounceThreshold));
-}
-
-Number.prototype.truncate = function(decimalPlaces=2) {
-  var strN = this + ''
-  var [lhs, rhs] = strN.split('.')
-  var ret;
-  if (rhs)
-    ret = [lhs, rhs.slice(0, intDecimalPlaces)].join('.')
-  else
-    ret = lhs
-  return Number(ret);
-}
-
-String.prototype.trimLast = function() {
-  return this.slice(0, this.length - 1);
 }
 
 export default app;

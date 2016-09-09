@@ -2,7 +2,7 @@ import './prefix.js'
 import resume from '../components/resume/.js'
 import header from '../components/header/directive.js'
 
-var app = angular.module('my-website', ['svg-helpers', 'my-tools']);
+var app = angular.module('my-website', ['svg-helpers', 'my-tools', 'my-tweens']);
 
 function scale(elem, value) {
 	elem.css({transform: `scale(${value})`});

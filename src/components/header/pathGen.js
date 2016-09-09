@@ -1,5 +1,4 @@
 import _ from 'lodash'
-
 export default function genWaves(elements) {
 	var size = 100/elements.length
 	var length = elements.length;
@@ -9,12 +8,8 @@ export default function genWaves(elements) {
 		var pts0 = genPoints(0);
 		var range = _.range(elements.length);
 		var points = range.map(index=> pts)
-		var pointsX = points.map((segment, index)=>segment.map( ([x,y]) =>[ index*size + x/length, y ] ));
-		var pointsXY = pointsX.map((segment, index)=> segment.map( ([x,y]) => {
-			if( index%2 !== 0 ) 
-				y = 100 - y
-			return [x,y]
-		}));
+		var pointsX = points.map((segment, index)=>segment.map(( [x,y] ) =>[ (index*size + x/length), y ] ));
+		var pointsXY = pointsX.map((segment, index)=> segment.map(( [x,y] ) => [x, (index % 2 !== 0) ? 100-y : y] ));
 		var pointSequence = _.flatten(pointsXY);
 		return makeString(pointSequence, unit);
 	}
@@ -49,4 +44,3 @@ export default function genWaves(elements) {
 		console.log('lengths are...', startLength/ endLength);
 	}
 }
-
