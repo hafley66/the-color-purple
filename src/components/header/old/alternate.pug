@@ -1,12 +1,12 @@
 include ../paths/
 
-
-
 mixin the-header-build
 	.padd-md
 		.header-component.header-text.relative.padd-md.ng-cloak(
 			ng-mouseleave="ctrl.anchorOn(ctrl.active) + ctrl.toSquare()" 
-			ng-mouseenter="ctrl.toDiamond()")
+			ng-mouseenter="ctrl.toDiamond()"
+			hover-state
+			)
 			+the-wavebeam
 			+a-row-of-links
 
@@ -48,8 +48,6 @@ mixin a-header-link
 		)
 			+a-header-text
 				|{{link}}
-		//- +wave-2
-		//- +wave
 mixin a-header-text
 	div(class=`
 	txt-center	

@@ -42,7 +42,7 @@ function link($scope, $elem, $attr, C) {
 }
 
 app.directive(directiveName, function() {
-	return {
+	return { 
 		bindToController,
 		link,
 		controller(){},

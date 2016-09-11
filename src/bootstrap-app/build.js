@@ -1,7 +1,7 @@
 import './prefix.js'
 import resume from '../components/resume/.js'
-import header from '../components/header/directive.js'
-import headerAni from '../components/header/animator.js'
+import header from '../components/old/header/directive.js'
+import headerAni from '../components/old/header/animator.js'
 
 var app = angular.module('my-website', ['svg-helpers', 'my-tools', 'my-tweens']);
 

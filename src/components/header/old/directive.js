@@ -47,7 +47,7 @@ export default ['myHeader', ['$timeout', function($timeout) {
 
 
 			this.dashAlign = 0.50
-			this.dashSize = 1/this.links.length
+			this.dashSize = 0.26
 			this.dashDistanceFromPoint= this.dashAlign * this.dashSize
 			this.dashPosition = this.dashDistanceFromPoint;
 			this.tween = 0;
@@ -65,8 +65,13 @@ export default ['myHeader', ['$timeout', function($timeout) {
 			}
 			ctrl.index = (link=ctrl.active) => _.indexOf(ctrl.links, link)
 			ctrl.animation = genTween( percent => $scope.$apply(()=>changePath(percent)));
-			ctrl.toSquare = event => ctrl.animation.play();
-			ctrl.toDiamond = event => ctrl.animation.reverse(); 
+			ctrl.toSquare = event => {
+				ctrl.animation.play()
+			}
+			ctrl.toDiamond = event => {
+				if(ctrl.tween > 0)
+					ctrl.animation.reverse()
+			}
 
 			
 			ctrl.active = 'home';
@@ -88,11 +93,6 @@ export default ['myHeader', ['$timeout', function($timeout) {
 			ctrl.anchorOn = function(link) {
 				ctrl.anchored = link;
 				moveToPercent(ctrl.anchorPercent(link));
-			}
-
-			$scope.getEventSideEntrance = e=> {
-				var side = getEventSideEntrance(e)
-				$scope.side 
 			}
 
 			$timeout(()=>ctrl.anchorOn(ctrl.active) + ctrl.toSquare())
