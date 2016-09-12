@@ -9,6 +9,13 @@ mixin svg
 			viewBox='0 0 100 100',
 			preserveAspectRatio='none')&attributes(attributes)
 		block
+mixin fit-svg()
+	svg.dim-cover(xmlns="http://www.w3.org/2000/svg"
+			view-box-fit
+			preserveAspectRatio='none'
+			shape-rendering="geometricPrecision"
+			)&attributes(attributes)
+		block
 			
 mixin ResponsiveSVG
 	+svg.dim-cover(xmlns="http://www.w3.org/2000/svg",

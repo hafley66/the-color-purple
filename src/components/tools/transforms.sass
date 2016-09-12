@@ -5,7 +5,7 @@
   @content
 
 =scale($x:1, $y:null, $origin: null)
-  @if($y)
+  @if($y != null)
     transform: scale($x, $y)
   @else
     transform: scale($x)
@@ -70,5 +70,7 @@
   +scale($y: 0)
 .no-scale-x
   +scale($x: 0)
-.origin-center
+.origin-center, .about-center
   transform-origin: center
+.reflect-x
+  transform: scale(-1, 1)

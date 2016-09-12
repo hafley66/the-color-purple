@@ -1,0 +1,85 @@
+include ../global.pug
+
+mixin build
+	+THE-HEADER
+	+redo
+
+mixin THE-HEADER
+	#header.above
+		+row-of-links
+mixin row-of-links
+	.LINKS(hover-state)
+		.roh
+			.col-sm-4(ng-repeat='link in header.links' my-tween to="1" duration="0.1" ng-mouseenter="tween.play()" ng-mouseleave="tween.reverse()")
+				+a-header-link
+					|{{link}}
+				+fit-svg.abs-cover.low
+					path.no-fill(relative-d="{{header.linkPath(tween.T)}}")
+
+mixin redo
+	#body.relative
+		
+		.a-triangle.thats-up.abs-width.above
+			+shadow-path("{{header.triangleUp(tween.T)}}")
+		
+		+the-content-box
+		
+		.a-triangle.thats-down.abs-width.below
+			+shadow-path("{{header.triangleDown(tween.T)}}")
+
+mixin the-content-box
+	#content.relative
+		|Hello world
+
+mixin THE-BODY()
+	#BODY.relative
+		+EYES
+		+CONTENT
+		+CHIN
+mixin FOREHEAD()
+	#FOREHEAD
+		+shadow-path("{{header.foreheadPath(tween.T)}}")
+mixin CONTENT() 
+	#CONTENT
+		#CONTENT-AREA
+			.txt-center|HELLO WORLD
+
+mixin EYES()
+	#EYES.relative&attributes(attributes)
+		+shadow-path("{{header.eyePath(tween.T)}}")
+mixin CHIN()
+	#CHIN.relative&attributes(attributes)
+		+shadow-path("{{header.chinPath(tween.T)}}")
+
+mixin shadow-path(pathString)
+		+fit-svg.abs-cover.the-shadow.no-fill
+			path(relative-d=pathString)
+		+fit-svg.abs-cover.the-face
+			path(relative-d=pathString)
+
+mixin reflected-path(pathString) 
+	+shadow-path(pathString)
+	.reflect-x.about-center.relative.dim-cover
+		+shadow-path(pathString)
+
+mixin a-header-link
+	.clicker(
+		ng-class="{outline: ctrl.isActive(link)}"
+		ng-click="ctrl.activateLink(link)"
+		ng-mouseenter="ctrl.anchorOn(link)"
+	)
+		+a-header-text
+			|{{link}}
+mixin a-header-text
+	div.header-link(class=`
+	txt-center	
+	padd-md	
+	font-md	
+	uppercase	
+	dense	
+	no-highlight	
+	pointer	
+	underline
+		`)&attributes(attributes)
+		block
++build

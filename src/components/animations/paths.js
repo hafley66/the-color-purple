@@ -28,7 +28,7 @@ app.directive('relativeD', function() {
       var replace = function(pathString, [findsPercent, getPercent]) {
         var x = pathString.replace(findsPercent, function(match, pre, capture) {
           var percent = getPercent(capture.slice(0, -1))
-          return pre + ' ' + percent;
+           return pre + ' ' + percent;
         })
         return x
       }
@@ -46,8 +46,9 @@ app.directive('relativeD', function() {
 
       $scope.$on('view-box-change', (e, data) => {
         [x, y, W, H] = data
-        if (W && H)
+        if (W && H){
           updatePath()
+        }
       })
 
       var latch = 0;
@@ -58,6 +59,7 @@ app.directive('relativeD', function() {
 
 app.directive('viewBoxFit', ['$timeout', function($timeout) {
   return {
+    scope: true,
     link($scope, $elem, $attr) {
       var W, H, element = $elem[0];
       var getViewBox = e => fastdom.measure(x => {
@@ -66,10 +68,11 @@ app.directive('viewBoxFit', ['$timeout', function($timeout) {
         H = parent.height(); 
       })
       var setViewBox = e => fastdom.mutate(x => {
-        console.log('setting viewbox', W, H);
         element.setAttribute('view-box', `0 0 ${W} ${H}`)
       })
-      var broadcastViewBox = e => $scope.$broadcast('view-box-change', [0, 0, W, H])
+      var broadcastViewBox = e => {
+        $scope.$broadcast('view-box-change', [0, 0, W, H])
+      }
       var doThings = e => getViewBox().then(setViewBox).then(broadcastViewBox)
       onResizeRaw(doThings)
       $timeout(doThings, 100);
@@ -85,7 +88,6 @@ app.directive('relativeDash', function() {
     },
     controller() {
       this.pathLength = 0;
-      console.log('hello relative dash');
     },
     controllerAs:'pathSizer',
     link($scope, $elem, $attr, ctrl) {

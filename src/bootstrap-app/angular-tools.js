@@ -54,10 +54,14 @@ app.directive('postMeasure', ()=>{
 
 app.directive('flowIn', ()=>{
 	return {
+		bindToController: {
+			'open': '=flowIn'
+		},
+		controllerAs: 'collapser',
+		controller() {},
 		link($scope, $elem, $attr) {
 			var [elem] = $elem
-			var height = 
-			$scope.$watch($attr.flowIn, (newValue, oldValue)=> {
+			$scope.$watch('collapser.open', (newValue, oldValue)=> {
 				if(!!newValue) 
 					elem.style.maxHeight = Array.prototype.reduce.call(elem.childNodes, (p, c)=> p + (c.offsetHeight || 0), 0) + 'px';
 				else

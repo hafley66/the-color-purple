@@ -1,0 +1,96 @@
+
+=border-x($args)
+	border-left: $args
+	border-right: $args
+
+$BLACK-TRANS: rgba(5,0,5,0.84)
+$BLACK: rgba(51, 51, 51, 1)
+$WHITE-TRANS: rgba(0, 0, 0, 0.02)
+$WHITE: rgb(250, 250, 250)
+$SILVER: rgba(218, 218, 218, 1)
+
+$eyesH: 5vw
+$chinH: 10vw
+$pathW: 4px
+$eyeMidY: 0.50
+$eyePadd: $eyesH * (1 - $eyeMidY)
+
+body
+	background: $BLACK
+	color: $WHITE
+[ng-app]
+	max-width: 80em
+	overflow-x: hidden
+	margin: auto
+	path
+		stroke-width: $pathW
+		stroke: $SILVER
+		fill: transparent
+		stroke-linejoin: bevel
+		stroke-miterlimit: 100
+	.the-shadow path
+		stroke: $BLACK
+
+#HEADER
+	padding: 10px 40px
+	position: relative
+	z-index: 1
+	.LINKS
+		path
+			stroke: $SILVER
+			stroke-width: 3px
+			transition: all $fast
+		.header-link
+			transition: color $fast
+		// &.hovering
+		// 	.header-link
+		// 		color: $BLACK
+		// 	path
+		// 		fill: $SILVER
+
+#body
+	margin-top: $chinH
+	margin-bottom: $chinH + 1
+	.a-triangle	
+		path
+			stroke: $SILVER
+			fill: $WHITE
+		height: $chinH
+		z-index: -10
+	#content
+		color: $BLACK
+		background: $WHITE
+		+border-x( $pathW solid $SILVER )
+#BODY
+	.static-triangle
+		position: absolute
+		height: $chinH
+	
+	position: relative
+	background: $BLACK
+	color: $BLACK
+	#CONTENT
+		+border-x( $pathW solid $SILVER )
+		#CONTENT-AREA
+			background: $WHITE
+			color: $BLACK
+			+border-x(( $pathW / 4 ) solid $BLACK)
+			padding-top: $eyePadd
+	
+	#EYES
+		height: $eyesH
+		margin-bottom: -$eyePadd
+		.the-face path
+			fill: $BLACK
+		.the-shadow path
+			+translate(0, $pathW / 3)
+	
+	#CHIN
+		height: $chinH
+		padding-bottom: $pathW
+		.the-face path
+			fill: $WHITE
+		.the-shadow path
+			+translate(0, -$pathW / 3)
+[flow-in]
+	transition: max-height $fast

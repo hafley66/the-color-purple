@@ -1,7 +1,8 @@
 import './prefix.js'
 import resume from '../components/resume/.js'
-import header from '../components/old/header/directive.js'
-import headerAni from '../components/old/header/animator.js'
+import header from '../components/header/old/directive.js'
+import headerAni from '../components/header/old/animator.js'
+import headerNeo from '../components/header/directive.js'
 
 var app = angular.module('my-website', ['svg-helpers', 'my-tools', 'my-tweens']);
 
@@ -20,7 +21,7 @@ function clear(elem) {
 }
 
 // app.directive(...resume);
-app.directive(...header);
-app.directive(...headerAni)
+// app.directive(...header);
+app.directive(...headerNeo)
 
 export default app;

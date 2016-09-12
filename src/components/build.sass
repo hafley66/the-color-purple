@@ -8,7 +8,9 @@
 @import tools/svg
 @import bg-moving-triangle/.sass
 @import resume/.sass
+@import header/old/.sass
 @import header/.sass
+
 
 * 
   box-sizing: border-box
@@ -32,7 +34,7 @@ body
     clear: both
 
 .tester
-  background: rgba(5,0,5,0.84)
+  background: $BLACK
   position: fixed
   top: 25vh
   left: 25vw
@@ -45,3 +47,9 @@ body
     stroke: lightblue
     stroke-width: 15px
     stroke-linecap: round
+  &:after
+    content: ' '
+    width: 100px
+    height: 1000px
+    position: absolute
+    background-color: $SILVER
