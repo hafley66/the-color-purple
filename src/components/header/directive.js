@@ -21,9 +21,6 @@ function triangleUp(T) {
 }
 Object.assign(controller.prototype, {
 	linkPath,
-	eyePath,
-	chinPath,
-	foreheadPath,
 	triangleDown,
 	triangleUp
 })
@@ -56,20 +53,6 @@ function linkPath(T) {
 	return makeString([[ start, start ], [ 50, decays ], [ end, start ],
 		[ grows, 50 ] , [ end, end ], [ 50, grows ], [ start, end ], [decays, 50]])+ 'Z'
 }
-function eyePath(T) {
-	var midY = 50;
-	var left = 40;
-	var right = 100 - left
-	var midX = left + (right - left)/2
-	return makeString([[ -10, 0 ], [ left, 0 ] , [ midX, midY ] ,[ 110, 110 ], [110, -10], [ 100, 0 ], [right, 0] , [50, midY] ,[ -10, 110 ]]) + 'Z'
-}
-function chinPath(T) {
-	return makeString(triangleDown)
-}
-function foreheadPath(T) {
-	return makeString([[ -10, -10 ], [ 50, 100 ], [ 110, -10 ], [110, 150], [-10, 150]]) + 'Z'	
-}
-
 function makeString(points, unit='%') {
 	var makeString = (pathString, [x,y])=> pathString.push(`${x + unit} ${y + unit} L`) && pathString
 	return points.reduce(makeString, ['M']).join(' ').trimLast();

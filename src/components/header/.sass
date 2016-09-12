@@ -35,6 +35,7 @@ body
 	padding: 10px 40px
 	position: relative
 	z-index: 1
+	
 	.LINKS
 		path
 			stroke: $SILVER
@@ -49,48 +50,27 @@ body
 		// 		fill: $SILVER
 
 #body
-	margin-top: $chinH
-	margin-bottom: $chinH + 1
-	.a-triangle	
-		path
-			stroke: $SILVER
-			fill: $WHITE
+	.black
+		color: $BLACK
+	.white
+		color: $WHITE
+	margin-bottom: 3vh
+	.tri-height
 		height: $chinH
-		z-index: -10
+	.test-tri
+		position: absolute
+		left: 20%
+		top: 0
+		width: 60%
+		bottom: 0
+	path
+		stroke: $SILVER
+		fill: $WHITE
 	#content
 		color: $BLACK
 		background: $WHITE
 		+border-x( $pathW solid $SILVER )
-#BODY
-	.static-triangle
-		position: absolute
-		height: $chinH
-	
-	position: relative
-	background: $BLACK
-	color: $BLACK
-	#CONTENT
-		+border-x( $pathW solid $SILVER )
-		#CONTENT-AREA
-			background: $WHITE
-			color: $BLACK
-			+border-x(( $pathW / 4 ) solid $BLACK)
-			padding-top: $eyePadd
-	
-	#EYES
-		height: $eyesH
-		margin-bottom: -$eyePadd
-		.the-face path
-			fill: $BLACK
-		.the-shadow path
-			+translate(0, $pathW / 3)
-	
-	#CHIN
-		height: $chinH
-		padding-bottom: $pathW
-		.the-face path
-			fill: $WHITE
-		.the-shadow path
-			+translate(0, -$pathW / 3)
+	.hero-text
+		font-size: 4vw
 [flow-in]
 	transition: max-height $fast

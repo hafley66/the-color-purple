@@ -7,6 +7,7 @@ mixin build
 mixin THE-HEADER
 	#header.above
 		+row-of-links
+
 mixin row-of-links
 	.LINKS(hover-state)
 		.roh
@@ -19,48 +20,25 @@ mixin row-of-links
 mixin redo
 	#body.relative
 		
-		.a-triangle.thats-up.abs-width.above
-			+shadow-path("{{header.triangleUp(tween.T)}}")
+		+a-triangle
+			+a-path("{{header.triangleUp(tween.T)}}")
+			+hero-text
+			//- .test-tri
+			//- 	+fit-svg.abs-cover
+			//- 		+a-path('M 0 50% L 50% 0 L 100% 50% L 50% 100% Z')
 		
 		+the-content-box
 		
-		.a-triangle.thats-down.abs-width.below
-			+shadow-path("{{header.triangleDown(tween.T)}}")
+		+a-triangle
+			+a-path("{{header.triangleDown(tween.T)}}")
 
 mixin the-content-box
 	#content.relative
 		|Hello world
 
-mixin THE-BODY()
-	#BODY.relative
-		+EYES
-		+CONTENT
-		+CHIN
-mixin FOREHEAD()
-	#FOREHEAD
-		+shadow-path("{{header.foreheadPath(tween.T)}}")
-mixin CONTENT() 
-	#CONTENT
-		#CONTENT-AREA
-			.txt-center|HELLO WORLD
-
-mixin EYES()
-	#EYES.relative&attributes(attributes)
-		+shadow-path("{{header.eyePath(tween.T)}}")
-mixin CHIN()
-	#CHIN.relative&attributes(attributes)
-		+shadow-path("{{header.chinPath(tween.T)}}")
-
-mixin shadow-path(pathString)
-		+fit-svg.abs-cover.the-shadow.no-fill
+mixin a-path(pathString)
+		+fit-svg&attributes(attributes)
 			path(relative-d=pathString)
-		+fit-svg.abs-cover.the-face
-			path(relative-d=pathString)
-
-mixin reflected-path(pathString) 
-	+shadow-path(pathString)
-	.reflect-x.about-center.relative.dim-cover
-		+shadow-path(pathString)
 
 mixin a-header-link
 	.clicker(
@@ -82,4 +60,12 @@ mixin a-header-text
 	underline
 		`)&attributes(attributes)
 		block
+mixin a-triangle
+	.low.tri-height.relative&attributes(attributes)
+		block
+mixin hero-text
+	.hero-text.txt-center.black.dense.uppercase.bold.abs-width.align-bottom
+		|Chris Hafley
+		.font-xs.flat-line
+			|SOFTWARE ENGINEER
 +build
