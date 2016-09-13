@@ -8,7 +8,7 @@ const controller = function() {
 	console.log('hello paths');
 }
 
-var triD = [[-10, 0], [0, 0], [50, 100], [100, 0], [110, 0]]
+var triD = [[0, -10], [0, 0], [50, 100], [100, 0], [100, -10]]
 var triU = triD.map(([x,y])=> [x, 100 - y])
 var triL = triD.map(([x,y])=> [y, x])
 var triR = triL.map(([x,y])=> [100-x, y])
@@ -49,6 +49,11 @@ function linkPath(T) {
 	return makeString([[ start, start ], [ 50, decays ], [ end, start ],
 		[ grows, 50 ] , [ end, end ], [ 50, grows ], [ start, end ], [decays, 50]])+ 'Z'
 }
+
+function mobileLinkPath(T) {
+	
+}
+
 function makeString(points, unit='%') {
 	var makeString = (pathString, [x,y])=> pathString.push(`${x + unit} ${y + unit} L`) && pathString
 	return points.reduce(makeString, ['M']).join(' ').trimLast();

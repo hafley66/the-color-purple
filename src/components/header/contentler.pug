@@ -1,12 +1,17 @@
 mixin contentler
-	+home-ler
-	+resume-ler
-	+demos-ler
+	#contentler.relative.lower
+		#main
+			.black.txt-center|HELLO WORLD
+			+home-ler
+			my-resume
+			+demos-ler
+		+a-triangle
+			+a-path('{{paths.triangleDown(tween.T)}}')
 
 
 mixin home-ler
-	home-page
+	home-page#Home
 mixin resume-ler
-	resume-page
+	resume-page#Resume
 mixin demos-ler
-	demos-page
+	demos-page#Demos

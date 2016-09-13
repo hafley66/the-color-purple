@@ -1,5 +1,17 @@
+@import ./header.sass
 @import ./titler.sass
-@import ./bodler.sass
+@import ./contentler.sass
+
+
+=active-colors()
+	.home
+		color: $RED
+	.resume
+		color: $PURPLE
+	.demos
+		color: $blue
+
+
 .cc-bg
 	background: currentColor
 =border-x($args)
@@ -30,42 +42,24 @@ body
 	background: $BLACK
 	color: $WHITE
 [ng-app]
+	+active-colors
 	max-width: 80em
 	overflow-x: hidden
 	margin: auto
 	path
 		stroke-linejoin: bevel
-
-#HEADER
-	padding: 10px 40px
-	position: relative
-	z-index: 1
-	
-	.LINKS
-		path
-			stroke: $SILVER
-			stroke-width: 3px
-			transition: all $fast
-		.header-link
-			transition: color $fast
-			+BREAK(sm)
-				10vw
-		// &.hovering
-		// 	.header-link
-		// 		color: $BLACK
-		// 	path
-		// 		fill: $SILVER
-
 .black-on-white
 	color: $BLACK
 	background: $WHITE
 
++header
 #body
 	margin-bottom: 4vw
 	&.home
-		color: $RED
+		color: $RED 
 	&.resume
 		color: $PURPLE
 	&.demos
 		color: $blue
 	+titler
+	+contentler

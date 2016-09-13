@@ -5,7 +5,7 @@ module.exports = {
     progress:true,
     colors: true,
 
-    entry: "./src/bootstrap-app/build.js",
+    entry: "./src/bootstrap-app/build-ler.js",
     output: {
         path: __dirname,
         filename: "bundle.js"

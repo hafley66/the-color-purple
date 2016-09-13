@@ -1,0 +1,22 @@
+=header
+	#HEADER
+		padding: 10px 40px
+		position: relative
+		z-index: 1
+		
+		.LINKS
+			.link-ler
+				transition: color $fast
+				.clicker
+					color: $WHITE
+				&.active
+					.fancy-path path
+						fill: currentColor
+				&:hover
+					.fancy-path path
+						stroke: currentColor
+			path
+				stroke: $WHITE
+				fill: $BLACK
+				stroke-width: 3px
+				transition: all $fast
