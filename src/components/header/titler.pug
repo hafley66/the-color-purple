@@ -1,0 +1,19 @@
+mixin titler
+	#titler
+		+a-triangle.thats-above
+			+a-path("{{paths.triangleUp(tween.T)}}")
+		+title-text
+		+a-triangle.thats-below
+			+a-path("{{paths.triangleDown(tween.T)}}")
+
+mixin a-triangle
+	.a-triangle.low.relative&attributes(attributes)
+		block
+
+mixin title-text
+	.hero-text.txt-center.uppercase.relative.cc-bg
+		.abs-center.white
+			.my-name.bord-b-sm.flat-line.dense.sans2
+				|Chris Hafley
+			.job-title.font-xs.flat-line.sans3
+				|SOFTWARE ENGINEER

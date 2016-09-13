@@ -1,0 +1,25 @@
+=titler-prep-colors
+	#content, .hero-text, .a-triangle
+		transition: color $fast, background $fast, border-color $fast
+=titler
+	#titler
+		+titler-prep-colors()
+		.a-triangle
+			path
+				fill: currentColor
+			+BREAK(xs)
+				height: 8rem
+			+BREAK(sm)
+				height: 6rem
+		.hero-text
+			color: currentColor
+			background: currentColor
+			white-space: nowrap
+			height: 1.5em
+
+			+BREAK(sm)
+				font-size: 9vw
+			+BREAK(md)
+				font-size: 9rem
+			+BREAK(xs)
+				font-size: 6rem

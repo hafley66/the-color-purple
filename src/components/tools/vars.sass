@@ -42,7 +42,7 @@ $reading-length: 60em
 
 //Compound Color Scheme
 $green0: #00FF81
-$blue0: #3DCDD7
+$blue: #3DCDD7
 $red0: #FF4054
 $purple0: #CC1484
 
@@ -63,3 +63,10 @@ $bumble: #FFCD44
 $silver: silver
 $gold: #D4BB6B
 $black: #000
+
+=clearfix
+  &:before, &:after
+    content: " "
+    display: table
+  &:after
+    clear: both

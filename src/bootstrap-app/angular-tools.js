@@ -69,4 +69,12 @@ app.directive('flowIn', ()=>{
 			});
 		}}})
 
+app.directive('windowTracker', ()=> {
+	return {
+		link($scope, $elem, $attr) {
+			
+		}
+	}
+})
+
 export default app;
