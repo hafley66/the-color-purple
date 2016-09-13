@@ -32,12 +32,7 @@ const directiveFunction = function( ){
 	}
 }
 
-export default [
-directiveName,
-directiveFunction
-]
-
-
+export default [directiveName, directiveFunction]
 
 function linkPath(T) {
 	var start = 25, end = 75;
@@ -51,7 +46,7 @@ function linkPath(T) {
 }
 
 function mobileLinkPath(T) {
-	
+
 }
 
 function makeString(points, unit='%') {

@@ -1,5 +1,5 @@
 =titler-prep-colors
-	#content, .hero-text, .a-triangle
+	#content, .hero, .a-triangle
 		transition: color $fast, background $fast, border-color $fast
 =titler
 	#titler
@@ -7,23 +7,38 @@
 		.a-triangle
 			path
 				fill: currentColor
-			+BREAK(xs)
-				height: 8rem
-				&.thats-below
-					margin-bottom: -8rem
-			+BREAK(sm)
-				height: 6rem
-				&.thats-below
-					margin-bottom: -6rem
-		.hero-text
+			&.thats-above
+				+upper-triangle-height()
+			&.thats-below
+				+bottom-triangle-height()
+				+bottom-triangle-height(margin-bottom, -1)
+
+		.hero
 			color: currentColor
 			background: currentColor
 			white-space: nowrap
-			height: 1.5em
-
-			+BREAK(sm)
-				font-size: 9vw
-			+BREAK(md)
-				font-size: 9rem
-			+BREAK(xs)
-				font-size: 6rem
+			height: 1em
+			+hero-size()
+=bottom-triangle-height($prop: height, $mult: 1)
+	+BREAK(sm)
+		#{$prop}: $mult * 10vw
+	+BREAK(xs)
+		#{$prop}: $mult * 12rem
+=upper-triangle-height($prop: height, $mult: 1)
+	+BREAK(xs)
+		#{$prop}: $mult * 9rem
+	+BREAK(sm)
+		#{$prop}: $mult * 6rem
+=hero-size($prop: font-size, $mult: 1)
+	.sub-text
+		+BREAK(xs)
+			font-size: 0.30em
+			margin-top: 5px
+		font-size: 0.5em
+	+BREAK(sm)
+		#{$prop}: $mult * 9vw
+	+BREAK(md)
+		#{$prop}: $mult * 9rem
+	+BREAK(xs)
+		#{$prop}: $mult * 13vw
+		height: 11.5vw

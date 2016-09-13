@@ -6,6 +6,7 @@ const bindToController = {
 	monStart: '&onStart',
 	monEnd: '&onEnd',
 	mduration: '<?duration',
+	mplay: '<?play',
 	mrepeat: '<?repeat',
 	startPaused: '<?',
 	mfrom: '<?from',
@@ -43,6 +44,8 @@ function link($scope, $elem, $attr, C) {
 	})
 	C.play = tween.play.bind(tween)
 	C.reverse = tween.reverse.bind(tween)
+	$scope.$watch('tween.mplay', plays => plays? C.play() : null);
+	$scope.$watch('tween.mreverse', reverses => reverses? C.reverse() : null);
 }
 
 app.directive(directiveName, function() {

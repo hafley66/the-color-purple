@@ -2,7 +2,6 @@
 @import ./titler.sass
 @import ./contentler.sass
 
-
 =active-colors()
 	.home
 		color: $RED
@@ -10,7 +9,6 @@
 		color: $PURPLE
 	.demos
 		color: $blue
-
 
 .cc-bg
 	background: currentColor
@@ -26,12 +24,6 @@ $WHITE: rgb(250, 250, 250)
 $SILVER: rgba(218, 218, 218, 1)
 $RED: rgba(200,0,0,1)
 $PURPLE: rgba(145, 36, 151, 1)
-
-$eyesH: 5vw
-$chinH: 10vw
-$pathW: 9px
-$eyeMidY: 0.50
-$eyePadd: $eyesH * (1 - $eyeMidY)
 
 .black
 	color: $BLACK
@@ -54,12 +46,6 @@ body
 
 +header
 #body
-	margin-bottom: 4vw
-	&.home
-		color: $RED 
-	&.resume
-		color: $PURPLE
-	&.demos
-		color: $blue
+	margin-top: 15px
 	+titler
 	+contentler

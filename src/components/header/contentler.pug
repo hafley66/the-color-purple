@@ -1,12 +1,11 @@
 mixin contentler
 	#contentler.relative.lower
 		#main
-			.black.txt-center|HELLO WORLD
 			+home-ler
-			my-resume
+			resume-page(ng-if="header.active === 'resume'")
 			+demos-ler
 		+a-triangle
-			+a-path('{{paths.triangleDown(tween.T)}}')
+			+a-path('{{paths.triangleDown(tween.T)}}')(filter="url(#dropshadow)")
 
 
 mixin home-ler

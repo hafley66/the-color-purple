@@ -1,28 +1,28 @@
 =contentler-prep-colors
-	#main
-		transition: color $fast
 	.a-triangle
 		path
 			transition: color $fast
 =contentler
 	#contentler
 		+contentler-prep-colors
+		overflow-x: hidden
+		
 		+BREAK(xs)
 			margin: 0 1%
 		+BREAK(sm)
 			margin: 0 5%
-		overflow-x: hidden
+		
 		#main
+			min-height: 400px
+			transition: color $fast, transform $fast, max-height $fast
 			background: $WHITE
 			+border-x($bord-sm solid currentColor)
-			+BREAK(xs)
-				padding-top: 8rem
-			+BREAK(sm)
-				padding-top: 6rem
+			+bottom-triangle-height(padding-top)
+		
 		.a-triangle
 			+BREAK(sm)
 				+translate(0, 1px)
-			height: 8rem
+			+bottom-triangle-height($mult: 3 / 2)
 			margin-bottom: 5vw
 			path 
 				stroke-width: $bord-sm - 1

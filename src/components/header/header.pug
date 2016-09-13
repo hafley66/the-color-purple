@@ -1,20 +1,21 @@
 mixin THE-HEADER
 	#header.above(class="{{header.active}}")
 		+row-of-links
-
 mixin row-of-links
 	.LINKS(hover-state)
 		.roh
 			.col-sm-4.link-ler(ng-repeat='link in header.links' my-tween to="1" duration="0.1" 
+			play="header.active === link"
+			reverse="header.active !== link"
 			ng-mouseenter="tween.play()" 
-			ng-mouseleave="tween.reverse()"
+			ng-mouseleave="(header.active === link) || tween.reverse() "
 			ng-class="{active: header.active === link}"
 			class="{{::link}}"
 			)
 				+a-header-link
 					|{{link}}
 				+fit-svg.abs-cover.low.fancy-path
-					path.no-fill(relative-d="{{paths.linkPath(tween.T)}}")
+					path.no-fill(ng-attr-filter="{{header.active === link && 'url(#dropshadow)'}}" relative-d="{{paths.linkPath(tween.T)}}")
 mixin a-header-link
 	.clicker(ng-click="header.activate(link)")
 		+a-header-text

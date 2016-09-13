@@ -1,15 +1,21 @@
 =header
 	#HEADER
-		padding: 10px 40px
 		position: relative
 		z-index: 1
-		
+		margin-top: 2em
+		margin-bottom: 2em
+		padding: 5px 5vw
 		.LINKS
+			overflow: visible
 			.link-ler
-				transition: color $fast
+				overflow: visible
+				transition: color $slow, transform $fast
+				+BREAK(xs)
+					margin: 0 5em
 				.clicker
 					color: $WHITE
 				&.active
+					+translate(0, -5px)
 					.fancy-path path
 						fill: currentColor
 				&:hover

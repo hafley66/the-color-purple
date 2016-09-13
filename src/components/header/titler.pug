@@ -4,16 +4,16 @@ mixin titler
 			+a-path("{{paths.triangleUp(tween.T)}}")
 		+title-text
 		+a-triangle.thats-below
-			+a-path("{{paths.triangleDown(tween.T)}}")
+			+a-path("{{paths.triangleDown(tween.T)}}")(filter="url(#dropshadow)")
 
 mixin a-triangle
 	.a-triangle.low.relative&attributes(attributes)
 		block
 
 mixin title-text
-	.hero-text.txt-center.uppercase.relative.cc-bg
+	.hero.txt-center.uppercase.relative.cc-bg
 		.abs-center.white
-			.my-name.bord-b-sm.flat-line.dense.sans2
-				|Chris Hafley
-			.job-title.font-xs.flat-line.sans3
-				|SOFTWARE ENGINEER
+			.hero-text.flat-line.sans2(ng-class="{'bord-b-sm': page.subText}")
+				|{{page.heroText}}
+			.sub-text.font-xs.flat-line.sans3(ng-show="page.subText")
+				|{{page.subText}}

@@ -1,0 +1,55 @@
+
+mixin my-resume
+	.the-body
+		.roh
+			.col-sm-8.bord-r-sm
+				+my-work-experience
+				+my-projects
+			.col-sm-4
+				+my-education
+				+my-skills
+				+my-leadership
+
+
+mixin my-work-experience
+	.my-work-history
+		.font.head Work History
+		.job-section(ng-repeat="job in ctrl.experience")
+			.roh
+				.txt-left.col-xs-8
+					.font.main {{job.name}}
+					.font.sub.bord-rb-sm {{job.position}}
+				.txt-right.col-xs-4
+					.font.side {{job.start}}
+					.font.side {{job.end}}
+			ul.font.body
+				li.a-highlight(ng-repeat="point in job.highlights")
+					|{{point}}
+
+mixin my-education
+	.my-education.wide
+		.font.head Education
+		.txt-left
+			.font.main {{ ctrl.education.cwru.name }}
+			.font.sub {{ ctrl.education.cwru.degree }}
+
+mixin my-skills
+	.my-skills
+		.font.head
+			|Skills
+		div(ng-repeat="category in ctrl.skills")
+			.font.sub.bord-y-sm
+				|{{category.name}}
+			.padd-xs
+				.font.body(ng-repeat="skill in category.skills")
+					|{{skill}}
+
+mixin my-projects
+	.my-projects
+		.font.head Projects
+		.wide(ng-repeat="project in ctrl.projects") 
+			.font.main {{project.name}}
+			.font.body.wide.padd-xs {{project.description}}
+
+mixin my-leadership
+	.div
