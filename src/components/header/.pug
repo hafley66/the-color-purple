@@ -4,6 +4,10 @@ include ./titler.pug
 include ./contentler.pug
 
 mixin build
+	//- div(my-tween to=1 duration=1
+	//- 		as-var='pageChange')
+	//- 	.white.font-xl.txt-center
+	//- 		|HELLO{{pageChange.T}}
 	+THE-HEADER
 	+redoodler
 
@@ -12,9 +16,6 @@ mixin redoodler
 		+titler
 		+contentler
 
-mixin a-path(pathString)
-	+fit-svg
-		path(relative-d=pathString)&attributes(attributes)
 
 svg(width=0 height=0 xmlns='http://www.w3.org/2000/svg')
 	filter(width='200%' height='200%')#dropshadow

@@ -55,15 +55,12 @@ mixin SVGMultiTransform(order)
 	+MultiTransform(order, 'g')&attributes(attributes)
 		block
 
-mixin decorator-button-0
-	.svg-button-0.will-move-gpu&attributes(attributes)
-		.svg-group
-			+rsvg
-				rect.the-mask.blanket(y=-10, width=60, height=120)
-			+rsvg.the-background.abs.rotation.matrix.top-on-middle
-				rect(x=0, y= 0, width=100, height=100)
-				rect.inner.no-stroke.swap-color(x=10, y= 10, width=80, height=80)
+
+mixin a-triangle
+	.a-triangle.relative&attributes(attributes)
 		block
-mixin blanket
-	+svg.blanket&attributes(attributes)
-		rect.blanket(x=0, y=0, width=100, height=100)
+
+mixin a-path(pathString, shadow)
+	-shadow = shadow === undefined ? true: shadow
+	+fit-svg&attributes(attributes)
+		path(relative-d=pathString, filter=(shadow? 'url(#dropshadow)': ''))

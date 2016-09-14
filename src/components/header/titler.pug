@@ -1,19 +1,24 @@
 mixin titler
-	#titler.high
-		+a-triangle.thats-above
-			+a-path("{{paths.triangleUp(tween.T)}}")
+	#titler
+		+a-triangle.thats-above.abs.above
+			+a-path("{{paths.triangleUp(tween.T)}}", false)
 		+title-text
-		+a-triangle.thats-below
-			+a-path("{{paths.triangleDown(tween.T)}}")(filter="url(#dropshadow)")
-
-mixin a-triangle
-	.a-triangle.low.relative&attributes(attributes)
-		block
+			+shadow-triangles
+		+a-triangle.high.thats-below.abs.below.no-click
+			+a-path("{{paths.triangleDown(tween.T)}}")
 
 mixin title-text
-	.hero.txt-center.uppercase.relative.cc-bg
-		.abs-center.white
+	.hero.txt-center.uppercase.relative.cc-bg&attributes(attributes)
+		.abs-center.white.highest
 			.hero-text.flat-line.sans2(ng-class="{'bord-b-sm': page.subText}")
 				|{{page.heroText}}
 			.sub-text.font-xs.flat-line.sans3(ng-show="page.subText")
 				|{{page.subText}}
+		block
+
+mixin shadow-triangles() 
+	div&attributes(attributes)
+		.shadow-triangle.thats-left.below.lowest
+			+a-path("M 0 0 L 50% 100% L 50% 0 Z")
+		.shadow-triangle.thats-right.lowest.below
+			+a-path("M 100% 0 L 50% 100% L 50% 0 Z")

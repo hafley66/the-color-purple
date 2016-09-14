@@ -13,7 +13,23 @@
 				+bottom-triangle-height()
 				+bottom-triangle-height(margin-bottom, -1)
 
+		.shadow-triangle
+			position: absolute
+			transition: opacity $fast, transform $fast
+
+			&.thats-left
+				left: 0
+			&.thats-right
+				right: 0
+			width: 50%
+			+bottom-triangle-height($mult: 1.5)
+			path
+				fill: $WHITE-TRANS
+				stroke: currentColor
+				stroke-width: 2px
+			+translate(0, -1px)
 		.hero
+			position: relative
 			color: currentColor
 			background: currentColor
 			white-space: nowrap
@@ -41,4 +57,3 @@
 		#{$prop}: $mult * 9rem
 	+BREAK(xs)
 		#{$prop}: $mult * 13vw
-		height: 11.5vw

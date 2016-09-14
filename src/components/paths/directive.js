@@ -8,7 +8,7 @@ const controller = function() {
 	console.log('hello paths');
 }
 
-var triD = [[0, -10], [0, 0], [50, 100], [100, 0], [100, -10]]
+var triD = [[0, -1], [0, 0], [50, 100], [100, 0], [100, -1]]
 var triU = triD.map(([x,y])=> [x, 100 - y])
 var triL = triD.map(([x,y])=> [y, x])
 var triR = triL.map(([x,y])=> [100-x, y])
@@ -47,6 +47,11 @@ function linkPath(T) {
 
 function mobileLinkPath(T) {
 
+}
+
+function contactPath(T) {
+var left = `M -10% -40% L 100% -40% L 100% 50% L -10% 100% Z`	
+var right =`M 0 -40% L 0 50%  L 110% 100% L 110% -40% Z`
 }
 
 function makeString(points, unit='%') {

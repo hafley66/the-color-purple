@@ -28,15 +28,54 @@ app.directive('squarePlease', function() {
 	}
 })
 
+
+
 app.directive('hoverState', function() {
 	return {
 		link($scope, $elem) {
-			console.log($elem);
 			$elem.on('mouseenter', (e)=>{
 				$elem.addClass('hovering')
 			})
 
 			$elem.on('mouseleave', e=>$elem.removeClass('hovering'))
+		}
+	}
+})
+app.directive('clickState', function() {
+	return {
+		link($scope, $elem) {
+			$elem.on('click', e=>$elem.toggleClass('clicked'))
+		}
+	}
+})
+
+app.directive('collapseTarget', function() {
+	return {
+		bindToController: {
+			'target': '@collapseTarget',
+			'when': '=collapseWhen',
+			'parent': '@?collapseParent'
+		},
+		controllerAs: 'collapser',
+		controller(){
+			this.$target = $(this.target)
+			this.hide = ()=>this.$target.collapse('hide')
+			this.show = ()=>this.$target.collapse('show')
+		},
+		link($scope, $elem, $attr, C) {
+			var collapsing = null;
+			var currentState = null;
+			$scope.$watch('collapser.when', nvalue=>{
+				if(!!nvalue)
+					C.hide()
+				else
+					C.show()
+			})
+			$scope.$watch('collapser.target', nvalue=>{
+				if(!!nvalue)
+					C.$target = $(nvalue)
+			})
+			$elem.on('click', e=>$().collapse)
 		}
 	}
 })
@@ -55,17 +94,25 @@ app.directive('postMeasure', ()=>{
 app.directive('flowIn', ()=>{
 	return {
 		bindToController: {
-			'open': '=flowIn'
+			'open': '@flowIn'
 		},
 		controllerAs: 'collapser',
 		controller() {},
 		link($scope, $elem, $attr) {
 			var [elem] = $elem
 			$scope.$watch('collapser.open', (newValue, oldValue)=> {
-				if(!!newValue) 
-					elem.style.maxHeight = Array.prototype.reduce.call(elem.childNodes, (p, c)=> p + (c.offsetHeight || 0), 0) + 'px';
+				if(newValue === 'true')
+					newValue = true
 				else
-					elem.style.maxHeight = 0
+					newValue = false
+				var val = 0;
+				if(!!newValue) {
+					val = Array.prototype.reduce.call(elem.childNodes, (p, c)=> {
+						return p + (c.offsetHeight || 0);
+					}, 0) + 'px';
+				}
+				console.log('new value is...', val);
+				elem.style.maxHeight = val
 			});
 		}}})
 

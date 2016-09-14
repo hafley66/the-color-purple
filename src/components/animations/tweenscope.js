@@ -12,18 +12,19 @@ const bindToController = {
 	mfrom: '<?from',
 	mto: '<?to',
 	mreverse: '<?reverse',
-	myoyo: '<?yoyo'
+	myoyo: '<?yoyo',
+	masVar: '@?asVar'
 }
 var started = 0;
 function link($scope, $elem, $attr, C) {
+	$scope[C.masVar || 'tween'] = C;
 	C.T = C.mfrom || 0;
 	C.T100 = (C.mfrom || 0) * 100;
-	var tween = TweenMax.to(C, C.mduration || 0.5, {
+	var _config = {
 		T: C.mto || 1,
 		T100: (C.mto || 1) * 100,
 		repeat: C.mrepeat || 0,
 		onComplete(){
-
 		},
 		onReverseComplete() {
 		},
@@ -38,10 +39,13 @@ function link($scope, $elem, $attr, C) {
 				C.monUpdate(C.T)
 			$scope.$apply();
 		}, 
-		paused: C.startPaused || true,
+		
 		yoyo: C.myoyo || false,
 		ease: Sine.easeInOut
-	})
+	}
+	if(C.startPaused !== false)
+		_config.paused = true;
+	var tween = TweenMax.to(C, C.mduration || 0.5, _config)
 	C.play = tween.play.bind(tween)
 	C.reverse = tween.reverse.bind(tween)
 	$scope.$watch('tween.mplay', plays => plays? C.play() : null);
@@ -53,7 +57,8 @@ app.directive(directiveName, function() {
 		bindToController,
 		link,
 		controllerAs,
-		controller(){}
+		controller(){},
+		scope: true
 	}
 })
 

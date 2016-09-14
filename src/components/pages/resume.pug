@@ -1,6 +1,27 @@
-#resume
-	.my-education
+include ../global.pug
 
-	.my-experiences(ng-repeat="employment in resume.experience")
-	.my-projects(ng-repeat="project in resume.projects")
-		
+mixin resume
+	#resume
+		+contact-info
+		.resume-flow
+			.my-education
+
+			.my-experiences(ng-repeat="employment in resume.experience")
+				|{{employment.name}}
+			.my-projects(ng-repeat="project in resume.projects")
+				|{{project.name}}
+
+
+mixin contact-info
+	.my-contact-info.wide.abs.above
+		.relative.extra-triangle(click-state)
+			+a-path(`M -10% -40% L 100% -40% L 100% 50% L -10% 100% Z`).abs-cover
+			.contact-info.contact-phone.abs.align-left.txt-left
+				.side-text.hidden-sm.hide|330-324-4867
+				i.icon.fa.fa-phone(aria-hidden="true")
+		.relative.extra-triangle(click-state)
+			+a-path(`M 0 -40% L 0 50%  L 110% 100% L 110% -40% Z`).abs-cover
+			.contact-info.contact-email.abs.align-right.txt-right
+				.side-text.hidden-sm.hide|hafley66@gmail.com
+				i.icon.fa.fa-envelope-o(aria-hidden="true")
++resume

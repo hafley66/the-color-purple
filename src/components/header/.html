@@ -1,0 +1,101 @@
+
+<svg width="0" height="0" xmlns="http://www.w3.org/2000/svg">
+  <filter width="200%" height="200%" id="dropshadow">
+    <feGaussianBlur in="SourceAlpha" stddeviation="3"></feGaussianBlur>
+    <feOffset dx="2" dy="5" result="offsetblur"></feOffset>
+    <feComponentTransfer>
+      <feFuncA type="linear" slope="0.5"></feFuncA>
+    </feComponentTransfer>
+    <femerge>
+      <femergenode></femergenode>
+      <femergenode in="SourceGraphic"></femergenode>
+    </femerge>
+  </filter>
+</svg>
+<div class="above {{header.active}}" id="header">
+  <div class="LINKS" hover-state="hover-state">
+    <div class="roh">
+      <div class="col-sm-4 link-ler {{::link}}" ng-repeat="link in header.links" my-tween="my-tween" to="1" duration="0.1" play="header.isAt(link)" reverse="!header.isAt(link)" ng-mouseenter="tween.play()" ng-mouseleave="header.isAt(link) || tween.reverse() " ng-class="{active: header.isAt(link)}" collapse-target="#{{::link}}" collapse-when="!header.isAt(link)">
+        <div class="clicker" ng-click="header.activate(link)">
+          <div class="header-link 
+	txt-center	
+	padd-md	
+	font-md	
+	uppercase	
+	dense	
+	no-highlight	
+	pointer	
+	underline
+		" ng-class="{'has-underline': header.isAt(link)}">{{link}}
+          </div>
+        </div>
+        <svg class="dim-cover abs-cover low fancy-path" xmlns="http://www.w3.org/2000/svg" view-box-fit="view-box-fit" preserveAspectRatio="none" shape-rendering="geometricPrecision">
+          <path class="no-fill" ng-attr-filter="{{header.isAt(link) &amp;&amp; 'url(#dropshadow)'}}" relative-d="{{paths.linkPath(tween.T)}}"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="relative {{header.active}}" id="body">
+  <div class="high" id="titler" click-state="click-state">
+    <div class="a-triangle low relative thats-above">
+      <svg class="dim-cover" xmlns="http://www.w3.org/2000/svg" view-box-fit="view-box-fit" preserveAspectRatio="none" shape-rendering="geometricPrecision">
+        <path relative-d="{{paths.triangleUp(tween.T)}}" filter=""></path>
+      </svg>
+    </div>
+    <div class="hero txt-center uppercase relative cc-bg">
+      <div class="abs-center white">
+        <div class="hero-text flat-line sans2" ng-class="{'bord-b-sm': page.subText}">{{page.heroText}}</div>
+        <div class="sub-text font-xs flat-line sans3" ng-show="page.subText">{{page.subText}}</div>
+      </div>
+      <div>
+        <div class="shadow-triangle thats-left below lowest">
+          <svg class="dim-cover" xmlns="http://www.w3.org/2000/svg" view-box-fit="view-box-fit" preserveAspectRatio="none" shape-rendering="geometricPrecision">
+            <path relative-d="M 0 0 L 50% 100% L 50% 0 Z" filter="url(#dropshadow)"></path>
+          </svg>
+        </div>
+        <div class="shadow-triangle thats-right lowest below">
+          <svg class="dim-cover" xmlns="http://www.w3.org/2000/svg" view-box-fit="view-box-fit" preserveAspectRatio="none" shape-rendering="geometricPrecision">
+            <path relative-d="M 100% 0 L 50% 100% L 50% 0 Z" filter="url(#dropshadow)"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="a-triangle low relative thats-below">
+      <svg class="dim-cover" xmlns="http://www.w3.org/2000/svg" view-box-fit="view-box-fit" preserveAspectRatio="none" shape-rendering="geometricPrecision">
+        <path relative-d="{{paths.triangleDown(tween.T)}}" filter="url(#dropshadow)"></path>
+      </svg>
+    </div>
+  </div>
+  <div class="relative lower" id="contentler">
+    <div class="will-move-gpu" id="slider-mask">
+      <div class="relative" id="main">
+        <div class="collapse" id="home">HELLO WORLD</div>
+        <resume-page class="collapse relative">
+          <div class="my-contact-info abs above wide high">
+            <div class="abs align-left align-bottom">
+              <div class="contact-phone">PHONE</div>
+            </div>
+            <div class="abs align-right align-bottom">
+              <div class="contact-email">EMAIL</div>
+            </div>
+            <div class="a-triangle low relative">
+            </div>
+            <svg class="dim-cover" xmlns="http://www.w3.org/2000/svg" view-box-fit="view-box-fit" preserveAspectRatio="none" shape-rendering="geometricPrecision">
+              <path relative-d="M 0 100% L 100% 0 L 0 0 Z" filter="url(#dropshadow)"></path>
+            </svg>
+          </div>
+          <div class="my-education"></div>
+          <div class="my-experiences" ng-repeat="employment in resume.experience">{{employment.name}}</div>
+          <div class="my-projects" ng-repeat="project in resume.projects">{{project.name}}</div>
+        </resume-page>
+        <div class="collapse" id="demos">COMON FOX</div>
+      </div>
+      <div class="a-triangle low relative">
+        <svg class="dim-cover" xmlns="http://www.w3.org/2000/svg" view-box-fit="view-box-fit" preserveAspectRatio="none" shape-rendering="geometricPrecision">
+          <path relative-d="{{paths.triangleDown(tween.T)}}" filter="url(#dropshadow)"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>

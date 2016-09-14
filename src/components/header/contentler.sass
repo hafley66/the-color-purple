@@ -5,20 +5,19 @@
 =contentler
 	#contentler
 		+contentler-prep-colors
-		overflow-x: hidden
+		overflow-y: hidden
 		
 		+BREAK(xs)
-			margin: 0 1%
+			margin: 0 2.5%
 		+BREAK(sm)
 			margin: 0 5%
 		
 		#main
-			min-height: 400px
 			transition: color $fast, transform $fast, max-height $fast
 			background: $WHITE
 			+border-x($bord-sm solid currentColor)
 			+bottom-triangle-height(padding-top)
-		
+			
 		.a-triangle
 			+BREAK(sm)
 				+translate(0, 1px)
@@ -28,3 +27,4 @@
 				stroke-width: $bord-sm - 1
 				fill: $WHITE
 				stroke: currentColor
+		+resume

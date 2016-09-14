@@ -5,13 +5,15 @@ const config = {
 	template: templateFn(),
 	controllerAs: 'resume',
 	controller,
-	link
+	link,
+	replace: true
 }
 const methods = {
-
+	
 }
 function link($scope, $elem, $attr, C) {
 	console.log($scope.page);
+	$scope.page = $scope.page || {};
 	$scope.page.heroText = 'Chris Hafley'
 	$scope.page.subText = 'Software Engineer'
 }

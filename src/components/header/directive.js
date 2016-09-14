@@ -4,10 +4,13 @@ const config = {
 	bindToController: {},
 	controllerAs: 'header',
 	controller,
-	link($scope){
-		$scope.page = {}
+	link: {
+		pre($scope){
+			$scope.page = {}
+			this.page = {};
+		}
 	},
-	template: templateFn()
+	template: templateFn(),
 }
 const _links = ['home', 'resume', 'demos']
 
@@ -22,6 +25,9 @@ const methods = {
 	},
 	index(link=this.active) {
 		return this.links.indexOf(link)
+	},
+	isAt(link) {
+		return link === this.active
 	},
 	getInitialActive() {
 		var first = window.location.pathname.split('/')[1];
