@@ -5,13 +5,48 @@ mixin resume
 	#resume
 		+contact-info.high
 		.resume-flow.low
-			.my-education
-				.section-heading-text.uppercase.dense.relative
-					+a-path('{{paths.headingBg()}}', false).abs-cover
-					.relative.txt-center|EDUCATION
+			.container-fluid
+				.roh
+					.col-md-4.col-md-push-8
+						+my-education
+					.col-md-8.col-md-pull-4
+						+my-experiences
 
-			.my-experiences(ng-repeat="employment in resume.experience")
-				|{{employment.name}}
-			.my-projects(ng-repeat="project in resume.projects")
-				|{{project.name}}
+mixin my-education
+	.my-education.roh
+		+section-tween.col-md-12
+			+section-heading-text('EDUCATION')(data-toggle="collapse"
+			 data-target="#my-education-loop")
+			#my-education-loop.collapse.in(ng-repeat="school in resume.education")
+				+main-text('{{school.name}}', false).txt-center.dense
+
+
+mixin my-experiences
+	.my-experiences.roh
+		+section-tween.col-sm-12
+			+section-heading-text('WORK HISTORY')
+			.loop(ng-repeat="employment in resume.experience")
+
+mixin section-heading-text(text, styleOpt)
+	-var {left=10, right=10, ylift=110} = styleOpt || {}
+	.section-heading-text.text.uppercase.dense.relative.no-highlight.pointer.txt-center(ng-click="tween.toggle()")&attributes(attributes)
+		+a-path(`{{paths.headingBg(tween.T, ${left}, ${right}, ${ylift})}}`).abs-cover
+		.relative=text
+		block
+
+mixin main-text(text, tweens, styleOpt)
+	-var {left=15, right=15, ylift=15} = styleOpt || {}
+	.main-text.relative.text&attributes(attributes)
+		+a-path(`{{paths.headingBg(${tweens? 'tween.T' : 'undefined'}, ${left}, ${right}, ${ylift})}}`, false).abs-cover
+		.relative=text
+		block
+
+mixin section-tween
+	div(
+	my-tween 
+	to='1' 
+	duration='0.3' 
+	reverse-duration='0.45' 
+	ng-class="{open: tween.T > 0 && !tween.reversed()}")&attributes(attributes)
+		block
 +resume

@@ -62,14 +62,25 @@ function contactButton(T=0, tip=50, topSlack=3, bottomSlack=topSlack) {
 	return makeString(pts) + 'Z';
 }
 
-function headingBg(T=0, left=10, right=10) {
-	var leftPt = [-left, 50]
-	var rightPt = [100 + right, 50]
+function headingBg(T=0, left=10, right=10, ylift = 50) {
+	var _lift = (50 - ylift), dir = 1
+	if(_lift > 0)
+		dir = -1
+	var currLift = ylift + dir * _lift * (T)
+	var leftPt = [-left, currLift]
+	var rightPt = [100 + right, currLift]
 	var pts = [leftPt, [0, 0], [100, 0], rightPt, [100, 100], [0, 100]];
-	return makeString(pts)
+	return makeString(pts) + 'Z'
 }
 
 function makeString(points, unit='%') {
-	var makeString = (pathString, [x,y, xunit='%', yunit='%'])=> pathString.push(`${x + xunit} ${y + yunit} L`) && pathString
+	var makeString = (pathString, [x,y, xunit='%', yunit='%'])=> {
+		if(x.hasExp())
+			x = 0
+		if(y.hasExp())
+			y = 0
+		pathString.push(`${x + xunit} ${y + yunit} L`)
+		return pathString
+	}
 	return points.reduce(makeString, ['M']).join(' ').trimLast();
 }

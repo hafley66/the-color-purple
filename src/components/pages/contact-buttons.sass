@@ -2,7 +2,7 @@
 	$fast: 0.5s
 	.my-contact-info
 		path
-			transform: all 0.1s
+			// transform: all 0.4s
 		overflow-x: visible 
 		margin-left: -$bord-sm
 		width: calc(2 * #{$bord-sm} + 100%)
@@ -21,7 +21,7 @@
 			padding-top: 10px
 			transition: font-size $fast, transform $fast + 0.2
 		.buffer
-			transition: transform $fast
+			transition: transform $fast + 0.3
 		.at-right .buffer
 			+translate(100%, 50%)
 			+BREAK(md)

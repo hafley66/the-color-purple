@@ -28,7 +28,12 @@ app.directive('relativeD', function() {
       var replace = function(pathString, [findsPercent, getPercent]) {
         var x = pathString.replace(findsPercent, function(match, pre, capture) {
           var percent = getPercent(capture.slice(0, -1))
-           return pre + ' ' + percent;
+          if((percent + '').indexOf('e') > -1){
+            console.warn('boss we gotta renegade path unit...', pathString, percent)
+            percent = percent.truncate(2);
+          }
+
+          return pre + ' ' + percent.truncate(2);
         })
         return x
       }
@@ -39,7 +44,13 @@ app.directive('relativeD', function() {
       var getPath = () => Promise.resolve($scope.pathString)
       var setPath = (pathString) => {
         if (pathString && W && H)
-          fastdom.mutate(() => element.setAttribute('d', reduce(pathString)))
+          fastdom.mutate(() => {
+            try{
+              element.setAttribute('d', reduce(pathString))
+            } catch(err) {
+              console.warn(err);
+            }
+          })
       }
       var broadcastChange = (pathString) => $scope.$broadcast('path-change', [pathString, $elem])
       var updatePath = () => getPath().then(setPath).then(broadcastChange);
