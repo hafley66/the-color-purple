@@ -66,6 +66,9 @@ function headingBg(T=1, left=10, right=10, ylift = 50) {
 	var _lift = (50 - ylift), dir = 1
 	if(_lift > 0)
 		dir = -1
+	if(_lift === 0)
+		dir = 0
+
 	var currLift = ylift + dir * _lift * (T)
 	var leftPt = [-left, currLift]
 	var rightPt = [100 + right, currLift]

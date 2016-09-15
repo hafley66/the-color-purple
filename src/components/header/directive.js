@@ -11,6 +11,7 @@ const config = {
 		}
 	},
 	template: templateFn(),
+	replace: true
 }
 const _links = ['home', 'resume', 'demos']
 

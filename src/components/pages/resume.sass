@@ -18,7 +18,7 @@
 
 =the-texts
 	.collapse-buffer
-		margin: 10px 0
+		margin: 20px 0
 	.section-tween.opening, .section-tween.opened, .section-tween.closing
 		.svg-shadow
 			+show
@@ -46,10 +46,10 @@
 			stroke-width: 0
 	.main-text
 		+BREAK(xs)
-			margin: 10px 6vw
+			+margin-x(4vw)
 		+BREAK(sm)
-			margin: 10px 5%
-		margin-top: 10px
+			+margin-x(5%)
+		margin-top: 20px
 		font-size: 2.5rem
 		color: currentColor
 		path
@@ -57,13 +57,23 @@
 			stroke-width: 3px
 			stroke: currentColor
 	.sub-text
+		display: inline-block
 		font-size: 2rem
 		color: currentColor
 		background: $WHITE
+		padding-left: 6px
+		.actual-text
+			padding-right: 9px
+
+		path
+			stroke-width: 2px
+			fill: $WHITE
+			stroke: currentColor
 		+BREAK(xs)
-			margin: 0 6vw
+			+margin-x(calc(4vw + 4%))
 		+BREAK(sm)
-			margin: 0 10%
+			+margin-x(10%)
+
 	.side-text
 		font-size: 2rem
 	

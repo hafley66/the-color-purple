@@ -4,12 +4,18 @@ include ./titler.pug
 include ./contentler.pug
 
 mixin build
-	//- div(my-tween to=1 duration=1
-	//- 		as-var='pageChange')
-	//- 	.white.font-xl.txt-center
-	//- 		|HELLO{{pageChange.T}}
-	+THE-HEADER
-	+redoodler
+	div
+		svg(width=0 height=0 xmlns='http://www.w3.org/2000/svg')
+			filter(width='200%' height='200%')#dropshadow
+				feGaussianBlur(in='SourceAlpha', stddeviation='3')
+				feOffset(dx='2', dy='5', result='offsetblur')
+				feComponentTransfer
+					feFuncA(type='linear', slope='0.5')
+				femerge
+					femergenode
+					femergenode(in='SourceGraphic')
+		+THE-HEADER
+		+redoodler
 
 mixin redoodler
 	#body.relative(class="{{header.active}}")
@@ -17,14 +23,5 @@ mixin redoodler
 		+contentler
 
 
-svg(width=0 height=0 xmlns='http://www.w3.org/2000/svg')
-	filter(width='200%' height='200%')#dropshadow
-		feGaussianBlur(in='SourceAlpha', stddeviation='3')
-		feOffset(dx='2', dy='5', result='offsetblur')
-		feComponentTransfer
-			feFuncA(type='linear', slope='0.5')
-		femerge
-			femergenode
-			femergenode(in='SourceGraphic')
 
 +build
