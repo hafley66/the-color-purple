@@ -49,8 +49,7 @@ module.exports = {
                 presets: ["es2015"],
                 plugins: ["transform-es2015-modules-commonjs"]
             }
-        },
-        { test: /\.cson$/, loader: "cson" }
+        }
         ]
     },
     postcss: function(){return[precss, autoprefixer]}
