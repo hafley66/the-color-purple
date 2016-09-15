@@ -110,7 +110,7 @@ var strengthTrainer = {
 
 
 var resume = {
-	experience: {expand, rosetta, snapon},
+	jobs: {expand, rosetta, snapon},
 	education: {cwru},
 	projects,
 	leadership: [ sigmaCoordinator, peerTutor, strengthTrainer ],

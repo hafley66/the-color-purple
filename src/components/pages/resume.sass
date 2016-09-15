@@ -1,39 +1,69 @@
 @import ./contact-buttons.sass
+.black-dark
+	color: $BLACK-DARK
+.black-light
+	color: $BLACK-ALT
 .clicked
 	// border: 5px solid red
 .no-click
 	pointer-events: none
-.collapsing
-	> *
-		opacity: 0
-.collapsing, .collapse
-	> *
-		transition: opacity $fast
 =resume
 	#resume
+		.collapsing
+			overflow-y: hidden
+			overflow-x: visible
 		+my-contact-info
 		+resume-flow
 			+the-texts
 
-
 =the-texts
-	.text
-		margin: 10px 10%
+	.collapse-buffer
+		margin: 10px 0
+	.section-tween.opening, .section-tween.opened, .section-tween.closing
+		.svg-shadow
+			+show
+		+translate(0, -10px)
+	.section-tween.closed
+		.svg-shadow
+			+hide
+		+translate(0, 0)
+	.section-tween
+		transition: transform $fast
+	.loop .text
+		transition: transform $fast
+	.svg-shadow
+		transition: opacity $fast, transform $fast
+
 	.section-heading-text
+		+BREAK(xs)
+			margin: 0 6vw
+		+BREAK(sm)
+			margin: 0 10%
 		font-size: 3rem
 		color: currentColor
 		path
-			fill: darken($BLACK, 5%)
+			fill: $BLACK-DARK
 			stroke-width: 0
 	.main-text
+		+BREAK(xs)
+			margin: 10px 6vw
+		+BREAK(sm)
+			margin: 10px 5%
+		margin-top: 10px
 		font-size: 2.5rem
 		color: currentColor
 		path
-			fill: $WHITE
+			fill: currentColor
 			stroke-width: 3px
 			stroke: currentColor
 	.sub-text
 		font-size: 2rem
+		color: currentColor
+		background: $WHITE
+		+BREAK(xs)
+			margin: 0 6vw
+		+BREAK(sm)
+			margin: 0 10%
 	.side-text
 		font-size: 2rem
 	

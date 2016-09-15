@@ -9,10 +9,11 @@ const bindToController = {
 	mrevDuration: '=?reverseDuration',
 	mplay: '<play',
 	mrepeat: '<?repeat',
+	mstart: '<?start',
 	startPaused: '<?',
 	mfrom: '<?from',
 	mto: '<?to',
-	mreverse: '<reverse',
+	mreverse: '<?reverse',
 	myoyo: '<?yoyo',
 	masVar: '@?asVar'
 }
@@ -25,14 +26,6 @@ function link($scope, $elem, $attr, C) {
 		T: C.mto || 1,
 		T100: (C.mto || 1) * 100,
 		repeat: C.mrepeat || 0,
-		onComplete(){
-		},
-		onReverseComplete() {
-		},
-		onStart() {
-		},
-		onReverse() {
-		},
 		onUpdate() {
 			if(C.T === C.mto|| 1 && C.monEnd) {
 				C.monEnd()
@@ -62,6 +55,7 @@ function link($scope, $elem, $attr, C) {
 	C.play = tween.play.bind(tween)
 	C.reverse = tween.reverse.bind(tween)
 	C.reversed = tween.reversed.bind(tween);
+	C.paused = tween.paused.bind(tween);
 	C.toggle = () => {
 		if(tween.paused() || tween.reversed()){
 			tween.timeScale(1)

@@ -19,6 +19,11 @@ function clear(elem) {
 	elem.css({transform: ''})
 }
 
+function resizeWindow() {
+	window.dispatchEvent(new Event('resize'))
+}
+window.resize = resizeWindow
+
 app.directive(...resumePage);
 app.directive(...headerNeo)
 app.directive(...headerNyeoh)

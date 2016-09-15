@@ -65,6 +65,7 @@ app.directive('collapseTarget', function() {
 		controllerAs: 'collapser',
 		controller(){
 			this.$target = $(this.target)
+			console.log('target is...', this.$target, this.target);
 			this.hide = ()=>this.$target.collapse('hide')
 			this.show = ()=>this.$target.collapse('show')
 		},
@@ -76,6 +77,7 @@ app.directive('collapseTarget', function() {
 					C.hide()
 				else
 					C.show()
+				window.resize()
 			})
 			$scope.$watch('collapser.target', nvalue=>{
 				if(!!nvalue)

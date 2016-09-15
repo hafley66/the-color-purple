@@ -11,9 +11,12 @@
 		.extra-triangle
 			+bottom-triangle-height($mult: 1)
 			transition: opacity $fast, transform $fast
+			&.open, &.closing
+				z-index: 1
+
 		.contact-text
 			+hide
-			transition: opacity $fast, transform $fast
+			transition: opacity $slow + 0.4s, transform $fast + 0.3s
 			font-size: 2em
 			+translate(-50%, -200%)
 		.icon
@@ -38,6 +41,7 @@
 		.open
 			transform-origin: bottom center
 			.buffer
+				z-index: 100
 				+translate(50%, 60%)
 				.icon
 					+translate(-50%, 0)

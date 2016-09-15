@@ -1,11 +1,16 @@
 include ../global.pug
 include ./contact-buttons.pug
 
+-var openingCond = '(tween.T < 1 && tween.T !== 0 && tween.reversed())'
+-var closingCond = 'tween.T > 0 && tween.T !== 1 && !tween.reversed()'
+-var closedCond = 'tween.T === 1'
+-var openedCond = 'tween.T === 0 || tween.paused()'
+
 mixin resume
 	#resume
-		+contact-info.high
-		.resume-flow.low
-			.container-fluid
+		+contact-info
+		.resume-flow
+			.wide.relative
 				.roh
 					.col-md-4.col-md-push-8
 						+my-education
@@ -15,38 +20,57 @@ mixin resume
 mixin my-education
 	.my-education.roh
 		+section-tween.col-md-12
-			+section-heading-text('EDUCATION')(data-toggle="collapse"
-			 data-target="#my-education-loop")
-			#my-education-loop.collapse.in(ng-repeat="school in resume.education")
-				+main-text('{{school.name}}', false).txt-center.dense
-
+			+section-heading-text('EDUCATION')(
+			collapse-target="#my-education-loop" 
+			collapse-when=`${closingCond} || ${closedCond}`
+			)
+			#my-education-loop.collapse.in.relative
+				.loop(ng-repeat="school in resume.education")
+					+main-text('{{school.name}}').txt-center.dense
+					+sub-text('{{school.degree}}')
 
 mixin my-experiences
 	.my-experiences.roh
-		+section-tween.col-sm-12
-			+section-heading-text('WORK HISTORY')
-			.loop(ng-repeat="employment in resume.experience")
-
+		+section-tween.col-md-12
+			+section-heading-text('WORK HISTORY')(
+			collapse-target="#my-experiences-loop" 
+			collapse-when=`${closingCond} || ${closedCond}`
+			)
+			#my-experiences-loop.collapse.in.relative
+				.loop(ng-repeat="job in resume.jobs")
+					+main-text('{{job.name}}').txt-left.dense
+					+sub-text('{{job.position}}')
+mixin section-heading
+	.section-heading-text.text.uppercase.dense.relative.no-highlight.pointer.txt-center&attributes(attributes)
+		block
 mixin section-heading-text(text, styleOpt)
 	-var {left=10, right=10, ylift=110} = styleOpt || {}
-	.section-heading-text.text.uppercase.dense.relative.no-highlight.pointer.txt-center(ng-click="tween.toggle()")&attributes(attributes)
-		+a-path(`{{paths.headingBg(tween.T, ${left}, ${right}, ${ylift})}}`).abs-cover
+	+section-heading(ng-click="tween.toggle()")&attributes(attributes)
+		+a-path(`{{paths.headingBg(tween.T, ${left}, ${right}, ${ylift})}}`, true).abs-cover.svg-shadow
+		+a-path(`{{paths.headingBg(tween.T, ${left}, ${right}, ${ylift})}}`, false).abs-cover
 		.relative=text
 		block
 
 mixin main-text(text, tweens, styleOpt)
-	-var {left=15, right=15, ylift=15} = styleOpt || {}
-	.main-text.relative.text&attributes(attributes)
+	-var {left=5, right=5, ylift=50} = styleOpt || {}
+	.highest.main-text.relative.text&attributes(attributes)
 		+a-path(`{{paths.headingBg(${tweens? 'tween.T' : 'undefined'}, ${left}, ${right}, ${ylift})}}`, false).abs-cover
+		.white.relative.sans4=text
+		block
+
+mixin sub-text(text, tweens)
+	.sub-text.relative.text&attributes(attributes)
 		.relative=text
 		block
 
+
 mixin section-tween
-	div(
+	.collapse-buffer.relative
+		.section-tween(
 	my-tween 
+	value="{{tween.T}}"
 	to='1' 
 	duration='0.3' 
-	reverse-duration='0.45' 
-	ng-class="{open: tween.T > 0 && !tween.reversed()}")&attributes(attributes)
-		block
+	ng-class=`{opening: ${openingCond}, opened: ${openedCond}, closing: ${closingCond}, closed: ${closedCond}}`)&attributes(attributes)
+			block
 +resume
