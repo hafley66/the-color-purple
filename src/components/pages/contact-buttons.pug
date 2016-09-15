@@ -1,0 +1,24 @@
+mixin contact-tween
+	.relative.extra-triangle(
+	my-tween 
+	to='1' 
+	duration='0.2' 
+	reverse-duration='0.45' 
+	ng-class="{open: tween.T > 0 && !tween.reversed()}")&attributes(attributes)
+		block
+mixin contact-side-text(text)
+	.abs-center.txt-center.dense.contact-text.wide&attributes(attributes)!=text
+mixin contact-info
+	.my-contact-info.wide.abs.above&attributes(attributes)
+		+contact-tween.at-left
+			+a-path('{{paths.contactButton(tween.T)}}').abs-cover
+			.contact-info.contact-phone.abs-cover
+				+contact-side-text('330-324-4867')
+				.buffer.abs.dim-cover
+					.i.icon.fa.fa-phone(ng-click="tween.toggle()" aria-hidden="true")
+		+contact-tween.at-right
+			+a-path('{{paths.contactButton(tween.T)}}').abs-cover.reflect-x.about-center
+			.contact-info.contact-email.abs-cover
+				+contact-side-text('hafley66&#8203;@&#8203;gmail.com')
+				.buffer.abs.dim-cover
+					.i.icon.fa.fa-envelope-o(ng-click="tween.toggle()" aria-hidden="true")

@@ -1,12 +1,11 @@
 mixin contentler
-	#contentler.relative
-		#slider-mask.will-move-gpu
-			#main.relative
-				#home.collapse
-					| HELLO WORLD
-				#demos.collapse.relative
-					.wide.txt-center.padd-xl.font-xl
-						|COMING SOON
-				resume-page.collapse.relative
-			+a-triangle
-				+a-path('{{paths.triangleDown(tween.T)}}')
+	#contentler
+		#main.relative
+			#home.collapse
+				| HELLO WORLD
+			#demos.collapse.relative
+				.wide.txt-center.padd-xl.font-xl
+					|COMING SOON
+			resume-page.collapse.relative
+		+a-triangle.lowest
+			+a-path('{{paths.triangleDown(tween.T)}}')

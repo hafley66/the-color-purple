@@ -20,14 +20,20 @@ app.directive('floatTop', function() {
 			}}})
 })
 
-app.directive('squarePlease', function() {
+app.directive('squareHeight', function() {
 	return {
 		link($scope, $elem) {
 			$elem.width($elem.height());
 		}
 	}
 })
-
+app.directive('squareWidth', function() {
+	return {
+		link($scope, $elem) {
+			$elem.height($elem.width());
+		}
+	}
+})
 
 
 app.directive('hoverState', function() {

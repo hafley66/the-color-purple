@@ -4,6 +4,7 @@ var autoprefixer = require('autoprefixer');
 module.exports = {
     progress:true,
     colors: true,
+    devServer: {inline: true},
 
     entry: "./src/bootstrap-app/build-ler.js",
     output: {

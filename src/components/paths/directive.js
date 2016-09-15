@@ -21,7 +21,9 @@ function triangleUp(T) {
 Object.assign(controller.prototype, {
 	linkPath,
 	triangleDown,
-	triangleUp
+	triangleUp,
+	contactButton,
+	headingBg
 })
 
 const directiveFunction = function( ){
@@ -49,12 +51,25 @@ function mobileLinkPath(T) {
 
 }
 
-function contactPath(T) {
-var left = `M -10% -40% L 100% -40% L 100% 50% L -10% 100% Z`	
-var right =`M 0 -40% L 0 50%  L 110% 100% L 110% -40% Z`
+function contactButton(T=0, tip=50, topSlack=3, bottomSlack=topSlack) {
+
+	var midtop = [50, 0 - (T * tip)]
+	var midbottom = [(T * 50), 100 + (T * tip)]
+	var rightbottom = [100, 50 + (50 * T)]
+	var topleft = [-topSlack*(1-T), 0]
+	var bottomleft = [-bottomSlack*(1-T), 100, ' ']
+	var pts = [topleft, midtop, [100, 0], rightbottom, midbottom, bottomleft]
+	return makeString(pts) + 'Z';
+}
+
+function headingBg(T=0, left=10, right=10) {
+	var leftPt = [-left, 50]
+	var rightPt = [100 + right, 50]
+	var pts = [leftPt, [0, 0], [100, 0], rightPt, [100, 100], [0, 100]];
+	return makeString(pts)
 }
 
 function makeString(points, unit='%') {
-	var makeString = (pathString, [x,y])=> pathString.push(`${x + unit} ${y + unit} L`) && pathString
+	var makeString = (pathString, [x,y, xunit='%', yunit='%'])=> pathString.push(`${x + xunit} ${y + yunit} L`) && pathString
 	return points.reduce(makeString, ['M']).join(' ').trimLast();
 }

@@ -1,47 +1,38 @@
+@import ./contact-buttons.sass
 .clicked
 	// border: 5px solid red
 .no-click
 	pointer-events: none
 .collapsing
 	> *
-		transition: opacity $fast
 		opacity: 0
+.collapsing, .collapse
+	> *
+		transition: opacity $fast
 =resume
 	#resume
 		+my-contact-info
 		+resume-flow
+			+the-texts
 
 
 =the-texts
-	.title-text
-
-	.subtitle-text
-
-	.side-text
-=my-contact-info
-	.my-contact-info
-		overflow-x: visible 
-		transition: opacity $fast, transform $fast
-		+bottom-triangle-height
-		.extra-triangle
-			transition: opacity $fast, transform $fast
-			&.clicked
-			+bottom-triangle-height($mult: 1)
-		> *
-			height: 90%
-			width: 50%
-			display: inline-block
+	.section-heading-text
+		margin: 10px 10%
+		font-size: 5rem
+		color: currentColor
 		path
-			fill: $SILVER
-		.contact-info
-			margin: 0 2.5%
-			bottom: 25%
-		.icon
-			+bottom-triangle-height(font-size, 0.40)
-	&.collapsing .my-contact-info
-		+translate(0, -100%)
-		z-index: -1000
+			fill: darken($BLACK, 5%)
+			stroke-width: 0
+	.main-text
+		font-size: 3rem
+		color: 
+	.sub-text
+		font-size: 2rem
+	.side-text
+		font-size: 2rem
+	
 =resume-flow
 	.resume-flow
-		padding-top: 3em
-
+		padding-top: 2em
+		@content

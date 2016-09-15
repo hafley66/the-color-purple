@@ -1,24 +1,24 @@
 mixin titler
-	#titler
-		+a-triangle.thats-above.abs.above
+	#titler.relative
+		+a-triangle.thats-above.abs-width.above.higher
 			+a-path("{{paths.triangleUp(tween.T)}}", false)
-		+title-text
-			+shadow-triangles
-		+a-triangle.high.thats-below.abs.below.no-click
+		+title-text.highest
+		+shadow-triangles
+		+a-triangle.thats-below.abs-width.below.no-click.higher
 			+a-path("{{paths.triangleDown(tween.T)}}")
 
 mixin title-text
 	.hero.txt-center.uppercase.relative.cc-bg&attributes(attributes)
-		.abs-center.white.highest
-			.hero-text.flat-line.sans2(ng-class="{'bord-b-sm': page.subText}")
+		.abs-center.cc-bg.highest
+			.white.hero-text.flat-line.sans2(ng-class="{'bord-b-sm': page.subText}")
 				|{{page.heroText}}
-			.sub-text.font-xs.flat-line.sans3(ng-show="page.subText")
+			.white.sub-text.font-xs.flat-line.sans3(ng-show="page.subText")
 				|{{page.subText}}
 		block
 
 mixin shadow-triangles() 
 	div&attributes(attributes)
-		.shadow-triangle.thats-left.below.lowest
+		.shadow-triangle.align-left.lowest.below
 			+a-path("M 0 0 L 50% 100% L 50% 0 Z")
-		.shadow-triangle.thats-right.lowest.below
+		.shadow-triangle.align-right.lowest.below
 			+a-path("M 100% 0 L 50% 100% L 50% 0 Z")

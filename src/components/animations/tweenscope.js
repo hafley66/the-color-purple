@@ -6,12 +6,13 @@ const bindToController = {
 	monStart: '&onStart',
 	monEnd: '&onEnd',
 	mduration: '<?duration',
-	mplay: '<?play',
+	mrevDuration: '=?reverseDuration',
+	mplay: '<play',
 	mrepeat: '<?repeat',
 	startPaused: '<?',
 	mfrom: '<?from',
 	mto: '<?to',
-	mreverse: '<?reverse',
+	mreverse: '<reverse',
 	myoyo: '<?yoyo',
 	masVar: '@?asVar'
 }
@@ -28,6 +29,10 @@ function link($scope, $elem, $attr, C) {
 		},
 		onReverseComplete() {
 		},
+		onStart() {
+		},
+		onReverse() {
+		},
 		onUpdate() {
 			if(C.T === C.mto|| 1 && C.monEnd) {
 				C.monEnd()
@@ -43,13 +48,32 @@ function link($scope, $elem, $attr, C) {
 		yoyo: C.myoyo || false,
 		ease: Sine.easeInOut
 	}
+
+	function getReverseTimeScale(revDur) {
+		if(revDur !== undefined)
+			return C.mduration / revDur
+		else 
+			return 1
+	}
+
 	if(C.startPaused !== false)
 		_config.paused = true;
 	var tween = TweenMax.to(C, C.mduration || 0.5, _config)
 	C.play = tween.play.bind(tween)
 	C.reverse = tween.reverse.bind(tween)
-	$scope.$watch('tween.mplay', plays => plays? C.play() : null);
+	C.reversed = tween.reversed.bind(tween);
+	C.toggle = () => {
+		if(tween.paused() || tween.reversed()){
+			tween.timeScale(1)
+			tween.play()
+		}else{
+			tween.timeScale(C.dilution)
+			tween.reverse()
+		}
+	}
+	$scope.$watch('tween.mplay', plays => plays? C.play() : null)
 	$scope.$watch('tween.mreverse', reverses => reverses? C.reverse() : null);
+	$scope.$watch('tween.mrevDuration', revDur => C.dilution = getReverseTimeScale(revDur))
 }
 
 app.directive(directiveName, function() {

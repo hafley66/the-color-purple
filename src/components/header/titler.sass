@@ -3,12 +3,15 @@
 		transition: color $fast, background $fast, border-color $fast
 =titler
 	#titler
+		+upper-triangle-height(padding-top)
+
 		+titler-prep-colors()
 		.a-triangle
 			path
 				fill: currentColor
 			&.thats-above
 				+upper-triangle-height()
+				+upper-triangle-height(margin-bottom, -1)
 			&.thats-below
 				+bottom-triangle-height()
 				+bottom-triangle-height(margin-bottom, -1)
@@ -17,10 +20,6 @@
 			position: absolute
 			transition: opacity $fast, transform $fast
 
-			&.thats-left
-				left: 0
-			&.thats-right
-				right: 0
 			width: 50%
 			+bottom-triangle-height($mult: 1.5)
 			path
