@@ -4,9 +4,7 @@ mixin THE-HEADER
 mixin row-of-links
 	.LINKS(hover-state)
 		.roh
-			.col-sm-4.link-ler(ng-repeat='link in header.links' my-tween to="1" duration="0.1" 
-			play="header.isAt(link)"
-			reverse="!header.isAt(link)"
+			.col-sm-4.link-ler(ng-repeat='link in header.links'
 			ng-mouseenter="tween.play()" 
 			ng-mouseleave="header.isAt(link) || tween.reverse() "
 			ng-class="{active: header.isAt(link)}"
@@ -15,14 +13,11 @@ mixin row-of-links
 			collapse-when="!header.isAt(link)"
 			collapse-parent="#contentler"
 			)
-				+a-header-link
-					|{{link}}
+				.clicker(ng-click="header.activate(link)")
+					+a-header-text(ng-class="{'has-underline': header.isAt(link)}")
+						|{{link}}
 				+fit-svg.abs-cover.low.fancy-path
 					path.no-fill(ng-attr-filter="{{header.isAt(link) && 'url(#dropshadow)'}}" relative-d="{{paths.linkPath(tween.T)}}")
-mixin a-header-link
-	.clicker(ng-click="header.activate(link)")
-		+a-header-text(ng-class="{'has-underline': header.isAt(link)}")
-			|{{link}}
 mixin a-header-text
 	div.header-link(class=`
 	txt-center	

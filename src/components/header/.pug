@@ -14,6 +14,11 @@ mixin build
 				femerge
 					femergenode
 					femergenode(in='SourceGraphic')
+		//- +navler
+		//- +titler
+		//- +contactler
+		//- +bodyler
+
 		+THE-HEADER
 		+redoodler
 
@@ -21,7 +26,5 @@ mixin redoodler
 	#body.relative(class="{{header.active}}")
 		+titler
 		+contentler
-
-
 
 +build

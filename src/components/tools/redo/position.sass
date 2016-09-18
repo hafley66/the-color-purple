@@ -1,0 +1,22 @@
+=Rel
+  position: relative
+=Abs
+  position: absolute
+=Abs-Init
+  +Abs
+  +Align(left top)
+=Abs-Cover
+  +Abs
+  +Cover
+=Abs-Center
+  +Abs-Cover
+  left: 50%
+  top: 50%
+  +Translate(-50%, -50%)
+=Align($sides)
+  @for $i from 1 to length($sides)
+    #{nth($sides, $i)}: 0
+=Below
+  top: 100%
+=Above
+  bottom: 100%
