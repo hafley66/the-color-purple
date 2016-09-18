@@ -65,7 +65,6 @@ app.directive('collapseTarget', function() {
 		controllerAs: 'collapser',
 		controller(){
 			this.$target = $(this.target)
-			console.log('target is...', this.$target, this.target);
 			this.hide = ()=>this.$target.collapse('hide')
 			this.show = ()=>this.$target.collapse('show')
 		},

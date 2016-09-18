@@ -17,6 +17,7 @@ mixin resume
 						+my-education
 					.col-md-8.col-md-pull-4
 						+my-experiences
+						+my-projects
 
 mixin my-education
 	.my-education.roh
@@ -28,7 +29,10 @@ mixin my-education
 			#my-education-loop.collapse.in.relative
 				.loop(ng-repeat="school in resume.education")
 					+main-text('{{school.name}}').txt-center.dense
-					+sub-text('{{school.degree}}').txt-center
+					+sub-text.txt-center
+						|{{school.degree}}
+						br
+						|{{school.graduated}}
 
 mixin my-experiences
 	.my-experiences.roh
@@ -40,9 +44,22 @@ mixin my-experiences
 			#my-experiences-loop.collapse.in.relative
 				.loop(ng-repeat="job in resume.jobs")
 					+main-text('{{job.name}}').txt-left.dense
-					+sub-text('{{job.position}}')
+					+sub-text
+						|{{job.position}}
 					ul.a-list
 						li.black(ng-repeat="point in job.highlights")
 							|{{point}}
+
+mixin my-projects
+	.my-projects.roh
+		+section-tween.col-md-12
+			+section-heading-text('PROJECTS')(
+			collapse-target="#my-projects-loop" 
+			collapse-when=`${closingCond} || ${closedCond}`
+			)
+			#my-projects-loop.collapse.in.relative
+				.loop(ng-repeat="project in resume.projects")
+					+main-text('{{project.name}}').txt-left.dense
+					.sub-text.font-sm.black|{{project.description}}
 
 +resume

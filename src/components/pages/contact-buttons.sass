@@ -4,7 +4,6 @@
 	.my-contact-info
 		path
 			// transform: all 0.4s
-		overflow-x: visible 
 		margin-left: -$bord-sm
 		width: calc(2 * #{$bord-sm} + 100%)
 		transition: opacity $fast, transform $fast
@@ -17,7 +16,7 @@
 
 		.contact-text
 			+hide
-			transition: opacity 1.5s, transform $fast + 0.3s
+			transition: opacity 1s ease-in, transform $fast + 0.3s
 			font-size: 2em
 			+translate(-50%, -200%)
 		.icon

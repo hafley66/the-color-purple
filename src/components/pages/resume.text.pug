@@ -32,5 +32,5 @@ mixin sub-text(text, tweens, styleOpt)
 	-var {left=5, right=5, ylift=25} = styleOpt || {}
 	.sub-text.relative.text&attributes(attributes)
 		+a-path(`{{paths.headingBg(${tweens? 'tween.T' : 'undefined'}, ${left}, ${right}, ${ylift})}}`, false).abs-cover
-		.actual-text.relative.dense=text
-		block
+		.actual-text.relative.dense
+			block

@@ -1,11 +1,13 @@
 @import ./colors.sass
 @import ./header.sass
 @import ./titler.sass
-@import ./contentler.sass
+@import ../pages/about.sass
 @import ../pages/resume.sass
+@import ./contentler.sass
+
 
 =active-colors()
-	.home
+	.about
 		color: $RED
 	.resume
 		color: $PURPLE
@@ -24,12 +26,13 @@
 	color: $WHITE
 
 body
+	width: 100%
+	overflow-x: hidden
 	background: $BLACK-ALT
 	color: $WHITE
 [ng-app]
 	+active-colors
 	max-width: 80em
-	overflow-x: hidden
 	margin: auto
 	path
 		stroke-linejoin: bevel

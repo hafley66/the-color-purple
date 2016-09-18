@@ -3,26 +3,38 @@ const directiveName = 'newHeader';
 const config = {
 	bindToController: {},
 	controllerAs: 'header',
-	controller,
-	link: {
-		pre($scope){
-			$scope.page = {}
-			this.page = {};
-		}
-	},
+	controller: ['$scope', controller],
 	template: templateFn(),
 	replace: true
 }
-const _links = ['home', 'resume', 'demos']
-
-function controller(links=_links) {
-	this.links = links
+const _links = ['about', 'resume', 'demos']
+const _data = {
+	about: {
+		main: "Welcome!",
+		sub: "I'm Chris Hafley"
+	},
+	resume: {
+		main: 'CHRIS HAFLEY',
+		sub: 'SOFTWARE ENGINEER'
+	},
+	demos: {
+		main: 'Coming Soon'
+	}
+}
+function controller($scope) {
+	console.log($scope);
+	this.$scope = $scope
+	$scope.page = $scope.page || {};
+	this.links = _links
 	this.active = this.getInitialActive()
+	this.activate(this.active)
 }
 
 const methods = {
 	activate(link) {
 		this.active = link
+		this.$scope.page.mainText = _data[link].main
+		this.$scope.page.subText = _data[link].sub
 	},
 	index(link=this.active) {
 		return this.links.indexOf(link)
@@ -33,7 +45,7 @@ const methods = {
 	getInitialActive() {
 		var first = window.location.pathname.split('/')[1];
 		console.log('path is...', first);
-		return 'resume';
+		return 'about';
 	}
 }
 
