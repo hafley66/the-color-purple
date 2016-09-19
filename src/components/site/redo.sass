@@ -1,0 +1,37 @@
+@import ../pages/about.sass
+@import ../pages/resume.sass
+@import ./contentler.sass
+@import ./redo/Headler.sass
+@import ./redo/Navler.sass
+
+=active-colors()
+	.about
+		color: $RED
+	.resume
+		color: $PURPLE
+	.demos
+		color: $blue
+=Defaults-And-Overrides
+	body
+		overflow-x: hidden
+		max-width: 80em
+		+CenterBlock
+		background: $BLACK-ALT
+		color: $WHITE
+
+	path
+		stroke-linejoin: bevel
+	[ng-app]
+		+active-colors
+	.black-on-white
+		color: $BLACK
+		background: $WHITE
+
++Defaults-And-Overrides
+
++Headler
+	+Navler
+// +Mainler
+// 	+Titler
+// 	+Contactler
+// 	+Contentler

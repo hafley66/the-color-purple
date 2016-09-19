@@ -22,7 +22,7 @@ var aboutMe= {
 		`)
 }
 
-var aboutSite= {
+var aboutSite = {
 	title: 'About This Site',
 	text: (`
 		This is my first site ever fully created by me. 
@@ -35,7 +35,6 @@ var aboutSite= {
 		
 		I prefer a modularized and component based approach to user interfaces and reusing tools/techniques as much as possible.
 		This site was made using Angular, jQuery, GSAP for some path morphing, and the greatest tool ever, Lodash/Underscore. 
-		Other than that, all the SVG and Sass is done by me with some help from a custom bootstrap grid.
 
 		Thanks for visiting!
 		`)

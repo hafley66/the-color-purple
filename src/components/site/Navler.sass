@@ -1,0 +1,48 @@
+$NavLink-FontSize: 2rem
+$NavSvgPath-StrokeWidth: 3px
+=Navler
+	#Navler.as-Nav
+		+NavLink-Init
+		+NavLink-Active
+		+NavLink-Active-Hover
+
+=NavLink-Init
+	+NavLink
+		+NavText
+		+NavSvg
+
+=NavLink
+	.NavLink
+		+Relative
+		margin: 5px 10px
+		transition: transform $fast, color $slow
+		@content
+
+=NavText
+	.NavText
+		font-size: $NavLink-FontSize
+		+txt-center
+		+dense
+		+uppercase
+		+no-select
+		+pointer
+		+white
+
+=NavSvg
+	.NavSvg
+		+AbsCover
+	.NavSvgPath
+		+MovePath(0.5s ease)
+		+stroke($NavSvgPath-StrokeWidth, $WHITE)
+		fill: $BLACK
+
+=NavLink-Active
+	.NavLink.active
+		+Translate(0, -5px)
+		.NavSvgPath
+			+CCFill
+
+=NavLink-Active-Hover
+	.NavLink.active:hover
+		.NavSvgPath
+			stroke: currentColor

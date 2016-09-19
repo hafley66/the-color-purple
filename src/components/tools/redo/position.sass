@@ -1,18 +1,33 @@
+=Relative
+  position: relative
 =Rel
   position: relative
+=RelCover
+  +Relative
+  +Cover
+=RelativeCover
+  +RelCover
+=Absolute
+  +Abs
 =Abs
   position: absolute
-=Abs-Init
+=AbsInit
   +Abs
   +Align(left top)
-=Abs-Cover
+=AbsoluteInit
+  +AbsInit
+=AbsCover
   +Abs
   +Cover
-=Abs-Center
-  +Abs-Cover
+=AbsoluteCover
+  +AbsCover
+=AbsCenter
+  +AbsCover
   left: 50%
   top: 50%
   +Translate(-50%, -50%)
+=AbsoluteCenter
+  +AbsCenter
 =Align($sides)
   @for $i from 1 to length($sides)
     #{nth($sides, $i)}: 0
@@ -20,3 +35,7 @@
   top: 100%
 =Above
   bottom: 100%
+=CenterBlock
+  margin: auto
+  width: 100%
+  display: block

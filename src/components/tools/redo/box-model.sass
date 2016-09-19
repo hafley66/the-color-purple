@@ -24,10 +24,30 @@
   @if $right != null
     border-right: $w $s $c
 =border-y($w, $s: solid, $c: currentColor)
-  @if $top != null
-    border-top: $w $s $c
-  @if $bottom != null
-    border-bottom: $w $s $c
+  +border($w $s $c, top)
+  +border($w $s $c, bottom)
+=border($w: null, $s: null, $c: null, $side: null)
+  $ww: $w != null
+  $ss: $s != null
+  $cc: $c != null
+  $sside: $side != null
+  $all: $ww and $ss and $cc
+  @if $all and $sside
+    border-#{$side}: $w $s $c
+  @else if $all
+    border: $w $s $c
+  @else
+    @if $ww
+      border-#{$side}-width: $w
+    @if $ss
+      border-#{$side}-style: $s
+    @if $cc
+      border-#{$side}-color: $c
+
+
+.test
+  +border()
+
 =Horizontal($m: null, $b: null, $p: null, $w: 100%)
   +margin-x($m)
   +padding-x($p)

@@ -24,22 +24,22 @@
 =Fade
   opacity: 0
 
-=Translate-Down($v: 100%)
+=TranslateDown($v: 100%)
   +translate(0, $v)
-=Translate-Up($v: 100%)
+=TranslateUp($v: 100%)
   +translate(0, -1 * $v)
 
-=No-Scale-Y
+=NoScaleY
   +scale($y: 0)
-=No-Scale-X
+=NoScaleX
   +scale($x: 0)
 
-=About-Center
+=AboutCenter
   transform-origin: center
-=Reflect-X
+=ReflectX
   transform: scale(-1, 1)
-=Reflect-Y
+=ReflectY
   +scale(1, -1)
 
-=Preserve-3D
+=Preserve3D
   transform-style: preserve-3d

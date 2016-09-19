@@ -1,8 +1,18 @@
-=No-Stroke 
+=NoStroke 
   stroke-width: 0
-=No-Fill
+=NoFill
   fill: transparent
-=CC-Fill
+=CCFill
   fill: currentColor
-=CC-Stroke
+=CCStroke
   stroke: currentColor
+=stroke($w, $c: null, $dasharray: null, $dashoffset: null)
+	$hasArray: $dasharray != null
+	$hasOffset: $dashoffset != null
+	@if $hasArray
+		stroke-dasharray: $dasharray
+	@if $hasOffset
+		stroke-dashoffset: $dashoffset
+	@if $c != null
+		stroke: $c
+	stroke-width: $w
