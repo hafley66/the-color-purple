@@ -57,7 +57,7 @@ var cwru = {
 var seniorProject = {
 	name: 'Canvas',
 	tech: ['Android', 'Node', 'HTML/CSS'],
-	description: 'Collaborative drawing app designed to allow players to draw on the same canvas in multiple ways.'
+	description: '(Android) Collaborative drawing app designed to allow players to draw on the same canvas in multiple ways.'
 }
 
 var paperAndroid = {
@@ -83,7 +83,17 @@ var javscriptInterpreterProject = {
 	description: "(Coursework) Implemented a JavaScript interpreter using Scheme and Racket. Implemented variables, nested functions/closures, ended on objects/classes."
 }
 
-var projects = [seniorProject, paperAndroid, aiProjects, machineLearners, javscriptInterpreterProject];
+var checklistProject = {
+	name: 'Store Health Checklist',
+	description: "Created a single page application for filling out a large form of checklists and comments for inspecting the health of franchise stores."
+}
+
+var mapsProject = {
+	name: 'Store Health Maps',
+	description: 'Created component that viewed franchise locations on a map showing their relative health after inspection. Included support for clustering locations on map.'
+}
+
+var projects = [checklistProject, mapsProject, seniorProject, paperAndroid, aiProjects, machineLearners, javscriptInterpreterProject];
 
 
 var courses = [
