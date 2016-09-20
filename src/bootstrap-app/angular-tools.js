@@ -74,13 +74,14 @@ app.directive('collapseTarget', function() {
 	return {
 		bindToController: {
 			'target': '@collapseTarget',
-			'when': '@collapseWhen'
+			'when': '@collapseWhen',
+			'parent': '@collapseParent'
 		},
 		controllerAs: 'collapser',
 		controller(){
 			this.$target = $(this.target)
-			this.hide = ()=>this.$target.collapse('hide')
-			this.show = ()=>this.$target.collapse('show')
+			this.hide = ()=>this.$target.collapse('hide', {parent: this.parent})
+			this.show = ()=>this.$target.collapse('show', {parent: this.parent})
 		},
 		link($scope, $elem, $attr, C) {
 			var collapsing = null;
@@ -94,6 +95,8 @@ app.directive('collapseTarget', function() {
 				else 
 					C.show()
 				$scope.collapsed = !!nvalue
+				window.resize()
+				console.log('collapsing...', val, C.parent);
 			})
 		}
 	}

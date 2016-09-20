@@ -1,16 +1,55 @@
-@import ./Text.sass
-
 =Resume
 	#Resume
 		+Relative
-		+Resume-Box
+		.ResumeDate
+			font-size: 1.5rem
+		.roh
+			margin-bottom: 30px
+		.ResumeProjects.roh
+			+BREAK(md)
+				margin-bottom: 0
+		+ResumeSkillGroups
+		.ResumeProjectDescription
+			margin-bottom: 10px
+			+black
+		+ResumeHorizontals
+		.ResumeEducation
+			.MainText
+				font-size: 1.8rem
 
-=Resume-Box
-	padding-top: 1em
-	+Wide
-	+SectionText
-	.SectionText
-		.SectionTextText
+
+
 
 =ResumeEducationLoop
 	+Relative
+
+=ResumeSkillGroups
+	.ResumeSkillGroups
+		+BREAK(md)
+			margin-bottom: 0
+		+BREAK(xs)
+			margin-bottom: 0
+
+		.ResumeSkillsLoop
+			+black
+			+ResumeMargin
+=ResumeHorizontals
+	ul, .ResumeProjectDescription
+		+BREAK(sm)
+			+margin-x(5%)
+		+BREAK(xs)
+			+margin-x(2.5%, 2%)
+	ul
+		padding-left: 20px
+	.ResumeProjectDescription
+		+border(2px, currentColor, $side: left)
+		padding: 5px
+		+ResumeMargin
+	.SectionText
+		+margin-x(0.25em)
+
+=ResumeMargin()
+	+BREAK(sm)
+		+margin-x(10%)
+	+BREAK(xs)
+		+margin-x(10%, 2%)

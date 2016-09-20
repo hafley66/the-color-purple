@@ -1,4 +1,4 @@
-$path-duration: 0.5s ease-out
+$path-duration: 0.5s ease
 $text-fade-duration: 0.3s ease-in
 $text-move-duration: 0.5s ease-in
 $icon-move-duration: 0.3s linear
@@ -13,12 +13,14 @@ $icon-move-duration: 0.3s linear
 		.ContactLeft, .ContactRight
 			+High(5)
 		.ContactLeft .ContactButton
-			+Translate(-35%, 0)
+			+Translate3(-35%, 0)
 		.ContactRight .ContactButton
-			+Translate(35%, 0)
+			+Translate3(35%, 0)
 		.ContactButton
 			+RelativeCover
 			+MoveMatrix
+		.ContactPhone .ContactText
+			+no-wrap
 
 		+ContactClicked
 		+ContactIcon
@@ -26,11 +28,13 @@ $icon-move-duration: 0.3s linear
 		+ContactText
 
 =ContactClicked
+	.ContactIcon:hover
+		color: $BLACK
 	.clicked
 		&.ContactLeft
-			+Translate(50%, 100%)
+			+Translate3(50%, 150%)
 		&.ContactRight
-			+Translate(-50%, 100%)
+			+Translate3(-50%, 150%)
 		.ContactText
 			transition-duration: 0.4s, 0.3s
 			+Show
@@ -61,10 +65,9 @@ $icon-move-duration: 0.3s linear
 
 =ContactIcon
 	.ContactIcon
-		+MoveMatrix
 		+AbsoluteCenter
 		+TitlerBottom-Height(font-size, 0.40)
-		transition: font-size $fast, $icon-move-duration
+		transition: font-size $fast, transform $icon-move-duration, color $fast
 		padding-top: 10px
 
 =ContactText
@@ -77,5 +80,10 @@ $icon-move-duration: 0.3s linear
 		+txt-center
 		transition: opacity $text-fade-duration, transform $text-move-duration
 		transition-duration: 0.1s, 0.3s
-		font-size: 1.5em
-		+Translate(-50%, -200%)
+		+BREAK(xs)
+			font-size: 1.5em
+		+BREAK(sm)
+			font-size: 2em
+			+no-wrap
+		+Low(5)
+		+Translate(-50%, -50%)

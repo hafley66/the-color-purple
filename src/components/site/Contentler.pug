@@ -1,26 +1,16 @@
+include ../global.pug
+include ./Text.pug
 include ./Resume.pug
+include ./About.pug
+
 mixin Contentler
-	#Contentler.as-Content
+	#contentler.as-Content
 		+ContentPage
 
 mixin ContentPage
-	.ContentPage
-		+About
-		+Resume
-		+Demos
+	+Resume
+	+About
+	+Demos
 
 mixin Demos
 	//- 
-
-mixin About
-	//- 
-
-mixin contentler
-	#contentler
-		#main.relative
-			about-page.collapse
-				.beginning.center-block.txt-center
-					|Home 
-				.wide.txt-center.padd-xl.font-xl
-					|COMING SOON
-			resume-page.collapse.relative

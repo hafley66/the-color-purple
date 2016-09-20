@@ -11,10 +11,9 @@ $SectionText-Size: 2em
 		.the-shadow
 			+Fade		
 		+Translate(0, 0)
-	.open 
-		.the-shadow
-			+Show
-		.SectionText
+		&.open		
+			.the-shadow
+				+Show
 			+Translate(0, -10px)
 		
 =SectionTextDecoration
@@ -29,11 +28,20 @@ $SectionText-Size: 2em
 
 =MainText
 	.MainText
-		margin-top: 20px
+		margin-top: 2px
 		font-size: 2.5rem
 		color: currentColor
+		+txt-center
+		+dense
+		+Relative
+		+MainTextDecoration
+		._MainText
+			+white
+			+Relative
+
 =MainTextDecoration
 	.MainTextDecoration
+		+AbsoluteCover
 		path
 			fill: currentColor
 			stroke-width: 3px
@@ -41,13 +49,21 @@ $SectionText-Size: 2em
 
 =SubText
 	.SubText
-		margin-top: 20px
-		font-size: 2.5rem
+		+Relative
+		+margin-x(10%)
+		+padding-x(10%)
 		color: currentColor
+		font-size: 1.8rem
+		background: $WHITE
+		+SubTextDecoration
+		._SubText
+			+txt-center
+			+Relative
 =SubTextDecoration
 	.SubTextDecoration
+		+AbsoluteCover
 		path
-			fill: currentColor
+			fill: $WHITE
 			stroke-width: 3px
 			stroke: currentColor
 
@@ -60,41 +76,10 @@ $SectionText-Size: 2em
 	+pointer
 	+txt-center
 
-=the-texts
-	.main-text
-		+BREAK(xs)
-			+margin-x(4vw)
-		+BREAK(sm)
-			+margin-x(5%)
-	#my-education-loop
-		.sub-text
-			display: block
-			.actual-text
-				padding-right: 5px
-	#my-projects-loop
-		.sub-text
-			color: $BLACK
-			border-left: 3px solid $BLACK
-			font-size: 1.6rem
-			padding: 2px
-	.sub-text
-		display: inline-block
-		font-size: 2rem
-		color: currentColor
-		background: $WHITE
-		padding-left: 6px
-		.actual-text
-			padding-right: 9px
+=TextDecoration
+	.TextDecoration
+		+AbsoluteCover
 
-		path
-			stroke-width: 2px
-			fill: $WHITE
-			stroke: currentColor
-		+BREAK(xs)
-			+margin-x(calc(4vw + 4%))
-		+BREAK(sm)
-			+margin-x(10%)
-
-	.side-text
-		font-size: 2rem
-	
++SectionText
++MainText
++SubText

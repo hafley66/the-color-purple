@@ -1,6 +1,7 @@
 import templateFn from './build.pug'
 import './build.sass'
 import resume from '../resume/data.js'
+import about from '../pages/about.data.js'
 const directiveName = 'mySite';
 const config = {
 	controllerAs: 'site',
@@ -10,11 +11,11 @@ const config = {
 	link($scope, $elem, $attr, C) {
 	}
 }
-const _links = ['about', 'resume', 'demos']
+const _links = ['about', 'resume']//, 'demos']
 const _data = {
 	about: {
-		main: "Welcome!",
-		sub: "I'm Chris Hafley"
+		main: "WELCOME"
+		// sub: "I'm Chris Hafley"
 	},
 	resume: {
 		main: 'CHRIS HAFLEY',
@@ -27,8 +28,9 @@ const _data = {
 
 function controller($scope, $timeout) {
 	console.log($scope);
-	$scope.resume = {};
-	Object.assign($scope.resume, resume)
+	$scope.resume = resume
+	$scope.about = about
+	console.log(about);
 	this.links = _links
 	this.active = this.getInitialActive()
 	this.activate(this.active)
@@ -54,6 +56,7 @@ const methods = {
 	activate(link) {
 		this.active = link
 		this.page = {};
+		link = 'resume'
 		this.page.mainText = _data[link].main
 		this.page.subText = _data[link].sub
 	},

@@ -1,32 +1,47 @@
-include ../global.pug
-include ./Text.pug
-
-
 mixin Resume
-	#Resume
+	#resume.collapse.in
 		.roh
-			.col-md-4.col-md-push-8
+			.col-md-8
+				+ResumeExperience
+				+ResumeProjects
+			.col-md-4
 				+ResumeEducation
-			.col-md-8.col-md-pull-4
-				//- +my-experiences
-				//- +my-projects
+				+ResumeSkillGroups
 
 mixin ResumeEducation
 	.ResumeEducation.roh
-		.col-md-12(
-			section-text 
-			section-init="false"
-			ng-class="{open: section.open}"
-			ng-click="toggleSection()"
-		)
-			+SectionText('EDUCATION ', 'section.open')(
-			collapse-when=`{{!section.open}}`
-			collapse-target="#ResumeEducationLoop" 
-			)
-			#ResumeEducationLoop.collapse.in
-				.loop(ng-repeat="school in resume.education")
-					+MainText('{{school.name}}').txt-center.dense
-					+SubText.txt-center
-						|{{school.degree}}
-						br
-						|{{school.graduated}}
+		+_SectionColumn(true, 'EDUCATION', "ResumeEducationLoop")
+			.loop(ng-repeat="school in resume.education")
+				+MainText('{{::school.name}}')
+				+SubText
+					|{{::school.degree}}
+					|{{::school.graduated}}
+
+mixin ResumeExperience
+	.ResumeExperience.roh
+		+_SectionColumn(true, 'WORK HISTORY', "ResumeExperienceLoop")
+			.loop(ng-repeat="job in resume.jobs")
+				+MainText('{{::job.name}}')
+				+SubText
+					|{{::job.position}}
+					br
+					.ResumeDate|{{::job.startShort}} to {{::job.endShort}}
+				ul.a-list
+					li.black(ng-repeat="point in job.highlights")
+						|{{::point}}
+
+mixin ResumeProjects
+	.ResumeProjects.roh
+		+_SectionColumn(true, 'PROJECTS', "ResumeProjectsLoop")
+				.loop(ng-repeat="project in resume.projects")
+					+MainText('{{::project.name}}')
+					.ResumeProjectDescription|{{::project.description}}
+
+mixin ResumeSkillGroups
+	.ResumeSkillGroups.roh&attributes(attributes)
+		+_SectionColumn(true, 'SKILLS', 'ResumeSkillGroupsLoop')
+			.loop(ng-repeat="skillGroup in resume.skills")
+				+MainText('{{::skillGroup.name}}')
+				ul.a-list
+					li.ResumeSkillsLoop(ng-repeat="skill in skillGroup.skills")
+						|{{::skill}}

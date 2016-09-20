@@ -7,7 +7,7 @@ mixin Navler
 
 mixin _Nav-Grid-Col
 	.roh
-		.col-sm-4(ng-repeat='link in site.links')
+		.col-sm-6(ng-repeat='link in site.links')
 			block
 
 mixin NavText
@@ -31,7 +31,7 @@ mixin NavLink
 		ng-class="{active: site.isAt(link)}"
 		class="{{::link}}"
 		collapse-target="#{{::link}}"
-		collapse-when="!site.isAt(link)"
+		collapse-when="{{!site.isAt(link)}}"
 		collapse-parent="#contentler"
 	)
 		block

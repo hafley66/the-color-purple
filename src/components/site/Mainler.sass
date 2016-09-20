@@ -26,6 +26,6 @@ $xs-margin: 2.5%
 
 =MainMargin($p: margin, $mult: 1)
 	+BREAK(sm)
-		+margin-x($sm-margin)
+		+margin-x($sm-margin * $mult)
 	+BREAK(xs)
-		+margin-x($xs-margin)
+		+margin-x($xs-margin * $mult)

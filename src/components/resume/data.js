@@ -3,7 +3,9 @@ var expand = {
 	position: 'Frontend Engineer',
 	where: 'Fairlawn, OH',
 	start: 'Sept. 20, 2015',
+	startShort: 'Sept 2015',
 	end: 'May 20, 2016',
+	endShort: 'May 2016',
 	highlights: 
 	[
 	'Created several apps using Angular.js.',
@@ -20,7 +22,9 @@ var rosetta={
 	position: 'Software Engineer Intern',
 	where: 'Cleveland, OH',
 	start: 'May 20, 2014',
+	startShort: 'May 2014',
 	end: 'Aug. 8, 2014',
+	endShort: 'Aug 2014',
 	highlights: 
 	[
 	'Assisted migration of enterprise website on both front and back ends.',
@@ -34,6 +38,8 @@ var snapon={
 	position: 'Software Developer Intern',
 	where: 'Richfield, OH',
 	start: 'May 20, 2013',
+	startShort: 'May 2013',
+	endShort: 'Aug 2013',
 	end: 'Aug. 8, 2013',
 	highlights: 
 	[
@@ -61,18 +67,23 @@ var paperAndroid = {
 }
 
 var machineLearners = {
-	name: 'Machine Learning Algorithms (Coursework)',
+	name: 'Machine Learning',
 	tech: ['Python', 'MATLAB'],
-	description: `Implemnted artificial neural network, decision tree, and naive bayes classifiers from scratch.`
+	description: `(Coursework) Implemnted artificial neural network, decision tree, and naive bayes classifiers from scratch.`
 }
 
 var aiProjects = {
-	name: 'Artificial Intelligence Algorithms (Coursework)',
+	name: 'Artificial Intelligence',
 	tech: ['Java'],
-	description: 'Implemented A*, Min-Max, and Temporal Difference learner against opponents in an in-house game framework.'
+	description: '(Coursework) Implemented A*, Min-Max, and Temporal Difference learner against opponents in an in-house game framework.'
 }
 
-var projects = [seniorProject, paperAndroid, aiProjects, machineLearners];
+var javscriptInterpreterProject = {
+	name: 'JavaScript Interpreter',
+	description: "(Coursework) Implemented a JavaScript interpreter using Scheme and Racket. Implemented variables, nested functions/closures, ended on objects/classes."
+}
+
+var projects = [seniorProject, paperAndroid, aiProjects, machineLearners, javscriptInterpreterProject];
 
 
 var courses = [
@@ -109,6 +120,7 @@ var strengthTrainer = {
 }
 
 
+		// Information Architecture
 var resume = {
 	jobs: {expand, rosetta, snapon},
 	education: {cwru},
@@ -118,33 +130,49 @@ var resume = {
 	skills: [
 	{
 		name: 'Front End',
-		skills: `Information Architecture
-		Angular
+		skills: `JavaScript+ES2015
+		Angular 1.3+
 		Responsive Design
-		JavaScript+ES2015
 		DOM APIs
-		CSS/Sass
 		SVG
+		CSS/Sass
 		HTML5 Canvas
 		Maps API`.split('\n')
 	},{
 		name: 'Back End',
-		skills: `Django
-		npm+Node.js
-		MySQL
-		Redis
-		AWS
-		BASH
+		skills: `BASH
 		git
-		Vagrant+VirtualBox
-		`.split('\n')
-	}//,{
+		npm+Node.js
+		Express
+		Mongo/NoSQL
+		MySQL
+		Django
+		Redis
+		Vagrant+VirtualBox`.split('\n')
+	}
+	,
+	{
+		name: 'Maths',
+		skills: `Calculus
+		Computer Graphics
+		Linear Algebra
+		Probability+Stats
+		Formal Logic
+		Graph Theory
+		Functional Programming
+		Mathematical Optimization
+		Linear Programming
+		Decision Trees
+		Naive Bayes Classifiers
+		Classical Geometry`.split('\n'),
+	}
+	// ,
+	// {
 	// 	name: 'Machine Learning',
-	// 	skills: `Python+NumPy
-	// 	MATLAB
-	// 	Decision Trees
+	// 	skills: `
+	// 	Python+NumPy
 	// 	Neural Networks
-	// 	Naive Bayes Classification`.split('\n')
+	// 	`.split('\n')
 	// }
 	]
 }

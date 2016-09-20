@@ -1,0 +1,30 @@
+include ../global.pug
+include ./Text.pug
+
+
+mixin About
+	#about.collapse.in
+		.roh
+			.col-sm-10.col-sm-offset-1
+				+AboutMe
+				+AboutSite
+
+mixin AboutMe
+	.AboutMe.roh
+		+_SectionColumn(true, 'About Me', 'AboutMeLoop')
+			.loop
+				.skill(ng-repeat="para in about.me.text")
+					p
+						|{{::para}}
+				p.Signature
+					|-Chris Hafley
+
+mixin AboutSite
+	.AboutSite.roh
+		+_SectionColumn(true, 'About This Site', 'AboutSiteLoop')
+			.loop
+				.skill(ng-repeat="para in about.site.text")
+					p
+						|{{::para}}
+				p.Signature
+					|-Thanks for visiting!
