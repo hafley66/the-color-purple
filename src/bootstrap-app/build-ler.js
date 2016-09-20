@@ -1,4 +1,5 @@
 import './prefix.js'
+import paths from '../components/paths/directive.js'
 import mySite from '../components/site/Directive.js'
 var app = angular.module('my-website', ['svg-helpers', 'my-tools']);
 
@@ -24,6 +25,7 @@ function resizeWindow() {
 
 window.resize = resizeWindow
 
+app.directive(...paths)
 app.directive(...mySite)
 
 export default app;

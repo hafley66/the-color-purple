@@ -2,6 +2,7 @@ import template from './build.html'
 import './build.sass'
 import resume from '../resume/data.js'
 import about from '../pages/about.data.js'
+
 const directiveName = 'mySite';
 const config = {
 	template,
@@ -28,6 +29,7 @@ const _data = {
 
 function controller($scope, $timeout) {
 	console.log($scope);
+	console.log($scope.paths, 'where are my paths')
 	$scope.resume = resume
 	$scope.about = about
 	console.log(about);

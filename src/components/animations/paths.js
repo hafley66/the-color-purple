@@ -1,3 +1,5 @@
+import angular from 'angular'
+
 const PATH_REGEX_X_COORD = /([MLH]\s*)(-?\d+(?:\.\d+)?%)/gi,
 PATH_REGEX_Y_COORD_2ND_PLACE = /(,?[MLH]\s*(?:-?\d+(?:\.\d+)?)[a-z% ]+(?: *|,))(-?\d+(?:\.\d+)?%)/gi,
 PATH_REGEX_Y_COORD_1ST_PLACE = /([V]\s*)(\d+%)/gi;

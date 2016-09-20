@@ -1,8 +1,7 @@
-import templateFn from './.pug'
 const directiveName = 'myPaths'
 const controllerAs = 'paths'
 
-const template = templateFn();
+console.log('hello path helpers');
 
 const controller = function() {
 	console.log('hello paths');
@@ -30,8 +29,7 @@ Object.assign(controller.prototype, {
 const directiveFunction = function( ){
 	return {
 		controller,
-		controllerAs,
-		template
+		controllerAs
 	}
 }
 
