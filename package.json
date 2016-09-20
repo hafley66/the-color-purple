@@ -40,7 +40,7 @@
     "watch:index": "pug -w src/bootstrap-app/page/index.pug -o ./ -f &",
     "watch:entry": "pug -w src/components/site/build.pug -o src/components/site/ -f &",
     "watch:html": "npm run watch:index && npm run watch:entry",
-    "dev": "npm run watch:html && webpack-dev-server --inline",
+    "dev": "npm run watch:html && webpack-dev-server --inline --hot",
     "build": "npm run build:html && webpack --optimize-minimize",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
