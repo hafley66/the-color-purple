@@ -8,7 +8,7 @@ const controller = function() {
 	console.log('hello paths');
 }
 
-var triD = [[0, -1], [0, 0], [50, 100], [100, 0], [100, -1]]
+var triD = [[0, 0], [0, 0], [50, 95], [100, 0], [100, 0]]
 var triU = triD.map(([x,y])=> [x, 100 - y])
 var triL = triD.map(([x,y])=> [y, x])
 var triR = triL.map(([x,y])=> [100-x, y])
@@ -23,7 +23,8 @@ Object.assign(controller.prototype, {
 	triangleDown,
 	triangleUp,
 	contactButton,
-	headingBg
+	headingBg,
+	headingBg2
 })
 
 const directiveFunction = function( ){
@@ -52,14 +53,10 @@ function mobileLinkPath(T) {
 }
 
 function contactButton(T=0, tip=50, topSlack=3, bottomSlack=topSlack) {
-
-	var midtop = [50, 0 - (T * tip)]
-	var midbottom = [(T * 50), 100 + (T * tip)]
-	var rightbottom = [100, 50 + (50 * T)]
-	var topleft = [-topSlack*(1-T), 0]
-	var bottomleft = [-bottomSlack*(1-T), 100, ' ']
-	var pts = [topleft, midtop, [100, 0], rightbottom, midbottom, bottomleft]
-	return makeString(pts) + 'Z';
+	if(T > 0)
+		return "M 0 0 L 50% -50% L 100% 0 L 100% 100% L 50% 150% L 0 100% Z"
+	else
+		return `M -2.5% 0 L 50% 0 L 100% 0 L 100% 50% L 50% 75% L 0 100% Z`
 }
 
 function headingBg(T=1, left=10, right=10, ylift = 50) {
@@ -75,6 +72,14 @@ function headingBg(T=1, left=10, right=10, ylift = 50) {
 	var pts = [leftPt, [0, 0], [100, 0], rightPt, [100, 100], [0, 100]];
 	return makeString(pts) + 'Z'
 }
+
+function headingBg2(T=0){
+	if(T === 1)
+		return `M 0% 100% L 10% 0 L 90% 0 L 100% 100% L 90% 100%  L 10% 100% Z`
+	else
+		return `M 5% 50% L 10% 0 L 90% 0 L 95% 50% L 90% 100% L 10% 100% Z`
+}
+
 
 function makeString(points, unit='%') {
 	var makeString = (pathString, [x,y, xunit='%', yunit='%'])=> {

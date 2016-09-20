@@ -17,19 +17,19 @@
 =AbsoluteInit
   +AbsInit
 =AbsCover
-  +Abs
+  +AbsInit
   +Cover
 =AbsoluteCover
   +AbsCover
 =AbsCenter
-  +AbsCover
+  +Abs
   left: 50%
   top: 50%
   +Translate(-50%, -50%)
 =AbsoluteCenter
   +AbsCenter
 =Align($sides)
-  @for $i from 1 to length($sides)
+  @for $i from 1 through length($sides)
     #{nth($sides, $i)}: 0
 =Below
   top: 100%

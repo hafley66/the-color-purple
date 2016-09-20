@@ -1,3 +1,14 @@
 mixin Mainler
-	#Mainler
+	#Mainler(class="{{site.active}}")
 		block
+		+MainDecoration
+
+
+mixin MainDecoration
+	.MainDecoration
+		+MainSvg
+
+mixin MainSvg
+	-var pathString = '{{::paths.triangleDown(0)}}'
+	+fit-svg.MainSvg&attributes(attributes)
+		path.MainPath(relative-d=pathString filter="url(#dropshadow)")

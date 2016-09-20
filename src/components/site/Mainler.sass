@@ -1,0 +1,31 @@
+$sm-margin: 5%
+$xs-margin: 2.5%
+
+=Mainler
+	#Mainler
+		margin-bottom: 5vh
+		transition: color $fast ease
+		@content
+		+MainDecoration
+
+=MainDecoration
+	.MainDecoration
+		+Low(1)
+		+BREAK(sm)
+			+padding-x($sm-margin)
+		+BREAK(xs)
+			+padding-x($xs-margin)
+		+Relative
+		+Wide
+		+TitlerBottom-Height($mult: 1)
+		.MainSvg
+			+RelativeCover
+		.MainPath
+			fill: $WHITE
+			+stroke($bord-sm - 2, currentColor)
+
+=MainMargin($p: margin, $mult: 1)
+	+BREAK(sm)
+		+margin-x($sm-margin)
+	+BREAK(xs)
+		+margin-x($xs-margin)

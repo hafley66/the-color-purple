@@ -1,0 +1,100 @@
+$SectionPath-Speed: $fast ease
+$SectionText-Size: 2em
+=SectionText
+	.SectionText
+		+MoveMatrix
+		+Relative
+		
+		+SectionTextDecoration
+		+SectionText-Text
+		
+		.the-shadow
+			+Fade		
+		+Translate(0, 0)
+	.open 
+		.the-shadow
+			+Show
+		.SectionText
+			+Translate(0, -10px)
+		
+=SectionTextDecoration
+	.SectionTextDecoration
+		+Low(1)
+		+AbsoluteCover
+		.the-shadow
+			transition: d $SectionPath-Speed, opacity $SectionPath-Speed
+		.SectionTextPath
+			fill: $BLACK
+			+MovePath($SectionPath-Speed)
+
+=MainText
+	.MainText
+		margin-top: 20px
+		font-size: 2.5rem
+		color: currentColor
+=MainTextDecoration
+	.MainTextDecoration
+		path
+			fill: currentColor
+			stroke-width: 3px
+			stroke: currentColor
+
+=SubText
+	.SubText
+		margin-top: 20px
+		font-size: 2.5rem
+		color: currentColor
+=SubTextDecoration
+	.SubTextDecoration
+		path
+			fill: currentColor
+			stroke-width: 3px
+			stroke: currentColor
+
+
+=SectionText-Text
+	font-size: $SectionText-Size
+	+uppercase
+	+dense
+	+no-select
+	+pointer
+	+txt-center
+
+=the-texts
+	.main-text
+		+BREAK(xs)
+			+margin-x(4vw)
+		+BREAK(sm)
+			+margin-x(5%)
+	#my-education-loop
+		.sub-text
+			display: block
+			.actual-text
+				padding-right: 5px
+	#my-projects-loop
+		.sub-text
+			color: $BLACK
+			border-left: 3px solid $BLACK
+			font-size: 1.6rem
+			padding: 2px
+	.sub-text
+		display: inline-block
+		font-size: 2rem
+		color: currentColor
+		background: $WHITE
+		padding-left: 6px
+		.actual-text
+			padding-right: 9px
+
+		path
+			stroke-width: 2px
+			fill: $WHITE
+			stroke: currentColor
+		+BREAK(xs)
+			+margin-x(calc(4vw + 4%))
+		+BREAK(sm)
+			+margin-x(10%)
+
+	.side-text
+		font-size: 2rem
+	

@@ -16,8 +16,8 @@ mixin row-of-links
 				.clicker(ng-click="header.activate(link)")
 					+a-header-text(ng-class="{'has-underline': header.isAt(link)}")
 						|{{link}}
-				+fit-svg.abs-cover.low.fancy-path
-					path.no-fill(ng-attr-filter="{{header.isAt(link) && 'url(#dropshadow)'}}" relative-d="{{paths.linkPath(tween.T)}}")
+				//- +fit-svg.abs-cover.low.fancy-path
+				//- 	path.no-fill(ng-attr-filter="{{header.isAt(link) && 'url(#dropshadow)'}}" relative-d="{{paths.linkPath(tween.T)}}")
 mixin a-header-text
 	div.header-link(class=`
 	txt-center	

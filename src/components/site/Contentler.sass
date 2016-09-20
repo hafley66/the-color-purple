@@ -1,0 +1,49 @@
+@import ./Resume.sass
+=Content-Box
+	+MainMargin
+	+border-x($bord-sm, currentColor)
+	+TitlerBottom-Height(padding-top, $mult: 1.20)
+	padding-bottom: 5vh
+	+Content-Colors
+
+=Content-Colors
+	transition: border-color $fast ease, color $fast ease
+	background: $WHITE
+
+
+=Contentler
+	#Contentler
+		+Content-Box
+		+Resume
+
+
+=contentler-prep-colors
+	.a-triangle
+		path
+			transition: color $fast
+=contentler
+	#contentler
+		+contentler-prep-colors
+		
+		+BREAK(xs)
+			margin: 0 2.5%
+		+BREAK(sm)
+			margin: 0 5%
+		
+		#main
+			transition: color $fast, transform $fast, max-height $fast
+			background: $WHITE
+			+border-x($bord-sm solid currentColor)
+			+bottom-triangle-height(padding-top)
+			
+		.a-triangle
+			+BREAK(sm)
+				+translate(0, 1px)
+			+bottom-triangle-height($mult: 3 / 2)
+			margin-bottom: 5vw
+			path 
+				stroke-width: $bord-sm - 1
+				fill: $WHITE
+				stroke: currentColor
+		+about
+		+resume

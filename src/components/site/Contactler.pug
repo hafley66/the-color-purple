@@ -1,3 +1,27 @@
 mixin Contactler
-	#Contactler
-		block
+	#Contactler.roh
+		.col-xs-6.ContactLeft(ng-class="{clicked: leftClicked}" ng-init="leftClicked = false")
+			+ContactSvg("{{paths.contactButton(leftClicked + 0)}}").at-left
+			+ContactPhone('leftClicked')
+		.col-xs-6.ContactRight(ng-class="{clicked: rightClicked}" ng-init="rightClicked = false")
+			+ContactSvg("{{paths.contactButton(rightClicked + 0)}}").the-right
+			+ContactEmail('rightClicked')
+
+mixin ContactSvg(pathString)
+	+fit-svg.ContactSvg&attributes(attributes)
+		path.ContactPath(relative-d=pathString filter="url(#dropshadow)")
+
+mixin ContactPhone(toggle)
+	.ContactPhone.ContactButton
+		+ContactText('330-324-4867')
+		+ContactIcon('phone')(ng-click=toggle + ' = !' + toggle)
+mixin ContactEmail(toggle)
+	.ContactEmail.ContactButton
+		+ContactText('hafley66&#8203;@&#8203;gmail.com')
+		+ContactIcon('envelope-o')(ng-click=toggle + ' = !' + toggle)
+
+mixin ContactIcon(icon)
+	.ContactIcon.i.fa(class=`fa-${icon}` aria-hidden="true")&attributes(attributes)
+
+mixin ContactText(text)
+	.ContactText&attributes(attributes)!=text

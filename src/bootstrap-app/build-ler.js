@@ -1,9 +1,9 @@
 import './prefix.js'
 import resumePage from '../components/pages/resume.js'
-import headerAni from '../components/header/old/animator.js'
 import headerNeo from '../components/paths/directive.js'
 import headerNyeoh from '../components/header/directive.js'
 import aboutPage from '../components/pages/about.js'
+import mySite from '../components/site/Directive.js'
 var app = angular.module('my-website', ['svg-helpers', 'my-tools', 'my-tweens']);
 
 function scale(elem, value) {
@@ -21,13 +21,17 @@ function clear(elem) {
 }
 
 function resizeWindow() {
-	window.dispatchEvent(new Event('resize'))
+	var evt = document.createEvent('UIEvents'); evt.initUIEvent('resize', true, false, window, 0); window.dispatchEvent(evt);
+	// window.dispatchEvent(new Event('resize'))
 }
+
+
 window.resize = resizeWindow
 
 app.directive(...resumePage);
 app.directive(...headerNeo)
 app.directive(...headerNyeoh)
 app.directive(...aboutPage)
+app.directive(...mySite)
 
 export default app;

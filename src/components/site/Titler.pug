@@ -1,3 +1,32 @@
 mixin Titler
 	#Titler
-		block
+		+TitlerDecoration
+		+TitlerText
+
+mixin TitlerDecoration
+	.TitlerDecoration
+		+TitlerSides
+		+TitlerTop
+		+TitlerBottom
+
+mixin TitlerSides
+	-var triangle = "M 0 0 L 50% 100% L 100% 0 Z";
+	.TitlerSides.roh
+		.col-xs-6
+			+a-path(triangle).the-left
+		.col-xs-6
+			+a-path(triangle).the-right
+
+mixin TitlerTop
+	.TitlerTop
+		+a-path("{{::paths.triangleDown(0)}}", false)
+mixin TitlerBottom
+	.TitlerBottom
+		+a-path("{{::paths.triangleDown(0)}}")
+
+mixin TitlerText
+	.TitlerText
+		.TitlerMain(ng-class="{'bord-b-sm': site.page.subText}")
+			|{{site.page.mainText}}
+		.TitlerSub(ng-show="site.page.subText")
+			|{{site.page.subText}}

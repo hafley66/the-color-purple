@@ -40,17 +40,32 @@ app.directive('hoverState', function() {
 	return {
 		link($scope, $elem) {
 			$elem.on('mouseenter', (e)=>{
+				$scope.hovering = true
 				$elem.addClass('hovering')
+				$scope.$apply()
 			})
 
-			$elem.on('mouseleave', e=>$elem.removeClass('hovering'))
+			$elem.on('mouseleave', e=>{
+				$scope.hovering = false
+				$elem.removeClass('hovering')
+				$scope.$apply()
+			})
 		}
 	}
 })
 app.directive('clickState', function() {
 	return {
-		link($scope, $elem) {
-			$elem.on('click', e=>$elem.toggleClass('clicked'))
+		link($scope, $elem, $attr) {
+			var stateName = $attr.clickState
+			var clicked = false;
+			if($scope[stateName] === undefined)
+				$scope[stateName] = clicked || 'clicked'
+			$elem.on('click', e=>{
+				$scope[stateName] = !clicked
+				clicked = !clicked
+				$elem.toggleClass(stateName)
+				$scope.$apply()
+			})
 		}
 	}
 })
@@ -59,8 +74,7 @@ app.directive('collapseTarget', function() {
 	return {
 		bindToController: {
 			'target': '@collapseTarget',
-			'when': '=collapseWhen',
-			'parent': '@?collapseParent'
+			'when': '@collapseWhen'
 		},
 		controllerAs: 'collapser',
 		controller(){
@@ -71,18 +85,16 @@ app.directive('collapseTarget', function() {
 		link($scope, $elem, $attr, C) {
 			var collapsing = null;
 			var currentState = null;
-			$scope.$watch('collapser.when', nvalue=>{
-				if(!!nvalue)
+			$scope.collapsed = false;
+			var target = $(C.target)
+			$scope.$watch(()=> $attr.collapseWhen , (nvalue) =>{
+				var val = $scope.$eval(nvalue)
+				if(!!val) 
 					C.hide()
-				else
+				else 
 					C.show()
-				window.resize()
+				$scope.collapsed = !!nvalue
 			})
-			$scope.$watch('collapser.target', nvalue=>{
-				if(!!nvalue)
-					C.$target = $(nvalue)
-			})
-			$elem.on('click', e=>$().collapse)
 		}
 	}
 })
@@ -98,37 +110,18 @@ app.directive('postMeasure', ()=>{
 	}
 });
 
-app.directive('flowIn', ()=>{
+app.directive('sectionText', [function() {
 	return {
-		bindToController: {
-			'open': '@flowIn'
-		},
-		controllerAs: 'collapser',
-		controller() {},
+		scope: true,
 		link($scope, $elem, $attr) {
-			var [elem] = $elem
-			$scope.$watch('collapser.open', (newValue, oldValue)=> {
-				if(newValue === 'true')
-					newValue = true
-				else
-					newValue = false
-				var val = 0;
-				if(!!newValue) {
-					val = Array.prototype.reduce.call(elem.childNodes, (p, c)=> {
-						return p + (c.offsetHeight || 0);
-					}, 0) + 'px';
-				}
-				console.log('new value is...', val);
-				elem.style.maxHeight = val
-			});
-		}}})
-
-app.directive('windowTracker', ()=> {
-	return {
-		link($scope, $elem, $attr) {
-			
+			$scope.section = {};
+			if($attr.sectionInit)
+				$scope.section.open = $scope.$eval($attr.sectionInit)
+			else
+				$scope.section.open = true
+			$scope.toggleSection = () => $scope.section.open = !$scope.section.open
 		}
 	}
-})
+}])
 
 export default app;

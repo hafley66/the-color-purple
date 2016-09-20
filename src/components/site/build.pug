@@ -1,13 +1,15 @@
 include ../global.pug
-include Headler.pug
-include Titler.pug
-include Contactler.pug
-include Contentler.pug
+include ./Headler.pug
+include ./Mainler.pug
+include ./Navler.pug
+include ./Titler.pug
+include ./Contactler.pug
+include ./Contentler.pug
 
 mixin build
-	div
+	div(class="{{site.active}}")
 		svg(width=0 height=0 xmlns='http://www.w3.org/2000/svg')
-			filter(width='200%' height='200%')#dropshadow
+			filter(x='-50%' y='-50%' width='200%' height='300%')#dropshadow
 				feGaussianBlur(in='SourceAlpha', stddeviation='3')
 				feOffset(dx='2', dy='5', result='offsetblur')
 				feComponentTransfer
@@ -15,10 +17,11 @@ mixin build
 				femerge
 					femergenode
 					femergenode(in='SourceGraphic')
-	+Headler
-		+Navler
-	+Mainler
-		+Titler
-		+Contactler
-		+Contentler		
+		
+		+Headler
+			+Navler
+		+Mainler
+			+Titler
+			+Contactler
+			+Contentler
 +build

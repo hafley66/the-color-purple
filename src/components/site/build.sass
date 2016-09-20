@@ -1,8 +1,12 @@
+@import ../tools/redo/BUILD.sass
 @import ../pages/about.sass
 @import ../pages/resume.sass
-@import ./contentler.sass
-@import ./redo/Headler.sass
-@import ./redo/Navler.sass
+@import ./Headler.sass
+@import ./Navler.sass
+@import ./Mainler.sass
+@import ./Titler.sass
+@import ./Contactler.sass
+@import ./Contentler.sass
 
 =active-colors()
 	.about
@@ -26,12 +30,18 @@
 	.black-on-white
 		color: $BLACK
 		background: $WHITE
+	.flip-right
+		+AboutCenter
+		+ReflectX
 
-+Defaults-And-Overrides
 
-+Headler
-	+Navler
-// +Mainler
-// 	+Titler
-// 	+Contactler
-// 	+Contentler
+=build
+	+Defaults-And-Overrides
+	+Headler
+		+Navler
+	+Mainler
+		+Titler
+		+Contactler
+		+Contentler
+
++build

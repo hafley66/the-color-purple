@@ -1,0 +1,27 @@
+mixin SectionText(text, activeWhen)
+	.SectionText&attributes(attributes)!=text
+		+SectionTextDecoration(activeWhen)
+
+mixin SectionTextDecoration(activeWhen) 
+	.SectionTextDecoration&attributes(attributes)
+		+fit-svg.SectionTextSvg
+			-var pathString = `{{paths.headingBg2(${activeWhen} + 0)}}`
+			path.the-shadow(relative-d=pathString filter="url(#dropshadow")
+			path.SectionTextPath(relative-d=pathString)
+
+mixin MainText(text)
+	.MainText&attributes(attributes)!=text
+		+MainTextDecoration
+
+mixin MainTextDecoration
+	.MainTextDecoration&attributes(attributes)
+		+fit-svg.MainTextSvg
+			-var pathString = `{{paths.headingBg2(${activeWhen} + 0)}}`
+			path.the-shadow(relative-d=pathString filter="url(#dropshadow")
+			path.SectionTextPath(relative-d=pathString)
+
+mixin SubText 
+	.SubText&attributes(attributes)
+
+mixin SubTextDecoration 
+	.SubTextDecoration&attributes(attributes)

@@ -1,0 +1,118 @@
+=Titler-Z-Indices
+	.TitlerSides
+		+Low(5)
+	.TitlerBottom
+		+High(8)
+	.TitlerText
+		+High(10)
+	.TitlerTop
+		+Low(1)
+
+=Titler
+	#Titler
+		+Titler-Z-Indices
+		+Relative
+		+TitlerDecoration
+		+TitlerText
+		+TitlerTop-Height(margin-top)
+		+Titler-Color
+
+=Titler-Color
+	transition: color $fast
+=TitlerDecoration
+	.TitlerDecoration
+		pointer-events: none
+		> * 
+			+W(100%)
+			+Absolute
+		+AbsoluteCover
+		+TitlerSides
+		+TitlerTop
+		+TitlerBottom
+
+=TitlerTop
+	.TitlerTop
+		+Above
+		+TitlerTop-Height()
+		+AboutCenter
+		+ReflectY
+		path
+			+CCFill
+
+=TitlerBottom
+	$match-height-to-fix-filter-dropshadow: -110%
+	.TitlerBottom
+		+Below
+		+TitlerBottom-Height()
+		bottom: $match-height-to-fix-filter-dropshadow
+		svg
+			margin-bottom: 200px
+		path
+			+CCFill
+
+=TitlerSides
+	.TitlerSides
+		+Below
+		+TitlerBottom-Height($mult: 1.5)
+		svg
+			font-size: 0
+			display: inline-block
+			+Relative
+		.the-right
+			+AboutCenter
+			+ReflectX
+		path
+			fill: $WHITE-TRANS
+			+stroke(2px, currentColor)
+
+
+=TitlerText
+	.TitlerText
+		height: 1em
+		+Relative
+		+CCBg
+		+txt-center
+
+		+TitlerMain
+		+TitlerSub
+
+=TitlerMain
+	+TitlerMain-FontSize()
+	.TitlerMain
+		+padding-x(5%)
+		display: inline-block
+		+flatline
+		+white
+		+sans2
+		+dense
+
+=TitlerSub
+	.TitlerSub
+		+flatline
+		+TitlerSub-FontSize
+		+white
+		+sans3
+
+=TitlerSub-FontSize($prop: font-size, $mult: 1)
+	+BREAK(xs)
+		font-size: 0.30em
+		margin-top: 5px
+	font-size: 0.5em
+=TitlerMain-FontSize($prop: font-size, $mult: 1)
+	+BREAK(sm)
+		#{$prop}: $mult * 9vw
+	+BREAK(md)
+		#{$prop}: $mult * 9rem
+	+BREAK(xs)
+		#{$prop}: $mult * 13vw
+
+=TitlerBottom-Height($prop: height, $mult: 1)
+	+BREAK(sm)
+		#{$prop}: $mult * 10vw
+	+BREAK(xs)
+		#{$prop}: $mult * 12rem
+=TitlerTop-Height($prop: height, $mult: 1)
+	+BREAK(xs)
+		#{$prop}: $mult * 9rem
+	+BREAK(sm)
+		#{$prop}: $mult * 6rem

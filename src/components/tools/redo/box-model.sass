@@ -18,15 +18,13 @@
     padding-top: $top
   @if $bottom != null
     padding-bottom: $bottom
-=border-x($w, $s: solid, $c: currentColor)
-  @if $left != null
-    border-left: $w $s $c
-  @if $right != null
-    border-right: $w $s $c
-=border-y($w, $s: solid, $c: currentColor)
-  +border($w $s $c, top)
-  +border($w $s $c, bottom)
-=border($w: null, $s: null, $c: null, $side: null)
+=border-x($w, $c: currentColor, $s: solid)
+   +border($w,$c,$s, left)
+   +border($w,$c,$s, right)
+=border-y($w, $c: currentColor, $s: solid)
+  +border($w, $s, $c, top)
+  +border($w, $s, $c, bottom)
+=border($w: null, $c: null, $s: solid, $side: null)
   $ww: $w != null
   $ss: $s != null
   $cc: $c != null
@@ -73,3 +71,6 @@
   z-index: $z
 =Low($z: 1)
   z-index: -1 * $z
+
+=Wide
+  +W(100%)

@@ -1,0 +1,32 @@
+include ../global.pug
+include ./Text.pug
+
+
+mixin Resume
+	#Resume
+		.roh
+			.col-md-4.col-md-push-8
+				+ResumeEducation
+			.col-md-8.col-md-pull-4
+				//- +my-experiences
+				//- +my-projects
+
+mixin ResumeEducation
+	.ResumeEducation.roh
+		.col-md-12(
+			section-text 
+			section-init="false"
+			ng-class="{open: section.open}"
+			ng-click="toggleSection()"
+		)
+			+SectionText('EDUCATION ', 'section.open')(
+			collapse-when=`{{!section.open}}`
+			collapse-target="#ResumeEducationLoop" 
+			)
+			#ResumeEducationLoop.collapse.in
+				.loop(ng-repeat="school in resume.education")
+					+MainText('{{school.name}}').txt-center.dense
+					+SubText.txt-center
+						|{{school.degree}}
+						br
+						|{{school.graduated}}

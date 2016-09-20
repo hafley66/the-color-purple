@@ -2,31 +2,36 @@ mixin Navler
 	#Navler.as-Nav
 		+_Nav-Grid-Col
 			+NavLink
-				+NavText
 				+NavSvg
+				+NavText
 
 mixin _Nav-Grid-Col
 	.roh
-		.col-sm-4(ng-repeat='link in header.links')
+		.col-sm-4(ng-repeat='link in site.links')
 			block
+
 mixin NavText
-	.NavText(ng-class="{'has-underline': header.isAt(link)}")
+	.NavText(ng-class="{'has-underline': site.isAt(link)}")
 		|{{::link}}
+
 mixin NavSvg
 	+fit-svg.NavSvg
 		+NavSvgPath
+
 mixin NavSvgPath
-	path.NavSvgPath(ng-attr-filter="{{header.isAt(link) && 'url(#dropshadow)'}}" relative-d="{{paths.linkPath(0)}}")
+	path.NavSvgPath(
+	ng-attr-filter="{{site.isAt(link) && 'url(#dropshadow)'}}" 
+	relative-d="{{paths.linkPath((hovering || site.isAt(link)) + 0)}}"
+	)
+
 mixin NavLink
 	.NavLink(
-		path-ani="diamond"
-		ng-click="header.activate(link)"
-		ng-mouseenter="path.goto(1)" 
-		ng-mouseleave="header.isAt(link) || path.goto(0) "
-		ng-class="{active: header.isAt(link)}"
+		hover-state
+		ng-click="site.activate(link)"
+		ng-class="{active: site.isAt(link)}"
 		class="{{::link}}"
 		collapse-target="#{{::link}}"
-		collapse-when="!header.isAt(link)"
+		collapse-when="!site.isAt(link)"
 		collapse-parent="#contentler"
 	)
 		block

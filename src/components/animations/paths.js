@@ -8,12 +8,13 @@ DEBOUNCE_RATE = 25,
 USE_DEBOUNCE_ON_RESIZE = true;
 
 var app = angular.module('svg-helpers', []);
-app.directive('relativeD', function() {
+app.directive('relativeD', ['$timeout', function($timeout) {
   return {
     scope: {
       'pathString': '@relativeD'
     },
     link($scope, $elem, $attr) {
+      $elem.ready(x=>window.resize())
       var element = $elem[0];
       var [x, y, W, H] = [0,0,0,0]
       var relX = str => (Number(str) / 100) * W;
@@ -46,6 +47,9 @@ app.directive('relativeD', function() {
         if (pathString && W && H)
           fastdom.mutate(() => {
             try{
+              var pathS = reduce(pathString);
+              if(pathS.indexOf('NaN') !== -1)
+                console.error(new Error('ya done goofed'), pathString, pathS, $elem)
               element.setAttribute('d', reduce(pathString))
             } catch(err) {
               console.warn(err);
@@ -66,7 +70,7 @@ app.directive('relativeD', function() {
       $scope.$watch('pathString', pathString => latch? setPath(pathString) : latch++)
     }
   }
-})
+}])
 
 app.directive('viewBoxFit', ['$timeout', function($timeout) {
   return {
@@ -86,7 +90,6 @@ app.directive('viewBoxFit', ['$timeout', function($timeout) {
       }
       var doThings = e => getViewBox().then(setViewBox).then(broadcastViewBox)
       onResizeRaw(doThings)
-      $timeout(doThings, 100);
     }
   }
 }])

@@ -1,5 +1,7 @@
-$NavLink-FontSize: 2rem
+$NavLink-FontSize: 2em
 $NavSvgPath-StrokeWidth: 3px
+$NavLink-Rising-Speed: 0.9s ease
+$NavSvgPath-Speed: 0.3s ease
 =Navler
 	#Navler.as-Nav
 		+NavLink-Init
@@ -15,12 +17,13 @@ $NavSvgPath-StrokeWidth: 3px
 	.NavLink
 		+Relative
 		margin: 5px 10px
-		transition: transform $fast, color $slow
+		transition: transform $NavLink-Rising-Speed, color $slow
 		@content
 
 =NavText
 	.NavText
 		font-size: $NavLink-FontSize
+		padding: 1em 15px
 		+txt-center
 		+dense
 		+uppercase
@@ -31,14 +34,15 @@ $NavSvgPath-StrokeWidth: 3px
 =NavSvg
 	.NavSvg
 		+AbsCover
+		+Low(1)
 	.NavSvgPath
-		+MovePath(0.5s ease)
+		transition: d $NavSvgPath-Speed, fill $NavSvgPath-Speed
 		+stroke($NavSvgPath-StrokeWidth, $WHITE)
 		fill: $BLACK
 
 =NavLink-Active
 	.NavLink.active
-		+Translate(0, -5px)
+		+Translate(0, -10%)
 		.NavSvgPath
 			+CCFill
 
