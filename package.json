@@ -34,8 +34,11 @@
   },
   "scripts": {
     "build:index": "pug src/bootstrap-app/page/index.pug -o ./ -f",
-    "dev": "npm run build:index && webpack-dev-server --inline",
-    "build": "webpack",
+    "build:entry": "pug src/components/site/build.pug -o src/components/site/ -f",
+    "build:html": "npm run build:index && npm run build:entry",
+    "build:css": "node-sass --output-style compressed src/components/site/build.sass > src/components/site/build.css",
+    "dev": "npm run build:html && webpack-dev-server --inline",
+    "build": "npm run build:html && webpack --optimize-minimize",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

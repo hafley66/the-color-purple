@@ -1,12 +1,12 @@
-import templateFn from './build.pug'
+import template from './build.html'
 import './build.sass'
 import resume from '../resume/data.js'
 import about from '../pages/about.data.js'
 const directiveName = 'mySite';
 const config = {
+	template,
 	controllerAs: 'site',
 	controller: ['$scope', '$timeout', controller],
-	template: templateFn(),
 	replace: true,
 	link($scope, $elem, $attr, C) {
 	}
