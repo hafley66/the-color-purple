@@ -11,37 +11,44 @@ mixin Resume
 mixin ResumeEducation
 	.ResumeEducation.roh
 		+_SectionColumn(true, 'EDUCATION', "ResumeEducationLoop")
-			.loop(ng-repeat="school in resume.education")
-				+MainText('{{::school.name}}')
-				+SubText
-					|{{::school.degree}}
-					|{{::school.graduated}}
+			each school in resume.education
+				.loop
+					+MainText(school.name)
+					+SubText
+						=school.degree
+						br
+						=school.graduated
 
 mixin ResumeExperience
 	.ResumeExperience.roh
 		+_SectionColumn(true, 'WORK HISTORY', "ResumeExperienceLoop")
-			.loop(ng-repeat="job in resume.jobs")
-				+MainText('{{::job.name}}')
-				+SubText
-					|{{::job.position}}
-					br
-					.ResumeDate|{{::job.startShort}} to {{::job.endShort}}
-				ul.a-list
-					li.black(ng-repeat="point in job.highlights")
-						|{{::point}}
+			each job in resume.jobs
+				.loop
+					+MainText(job.name)
+					+SubText
+						=job.position
+						br
+						.ResumeDate=`${job.startShort} to ${job.endShort}`
+					ul.a-list
+						each point in job.highlights
+							li.black
+								=point
 
 mixin ResumeProjects
 	.ResumeProjects.roh
 		+_SectionColumn(true, 'PROJECTS', "ResumeProjectsLoop")
-				.loop(ng-repeat="project in resume.projects")
-					+MainText('{{::project.name}}')
-					.ResumeProjectDescription|{{::project.description}}
+				each project in resume.projects
+					.loop
+						+MainText(project.name)
+						.ResumeProjectDescription=project.description
 
 mixin ResumeSkillGroups
 	.ResumeSkillGroups.roh&attributes(attributes)
 		+_SectionColumn(true, 'SKILLS', 'ResumeSkillGroupsLoop')
-			.loop(ng-repeat="skillGroup in resume.skills")
-				+MainText('{{::skillGroup.name}}')
-				ul.a-list
-					li.ResumeSkillsLoop(ng-repeat="skill in skillGroup.skills")
-						|{{::skill}}
+			each skillGroup in resume.skills
+				.loop
+					+MainText(skillGroup.name)
+					ul.a-list
+						each skill in skillGroup.skills
+							li.ResumeSkillsLoop
+								=skill

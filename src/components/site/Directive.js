@@ -1,7 +1,5 @@
 import template from './build.html'
 import './build.css'
-import resume from './Resume.js'
-import about from './About.js'
 
 const directiveName = 'mySite';
 const config = {
@@ -28,11 +26,7 @@ const _data = {
 }
 
 function controller($scope, $timeout) {
-	console.log($scope);
 	console.log($scope.paths, 'where are my paths')
-	$scope.resume = resume
-	$scope.about = about
-	console.log(about);
 	this.links = _links
 	this.active = this.getInitialActive()
 	this.activate(this.active)

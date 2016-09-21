@@ -13,9 +13,9 @@ mixin AboutMe
 	.AboutMe.roh
 		+_SectionColumn(true, 'About Me', 'AboutMeLoop')
 			.loop
-				.skill(ng-repeat="para in about.me.text")
-					p
-						|{{::para}}
+				each text in about.me.text
+					.skill
+						p=text
 				p.Signature
 					|-Chris Hafley
 
@@ -23,8 +23,8 @@ mixin AboutSite
 	.AboutSite.roh
 		+_SectionColumn(true, 'About This Site', 'AboutSiteLoop')
 			.loop
-				.skill(ng-repeat="para in about.site.text")
-					p
-						|{{::para}}
+				each text in about.site.text
+					.skill
+						p=text
 				p.Signature
 					|-Thanks for visiting!

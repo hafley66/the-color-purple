@@ -8,6 +8,8 @@
     "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
+    "backbone": "^1.3.3",
+    "backbone-events-standalone": "^0.2.7",
     "bootstrap-sass": "^3.3.7",
     "css-loader": "^0.23.1",
     "fastdom": "^1.0.4",
@@ -20,6 +22,7 @@
     "mezr": "github:niklasramo/mezr",
     "ngtemplate-loader": "^1.3.1",
     "normalize.css": "^4.2.0",
+    "onchange": "^3.0.2",
     "postcss-loader": "^0.9.1",
     "pug": "^2.0.0-beta5",
     "pug-loader": "^2.2.1",
@@ -32,32 +35,29 @@
   "devDependencies": {
     "cson-loader": "^0.1.0"
   },
+  "config": {
+    "onchange": "onchange 'src/**/*.pug' 'build/components/static/*.js' -i --",
+    "index": "pug src/bootstrap-app/page/index.pug -o ./ -f",
+    "entry": "node build-website.js > build/components/site/build.html",
+    "bootstrap": "node-sass --output-style compressed src/bootstrap-app/custom-bootstrap-grid/bootstrap.scss -o build/bootstrap-app/custom-bootstrap-grid/",
+    "client": "node-sass --output-style compressed src/components/site/build.sass -o build/components/site/"
+  },
   "scripts": {
     "clean": "rm -rf build",
-
-    "_PUG:index": "echo 'pug src/bootstrap-app/page/index.pug -o ./ -f'",
-    "_PUG:entry": "echo 'pug src/components/site/build.pug -o build/components/site/ -f'",
-    "_SASS:bootstrap": "echo 'node-sass --output-style compressed src/bootstrap-app/custom-bootstrap-grid/bootstrap.scss -o build/bootstrap-app/custom-bootstrap-grid/'",
-    "_SASS:client": "echo 'node-sass --output-style compressed src/components/site/build.sass -o build/components/site/'",
-
-    "bPUG:index": "eval \"`npm run _PUG:index`\"",
-    "bPUG:entry": "eval \"`npm run _PUG:entry`\"",
-    "bPUG": "npm run bPUG:index && npm run bPUG:entry",
+    "bPUG:index": "eval \"$npm_package_config_index\"",
+    "bPUG:entry": "eval \"$npm_package_config_entry\"",
+    "bPUG": "npm run bPUG:entry && npm run bPUG:index",
     "bES6:client": "babel src -d build",
-    "bSASS:bootstrap": "eval \"`npm run _SASS:bootstrap`\"",
-    "bSASS:client": "eval \"`npm run _SASS:client`\"",
-    "bSASS": "npm run bSASS:bootstrap && npm run bSASS:client",
+    "bSASS:client": "eval \"$npm_package_config_client\"",
+    "bSASS": "npm run bSASS:client",
     "b0": "npm run bES6:client && npm run bSASS && npm run bPUG",
-
-    "wPUG:index": "eval \"`npm run _PUG:index` -w &\"",
-    "wPUG:entry": "eval \"`npm run _PUG:entry` -w &\"",
+    "wPUG:index": "eval \"$npm_package_config_index -w &\"",
+    "wPUG:entry": "eval \"$npm_package_config_onchange $npm_package_config_entry &\"",
     "wPUG": "npm run wPUG:index && npm run wPUG:entry",
-    "wES6:client": "babel -w src/ -d build/ -D &",
-    "wSASS:bootstrap": "eval \"`npm run _SASS:bootstrap` -w &\"",
-    "wSASS:client": "eval \"`npm run _SASS:client` -w &\"",
-    "wSASS": "npm run wSASS:bootstrap && npm run wSASS:client",
+    "wES6:client": "babel -w src/ -d build/ &",
+    "wSASS:client": "eval \"$npm_package_config_client -w &\"",
+    "wSASS": "npm run wSASS:client",
     "w": "npm run b0 && npm run wES6:client && npm run wSASS && npm run wPUG",
-
     "dev": "npm run clean && npm run w && webpack-dev-server --inline --hot",
     "build": "npm run clean && npm run b0 && webpack --optimize-minimize",
     "test": "echo \"Error: no test specified\" && exit 1"

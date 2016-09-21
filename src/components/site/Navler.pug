@@ -1,18 +1,15 @@
 mixin Navler
 	#Navler.as-Nav
 		+_Nav-Grid-Col
-			+NavLink
-				+NavSvg
-				+NavText
 
 mixin _Nav-Grid-Col
 	.roh
-		.col-sm-6(ng-repeat='link in site.links')
-			block
+		each link in ['about', 'resume']
+			.col-sm-6
+				+NavLink(link)
 
-mixin NavText
-	.NavText(ng-class="{'has-underline': site.isAt(link)}")
-		|{{::link}}
+mixin NavText(text)
+	.NavText(ng-class="{'has-underline': site.isAt(link)}")=text
 
 mixin NavSvg
 	+fit-svg.NavSvg
@@ -21,10 +18,11 @@ mixin NavSvg
 mixin NavSvgPath
 	path.NavSvgPath(
 	ng-attr-filter="{{site.isAt(link) && 'url(#dropshadow)'}}" 
-	relative-d="{{paths.linkPath((hovering || site.isAt(link)) + 0)}}"
+	d=paths.linkPath(0)
+	path-to=paths.linkPath(1)
 	)
 
-mixin NavLink
+mixin NavLink(text)
 	.NavLink(
 		hover-state
 		ng-click="site.activate(link)"
@@ -34,4 +32,5 @@ mixin NavLink
 		collapse-when="{{!site.isAt(link)}}"
 		collapse-parent="#contentler"
 	)
-		block
+		+NavSvg
+		+NavText(text)
