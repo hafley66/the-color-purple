@@ -1,24 +1,22 @@
-// path, rect, circle
-//   stroke-width: $bord-sm
-//   fill: white
-//   stroke: currentColor
-.no-stroke 
+=NoStroke 
   stroke-width: 0
-.no-fill
+=NoFill
   fill: transparent
-.swap-color
+=CCFill
   fill: currentColor
-  stroke: white
-.blanket
-  fill: white
-  stroke: white
-.rsvg
-	overflow: visible !important
-	+will-move-gpu
-	position: absolute
-.cc-fill
-  fill: currentColor
-.cc-stroke
+=CCStroke
   stroke: currentColor
-.svg-group
-  +will-move-gpu
+=stroke($w, $c: null, $dasharray: null, $dashoffset: null)
+	$hasArray: $dasharray != null
+	$hasOffset: $dashoffset != null
+	@if $hasArray
+		stroke-dasharray: $dasharray
+	@if $hasOffset
+		stroke-dashoffset: $dashoffset
+	@if $c != null
+		stroke: $c
+	stroke-width: $w
+svg
+	overflow: visible !important
+.fit-svg
+	+Cover

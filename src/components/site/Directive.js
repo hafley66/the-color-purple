@@ -1,7 +1,7 @@
 import template from './build.html'
-import './build.sass'
-import resume from '../resume/data.js'
-import about from '../pages/about.data.js'
+import './build.css'
+import resume from './Resume.js'
+import about from './About.js'
 
 const directiveName = 'mySite';
 const config = {

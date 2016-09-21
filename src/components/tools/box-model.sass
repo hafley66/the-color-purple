@@ -1,129 +1,76 @@
-=margin-x($x)
-  margin-left: $x
-  margin-right: $x
-=margin($y: null, $x: null, $all: null)
-  +shorthand('margin', $y, $x)
-=padding($y: null, $x: null)
-  +shorthand('padding', $y, $x)
-=border-width($y: null, $x: null)
-  +shorthand('border-width', $y, $x)
+=margin-x($left, $right: $left)
+  @if $left != null
+    margin-left: $left
+  @if $right != null
+    margin-right: $right
+=margin-y($top, $bottom: $top)
+  @if $top != null
+    margin-top: $top
+  @if $bottom != null
+    margin-bottom: $bottom
+=padding-x($left, $right: $left)
+  @if $left != null
+    padding-left: $left
+  @if $right != null
+    padding-right: $right
+=padding-y($top, $bottom: $top)
+  @if $top != null
+    padding-top: $top
+  @if $bottom != null
+    padding-bottom: $bottom
+=border-x($w, $c: currentColor, $s: solid)
+   +border($w,$c,$s, left)
+   +border($w,$c,$s, right)
+=border-y($w, $c: currentColor, $s: solid)
+  +border($w, $s, $c, top)
+  +border($w, $s, $c, bottom)
+=border($w: null, $c: null, $s: solid, $side: null)
+  $ww: $w != null
+  $ss: $s != null
+  $cc: $c != null
+  $sside: $side != null
+  $all: $ww and $ss and $cc
+  @if $all and $sside
+    border-#{$side}: $w $s $c
+  @else if $all
+    border: $w $s $c
+  @else
+    @if $ww
+      border-#{$side}-width: $w
+    @if $ss
+      border-#{$side}-style: $s
+    @if $cc
+      border-#{$side}-color: $c
 
-=border($size: $bord-xs, $color: black)
-  border: $size solid $color
 
+.test
+  +border()
 
-=make-padd-y-child($gutters: $gutters-px)
-  @each $name, $length in $gutters
-    .padd-y-child-#{$name}
-      > * 
-        +padding($y: $length)
-=make-marg-y-child($gutters: $gutters-px)
-  @each $name, $length in $gutters
-    .marg-y-child-#{$name}
-      > * 
-        +margin($y: $length)
+=Horizontal($m: null, $b: null, $p: null, $w: 100%)
+  +margin-x($m)
+  +padding-x($p)
+  +border-x($b)
+  +W($w)
+=Vertical($m: null, $b: null, $p: null, $h: 100%)
+  +margin-y($m)
+  +padding-y($p)
+  +border-y($b)
+  +H($h)
+=Dim($w: 100%, $h: null)
+  width: $w
+  @if ($h != null)
+    height: $h
+=Cover
+  +Dim(100%, 100%)
+=W($w)
+  width: $w
+=H($h)
+  height: $h
 
-.pstn-r-child > *
-  position: relative
+=High($z: 1)
+  z-index: $z
+=Low($z: 1)
+  z-index: -1 * $z
 
-=shorthand($prop: margin, $y: null, $x: null)
-  @if($y)
-    +shorthand-y($prop, $value: $y)
-  @else if($x)
-    +shorthand-x($prop, $value: $x)
-=shorthand-x($prop, $value: null)
-  @if($x)
-    @if(length($x) > 1)
-      #{$prop}-left: nth($value, 1)
-      #{$prop}-right: nth($value, 2)
-    @else 
-      #{$prop}-left: $value
-      #{$prop}-right: $value
-=shorthand-y($prop, $value: null)
-  @if($value)
-    @if(length($value) > 1)
-      #{$prop}-top: nth($value, 1)
-      #{$prop}-bottom: nth($value, 2)
-    @else 
-      #{$prop}-top: $value
-      #{$prop}-bottom: $value
-
-.collapse-child-margins:before, .collapse-child-margins:after
-  content: ' '
-  display: table
-
-=make-rules-from-map($attribute, $map, $rule-pre, $rule-post: '')
-  @each $name, $value in $map
-    @if($rule-post != '')
-      #{$rule-pre}-#{$name}-#{$rule-post}
-        #{$attribute}: $value
-    @else
-      #{$rule-pre}-#{$name}
-        #{$attribute}: $value
-+make-rules-from-map("padding", $margin-sizes, '.padd')
-.p-sm, .padd-sm
-  padding: 10px
-.p-sm-rel, .padd-sm-rem
-  padding: 1rem
-.p-md, .padd-md
-  padding: 15px
-.p-md-rel, .padd-md-rem
-  padding: 1.5rem
-.p-xs
-  padding: 5px
-.bord-no-top, .b-n-u
-  border-top-width: 0 !important
-.b-n-b
-  border-bottom-width: 0 
-.marg-xs
-  margin: 5px
-.marg-sm
-  margin: 10px
-.over-hidden
-  overflow: hidden
-.no-height
-  height: 0
-.flow-in
-  transition: max-height $fast ease
-  max-height: 0
-  overflow: hidden
-.cc.bord-sm-right
-  border-right: $bord-sm solid currentColor
-.cc.bord-sm-left
-  border-left: $bord-sm solid currentColor
-.padd-xs-left
-  padding-left: 5px
-.padd-xs-right
-  padding-right: 5px
-
-.font-25
-  font-size: 25px
-.font-20
-  font-size: 20px
-.font-15
-  font-size: 15px
-.wide-50
-  width: 50%
-.wide-75
-  width: 75%
-.wide-25
-  width: 25%
-
-.bord-b-sm
-  border-bottom: $bord-sm solid currentColor
-.bord-r-sm
-  border-right: $bord-sm solid currentColor
-.bord-rb-sm
-  $b: $bord-sm solid currentColor
-  border-right: $b
-  border-bottom: $b
-.bord-y-sm
-  $b: $bord-sm solid currentColor
-  border-top: $b
-  border-bottom: $b
-.no-padd
-  padding: 0 !important
-.roh
-  > *
-    padding: 0 !important
-  +clearfix
+=Wide
+  +W(100%)

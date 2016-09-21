@@ -1,5 +1,5 @@
 import './prefix.js'
-import paths from '../components/paths/directive.js'
+import paths from '../components/site/PathGen.js'
 import mySite from '../components/site/Directive.js'
 var app = angular.module('my-website', ['svg-helpers', 'my-tools']);
 

@@ -33,15 +33,33 @@
     "cson-loader": "^0.1.0"
   },
   "scripts": {
-    "build:index": "pug src/bootstrap-app/page/index.pug -o ./ -f",
-    "build:entry": "pug src/components/site/build.pug -o src/components/site/ -f",
-    "build:html": "npm run build:index && npm run build:entry",
-    "build:css": "node-sass --output-style compressed src/components/site/build.sass > src/components/site/build.css",
-    "watch:index": "pug -w src/bootstrap-app/page/index.pug -o ./ -f &",
-    "watch:entry": "pug -w src/components/site/build.pug -o src/components/site/ -f &",
-    "watch:html": "npm run watch:index && npm run watch:entry",
-    "dev": "npm run watch:html && webpack-dev-server --inline --hot",
-    "build": "npm run build:html && webpack --optimize-minimize",
+    "clean": "rm -rf build",
+
+    "_PUG:index": "echo 'pug src/bootstrap-app/page/index.pug -o ./ -f'",
+    "_PUG:entry": "echo 'pug src/components/site/build.pug -o build/components/site/ -f'",
+    "_SASS:bootstrap": "echo 'node-sass --output-style compressed src/bootstrap-app/custom-bootstrap-grid/bootstrap.scss -o build/bootstrap-app/custom-bootstrap-grid/'",
+    "_SASS:client": "echo 'node-sass --output-style compressed src/components/site/build.sass -o build/components/site/'",
+
+    "bPUG:index": "eval \"`npm run _PUG:index`\"",
+    "bPUG:entry": "eval \"`npm run _PUG:entry`\"",
+    "bPUG": "npm run bPUG:index && npm run bPUG:entry",
+    "bES6:client": "babel src -d build",
+    "bSASS:bootstrap": "eval \"`npm run _SASS:bootstrap`\"",
+    "bSASS:client": "eval \"`npm run _SASS:client`\"",
+    "bSASS": "npm run bSASS:bootstrap && npm run bSASS:client",
+    "b0": "npm run bES6:client && npm run bSASS && npm run bPUG",
+
+    "wPUG:index": "eval \"`npm run _PUG:index` -w &\"",
+    "wPUG:entry": "eval \"`npm run _PUG:entry` -w &\"",
+    "wPUG": "npm run wPUG:index && npm run wPUG:entry",
+    "wES6:client": "babel -w src/ -d build/ -D &",
+    "wSASS:bootstrap": "eval \"`npm run _SASS:bootstrap` -w &\"",
+    "wSASS:client": "eval \"`npm run _SASS:client` -w &\"",
+    "wSASS": "npm run wSASS:bootstrap && npm run wSASS:client",
+    "w": "npm run b0 && npm run wES6:client && npm run wSASS && npm run wPUG",
+
+    "dev": "npm run clean && npm run w && webpack-dev-server --inline --hot",
+    "build": "npm run clean && npm run b0 && webpack --optimize-minimize",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

@@ -6,14 +6,14 @@ module.exports = {
     colors: true,
     devServer: {inline: true},
 
-    entry: "./src/bootstrap-app/build-ler.js",
+    entry: "./build/bootstrap-app/build-ler.js",
     output: {
         path: __dirname,
         filename: "bundle.js"
     },
 
     resolve: {
-        modulesDirectories: ["node_modules", 'src']
+        modulesDirectories: ["node_modules", 'build', 'src']
     },
     module: {
         loaders: [
@@ -40,15 +40,6 @@ module.exports = {
         {
             test: /\.(pug|jade)$/,
             loader: "pug"
-        },
-        {
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            loader: "babel",
-            query: {
-                presets: ["es2015"],
-                plugins: ["transform-es2015-modules-commonjs"]
-            }
         }
         ]
     },
