@@ -6,8 +6,8 @@ mixin SectionTextDecoration(activeWhen)
 	.SectionTextDecoration&attributes(attributes)
 		+fit-svg.SectionTextSvg
 			-var pathString = `{{paths.headingBg2(${activeWhen} + 0)}}`
-			path.the-shadow(d=paths.headingBg(0) to-path=paths.headingBg(1) filter="url(#dropshadow")
-			path.SectionTextPath(d=paths.headingBg(0) to-path=paths.headingBg(1))
+			path.the-shadow(relative-d=pathString filter="url(#dropshadow")
+			path.SectionTextPath(relative-d=pathString)
 
 mixin MainText(text)
 	.MainText&attributes(attributes)
@@ -17,7 +17,8 @@ mixin MainText(text)
 mixin MainTextDecoration
 	.MainTextDecoration&attributes(attributes)
 		+fit-svg.MainTextSvg
-			path.MainTextPath(d=paths.headingBg(0))
+			-var pathString = `{{paths.headingBg2(0)}}`
+			path.MainTextPath(relative-d=pathString)
 
 mixin SubText(text)
 	.SubText&attributes(attributes)
@@ -28,10 +29,10 @@ mixin SubText(text)
 mixin SubTextDecoration
 	.SubTextDecoration&attributes(attributes)
 		+fit-svg.SubTextSvg
-			path(d="M 0 0, L 10% 0, L 90 0, L 100 0, L 90 100 L 10 100 Z" vector-effect="non-scaling-stroke")
+			path(relative-d="M 0 0, L 10% 0, L 90% 0, L 100% 0, L 90% 100% L 10% 100% Z")
 
 
-mixin _SectionColumn(initShow, text, target, parent)
+mixin _SectionColumn(initShow, text, target)
 	.col-md-12(
 			section-text 
 			section-init=(initShow + '')
@@ -39,9 +40,8 @@ mixin _SectionColumn(initShow, text, target, parent)
 			+SectionText(text, 'section.open')(
 			ng-class="{open: section.open}"
 			ng-click="toggleSection()"
-			data-toggle="collapse"
-			data-target=('#' + target)
-			data-parent=parent
+			collapse-target=('#' + target)
+			collapse-when=`{{!section.open}}`
 			)
 			.collapse.in(id=target)
 				block
